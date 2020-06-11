@@ -10,27 +10,23 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let genres = ["Action", "Comedy", "Western", "Drama"]
-    
+    @ObservedObject private var genreListVM = GenreListViewModel()
     
     var body: some View {
         
         NavigationView {
             
             List {
-                
-                ForEach(genres, id:\.self) { genre  in
                     
-                    NavigationLink (destination: ShortlistView()) {
-                        
-                        Text(genre)
-                    }
-                }
-                
-            }.navigationBarTitle("Choose Genre")
+                    GenreListView(genres: self.genreListVM.fetchedGenres)
+            
+                .navigationBarTitle("Genres")
+            }
         }
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
