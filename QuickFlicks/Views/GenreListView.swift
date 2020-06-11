@@ -20,16 +20,17 @@ struct GenreListView: View {
     
     var body: some View {
         
-        List {
+        ForEach(genres, id: \.id) { genre in
             
-            ForEach(self.genres, id: \.id) { genre in
-            
+            NavigationLink(destination: ShortlistView()) {
+                
                 Text(genre.name)
-                    
+                
             }
         }
     }
 }
+
 
 struct GenreListView_Previews: PreviewProvider {
     static var previews: some View {

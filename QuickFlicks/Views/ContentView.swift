@@ -17,10 +17,9 @@ struct ContentView: View {
         NavigationView {
             
             List {
-                    
-                    GenreListView(genres: self.genreListVM.fetchedGenres)
-            
-                .navigationBarTitle("Genres")
+                
+                GenreListView(genres: genreListVM.fetchedGenres)
+                
             }
         }
     }
