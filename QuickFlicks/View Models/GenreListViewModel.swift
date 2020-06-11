@@ -10,7 +10,7 @@ import Foundation
 
 class GenreListViewModel: ObservableObject {
     
-    @Published var fetchedGenres = [GenreViewModel]()
+    @Published var fetchedGenres = [GenreElement]()
     
     init() {
         fetchGenres()
@@ -20,27 +20,11 @@ class GenreListViewModel: ObservableObject {
         
         WebService().getGenres { genres in
             
-            if let genres = genres?.genres {
+            if let genre = genres?.genres {
                 
-                self.fetchedGenres = genres.map(GenreViewModel.init)
-                print(self.fetchedGenres)
+                self.fetchedGenres.append(contentsOf: genre)
         
             }
         }
-    }
-}
-
-class GenreViewModel {
-    
-    var id = UUID()
-    
-    var genre: GenreElement
-    
-    init(genre: GenreElement) {
-        self.genre = genre
-    }
-    
-    var name: String {
-        return self.genre.name
     }
 }

@@ -10,9 +10,9 @@ import SwiftUI
 
 struct GenreListView: View {
     
-    let genres: [GenreViewModel]
+    let genres: [GenreElement]
     
-    init(genres: [GenreViewModel]) {
+    init(genres: [GenreElement]) {
         
         self.genres = genres
         
@@ -22,7 +22,7 @@ struct GenreListView: View {
         
         ForEach(genres, id: \.id) { genre in
             
-            NavigationLink(destination: ShortlistView()) {
+            NavigationLink(destination: ShortlistView(genre: genre)) {
                 
                 Text(genre.name)
                 
@@ -34,6 +34,6 @@ struct GenreListView: View {
 
 struct GenreListView_Previews: PreviewProvider {
     static var previews: some View {
-        GenreListView(genres: [GenreViewModel(genre: GenreElement(id: 1, name: "Romance"))])
+        GenreListView(genres: [GenreElement(id: 1, name: "Western")])
     }
 }

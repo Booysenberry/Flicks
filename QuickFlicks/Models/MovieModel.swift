@@ -8,28 +8,53 @@
 
 import Foundation
 
-struct Movie: Codable {
-    
-    var posterURL: String
-    var title: String
-    var rating: Double
-    var ratingCount: Double
-    var releaseDate: String
-    var overview: String
-    
+// MARK: - MovieList
+struct MovieList: Codable {
+    let page, totalResults, totalPages: Int?
+    let results: [Result]?
+
     enum CodingKeys: String, CodingKey {
-       
-        case posterURL = "poster_path"
-        case rating = "vote_average"
-        case ratingCount = "vote_count"
-        case releaseDate = "release_date"
-        case title
-        case overview
-        
+        case page
+        case totalResults = "total_results"
+        case totalPages = "total_pages"
+        case results
     }
-    
-    #if DEBUG
-    static let example = Movie(posterURL: "/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg", title: "Ad Astra", rating: 6, ratingCount: 99, releaseDate: "2019-09-17", overview: "The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet Earth, astronaut Roy McBride undertakes a mission across the immensity of space and its many perils to uncover the truth about a lost expedition that decades before boldly faced emptiness and silence in search of the unknown.")
-    #endif
-    
+}
+
+// MARK: - Result
+struct Result: Codable {
+    let popularity: Double?
+    let voteCount: Int?
+    let video: Bool?
+    let posterPath: String?
+    let id: Int?
+    let adult: Bool?
+    let backdropPath: String?
+    let originalLanguage: OriginalLanguage?
+    let originalTitle: String?
+    let genreIDS: [Int]?
+    let title: String?
+    let voteAverage: Double?
+    let overview, releaseDate: String?
+
+    enum CodingKeys: String, CodingKey {
+        case popularity
+        case voteCount = "vote_count"
+        case video
+        case posterPath = "poster_path"
+        case id, adult
+        case backdropPath = "backdrop_path"
+        case originalLanguage = "original_language"
+        case originalTitle = "original_title"
+        case genreIDS = "genre_ids"
+        case title
+        case voteAverage = "vote_average"
+        case overview
+        case releaseDate = "release_date"
+    }
+}
+
+enum OriginalLanguage: String, Codable {
+    case en = "en"
+    case es = "es"
 }
