@@ -12,10 +12,6 @@ class ShortListViewModel: ObservableObject {
     
     @Published var fetchedMovies = [Result]()
     
-    init() {
-        fetchMovies(genre: 27)
-    }
-    
     func fetchMovies(genre: Int) {
         
         WebService().getMoviesByGenre(genre: genre) { movie in

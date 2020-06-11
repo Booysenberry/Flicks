@@ -13,32 +13,21 @@ struct ShortlistView: View {
     @ObservedObject private var shortlistVM = ShortListViewModel()
     
     var genre: GenreElement
-
+    
     var body: some View {
         
-        ForEach(shortlistVM.fetchedMovies, id: \.id) { movie in
+        List {
             
-            List {
-                Text("\(movie.title!)")
+            ForEach(shortlistVM.fetchedMovies, id: \.id) { movie in
+                
+                NavigationLink(destination: DetailView()) {
+                    
+                    Text("\(movie.title!)")
+                }
             }
+        }.onAppear {
+            self.shortlistVM.fetchMovies(genre: self.genre.id)
         }
-        
-//        List(0 ..< 3) { movie in
-//            Image("sample")
-//                .resizable()
-//                .frame(width: 100, height: 150)
-//
-//            NavigationLink (destination: DetailView()) {
-//
-//                VStack(alignment: .leading) {
-//
-//                    Text("Title")
-//                        .font(.largeTitle)
-//
-//                }
-//            }
-//        }
-            
         .navigationBarTitle("\(genre.name) Movies")
     }
 }
