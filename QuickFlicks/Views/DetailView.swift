@@ -10,28 +10,38 @@ import SwiftUI
 
 struct DetailView: View {
     
+    @ObservedObject private var detailVM = DetailViewModel()
+    
+    var movie: Result
+    
     var body: some View {
         
         VStack {
             
-            MovieDetailsView()
+            MovieDetailsView(movie: movie)
             
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent accumsan libero nec commodo ultricies. Vestibulum quam mi, ultricies ac sem non, accumsan dapibus eros. Vivamus suscipit tellus ligula, at semper nulla iaculis eu. Fusce ac libero eget nisi consequat dictum et sit amet mauris. Nullam vel dignissim tortor. Curabitur tristique, sapien ut lobortis aliquet, sapien turpis blandit elit, at placerat nibh risus quis dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam rutrum porttitor orci, quis rhoncus felis gravida vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras tempus nibh eget neque sodales mattis. Etiam eget quam ex.")
+            Text("\(movie.overview!)")
             
             Spacer()
             
-        }.navigationBarTitle("Movie Details")
+            }.onAppear {
+                self.detailVM.getMovieDetails(id: self.movie.id!)
+            }
+        .navigationBarTitle("Movie Details")
             .padding()
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        DetailView(movie: Result(popularity: 6, voteCount: 100, video: false, posterPath: "/aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg", id: 454626, adult: false, backdropPath: "/stmYfCUGd8Iy6kAMBr6AmWqx8Bq.jpg", originalLanguage: OriginalLanguage(rawValue: "en")!, originalTitle: "Sonic the Hedgehog", genreIDS: [28,35,878,10751], title: "Sonic the Hedgehog", voteAverage: 6.7, overview: "Based on the global blockbuster videogame franchise from Sega, Sonic the Hedgehog tells the story of the world’s speediest hedgehog as he embraces his new home on Earth. In this live-action adventure comedy, Sonic and his new best friend team up to defend the planet from the evil genius Dr. Robotnik and his plans for world domination.", releaseDate: "2020-02-12"))
     }
 }
 
 struct RatingView: View {
+    
+    var movie: Result
+    
     var body: some View {
         
         VStack {
@@ -40,19 +50,27 @@ struct RatingView: View {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
                 
-                Text("60%")
+                if movie.voteAverage != nil {
+                    Text("\(movie.voteAverage!)")
+                }
+                
             }
             HStack {
                 
                 Image(systemName: "person.3.fill")
                 
-                Text("99")
+                if movie.voteCount != nil {
+                Text("\(movie.voteCount!)")
+                }
             }
         }
     }
 }
 
 struct MovieDetailsView: View {
+    
+    var movie: Result
+    
     var body: some View {
         HStack {
             
@@ -62,11 +80,16 @@ struct MovieDetailsView: View {
             
             VStack(alignment: .leading) {
                 
-                Text("Title")
+                if movie.title != nil {
+                    Text(movie.title!)
                     .font(.largeTitle)
+                }
                 
-                Text("Released: 2019-11-21")
-                RatingView()
+                if movie.releaseDate != nil {
+                    Text(movie.releaseDate!)
+                }
+                
+                RatingView(movie: movie)
                 
             }
             Spacer()

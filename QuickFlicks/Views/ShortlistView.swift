@@ -20,9 +20,9 @@ struct ShortlistView: View {
             
             ForEach(shortlistVM.fetchedMovies, id: \.id) { movie in
                 
-                NavigationLink(destination: DetailView()) {
+                NavigationLink(destination: DetailView(movie: movie)) {
                     
-                    Text("\(movie.title!)")
+                    ShortlistRowView(movie: movie)
                 }
             }
         }.onAppear {
