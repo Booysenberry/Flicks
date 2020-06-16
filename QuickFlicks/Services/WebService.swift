@@ -34,7 +34,6 @@ class WebService {
             
             do {
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let genres = try decoder.decode(Genre.self, from: data)
                 
                 DispatchQueue.main.async {
@@ -77,7 +76,6 @@ class WebService {
             do {
 
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let movies = try decoder.decode(MovieList.self, from: data)
                 
                 DispatchQueue.main.async {
@@ -119,7 +117,6 @@ class WebService {
                 do {
 
                     let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
                     let movieDetails = try decoder.decode(Result.self, from: data)
                     
                     DispatchQueue.main.async {
