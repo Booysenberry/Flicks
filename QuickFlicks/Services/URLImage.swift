@@ -15,7 +15,7 @@ struct URLImage: View {
     
     var placeholder: Image
     
-    init(url: String, placeholder: Image = Image("sample")) {
+    init(url: String, placeholder: Image = Image("noImageFound")) {
         self.placeholder = placeholder
         self.imageLoader.load(url: url)
     }
@@ -23,9 +23,15 @@ struct URLImage: View {
     var body: some View {
         if let uiImage = self.imageLoader.downloadedImage {
             return Image(uiImage: uiImage)
-                .resizable()
+ 
         } else {
             return placeholder
         }
+    }
+}
+
+struct URLImage_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

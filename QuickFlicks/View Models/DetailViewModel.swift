@@ -10,7 +10,7 @@ import Foundation
 
 class DetailViewModel: ObservableObject {
     
-    @Published var fetchedMovie = [Result]()
+    @Published var fetchedMovie = [Movie]()
     
     func getMovieDetails(id: Int) {
 

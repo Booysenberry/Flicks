@@ -85,14 +85,14 @@ class WebService {
                 }
                 
             } catch let err {
-                print("Err", err)
+                print("Error", err)
             }
         }
         // execute the HTTP request
         task.resume()
     }
     
-    func getMovieDetails(movie: Int, completion: @escaping (Result?) -> ()) {
+    func getMovieDetails(movie: Int, completion: @escaping (Movie?) -> ()) {
         
         guard let url = URL(string: "https://api.themoviedb.org/3/movie/157336?api_key=5228bff935f7bd2b18c04fc3439828c0") else {
             fatalError("Invalid URL")
@@ -117,7 +117,7 @@ class WebService {
                 do {
 
                     let decoder = JSONDecoder()
-                    let movieDetails = try decoder.decode(Result.self, from: data)
+                    let movieDetails = try decoder.decode(Movie.self, from: data)
                     
                     DispatchQueue.main.async {
                     

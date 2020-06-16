@@ -34,7 +34,7 @@ class ImageLoader: ObservableObject {
             }
             
             DispatchQueue.main.async {
-                print(imageURL)
+        
                 self.downloadedImage = UIImage(data: data)
                 self.didChange.send(self)
             }

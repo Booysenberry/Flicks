@@ -13,16 +13,14 @@ struct GenreListView: View {
     let genres: [GenreElement]
     
     init(genres: [GenreElement]) {
-        
         self.genres = genres
-        
     }
     
     var body: some View {
         
         ForEach(genres, id: \.id) { genre in
             
-            NavigationLink(destination: ShortlistView(genre: genre)) {
+            NavigationLink(destination: MovielistView(genre: genre)) {
                 
                 Text(genre.name)
                 
