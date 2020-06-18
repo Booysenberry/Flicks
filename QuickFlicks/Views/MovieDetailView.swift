@@ -18,7 +18,10 @@ struct MovieDetailView: View {
         
         VStack {
             
-            URLImage(url: "\(movie.largePosterURL)")
+            URLImage(url: "\(movie.backdropURL)")
+                .aspectRatio(contentMode: .fit)
+            
+            Text("\(movie.movieRunTime)")
             
             Text(movie.movieOverview)
                 .padding()

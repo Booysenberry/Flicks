@@ -17,6 +17,7 @@ struct MovielistRowView: View {
         HStack {
             
             URLImage(url: "\(movies.smallPosterURL)")
+                .frame(width: 92, height: 136)
             
             VStack(alignment: .leading) {
                 

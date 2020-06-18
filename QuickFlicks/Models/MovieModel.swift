@@ -31,11 +31,12 @@ struct Movie: Codable {
     let posterPath: String?
     let id: Int
     let adult: Bool
-    let backdropPath: String
+    let backdropPath: String?
     let title: String
     let voteAverage: Double
     let overview: String
     let releaseDate: String?
+    let runTime: Int?
     
     enum CodingKeys: String, CodingKey {
         case popularity
@@ -48,10 +49,12 @@ struct Movie: Codable {
         case voteAverage = "vote_average"
         case overview
         case releaseDate = "release_date"
+        case runTime = "runtime"
+    
     }
     
     #if DEBUG
-    static let example = Movie(popularity: 5, voteCount: 10, video: false, posterPath: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", id: 157336, adult: false, backdropPath: "/9mmkq59uRuJWDFz9UHeX5ATNJYf.jpg", title: "Interstellar", voteAverage: 7, overview: "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.", releaseDate: "2014-11-05")
+    static let example = Movie(popularity: 5, voteCount: 10, video: false, posterPath: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", id: 157336, adult: false, backdropPath: "/9mmkq59uRuJWDFz9UHeX5ATNJYf.jpg", title: "Interstellar", voteAverage: 7, overview: "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.", releaseDate: "2014-11-05", runTime: 120)
     #endif
 }
 

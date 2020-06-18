@@ -92,7 +92,7 @@ class WebService {
         task.resume()
     }
     
-    func getMovieDetails(movie: Int, completion: @escaping (Movie?) -> ()) {
+    func getMovieDetails(movie: Int, completion: @escaping ([Movie]?) -> ()) {
         
         guard let url = URL(string: "https://api.themoviedb.org/3/movie/157336?api_key=5228bff935f7bd2b18c04fc3439828c0") else {
             fatalError("Invalid URL")
@@ -121,8 +121,8 @@ class WebService {
                     
                     DispatchQueue.main.async {
                     
-                       completion(movieDetails)
-                        print(movieDetails)
+                       completion([movieDetails])
+                        
                         
                     }
                     
