@@ -12,7 +12,7 @@ struct MovieDetailView: View {
     
     @ObservedObject private var detailVM = DetailViewModel()
     
-    var movie: MoviesViewModel
+    var movie: Movie
     
     var body: some View {
         
@@ -21,23 +21,29 @@ struct MovieDetailView: View {
             URLImage(url: "\(movie.backdropURL)")
                 .aspectRatio(contentMode: .fit)
             
-            Text("\(movie.movieRunTime)")
+            HStack {
+                Image(systemName: "play.rectangle")
+                Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
+                
+            }
             
-            Text(movie.movieOverview)
-                .padding()
+    
+            
+            Text(movie.overview)
+            .padding()
             
             Spacer()
             
         }.onAppear {
             self.detailVM.getMovieDetails(id: self.movie.id)
         }
-        .navigationBarTitle(movie.movieTitle)
+        .navigationBarTitle(movie.title)
     }
 }
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(movie: MoviesViewModel(movie: Movie.example))
+        MovieDetailView(movie: Movie.example)
     }
 }
 

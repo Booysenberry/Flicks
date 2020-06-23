@@ -10,18 +10,18 @@ import SwiftUI
 
 struct MovielistRowView: View {
     
-    var movies: MoviesViewModel
+    var movies: Movie
     
     var body: some View {
         
         HStack {
             
-            URLImage(url: "\(movies.smallPosterURL)")
+            URLImage(url: "\(movies.posterURL)")
                 .frame(width: 92, height: 136)
             
             VStack(alignment: .leading) {
                 
-                Text(movies.movieTitle)
+                Text(movies.title)
                     .font(.headline)
                 
                 VStack(alignment: .leading) {
@@ -31,7 +31,7 @@ struct MovielistRowView: View {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
                         
-                        Text(movies.rating)
+                        Text(movies.voteAveragePercent)
                             .font(.callout)
                     }
                     
@@ -39,7 +39,7 @@ struct MovielistRowView: View {
                         
                         Image(systemName: "person.fill")
                         
-                        Text(movies.votes)
+                        Text("\(movies.voteCount)")
                             .font(.callout)
                         
                     }
@@ -51,7 +51,7 @@ struct MovielistRowView: View {
 
 struct MovielistRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MovielistRowView(movies: MoviesViewModel(movie: Movie.example))
+        MovielistRowView(movies: Movie.example)
     }
 }
 

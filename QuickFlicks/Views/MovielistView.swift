@@ -20,9 +20,9 @@ struct MovielistView: View {
             
             ForEach(movielistVM.fetchedMovies, id: \.id) { movie in
                 
-                NavigationLink(destination: MovieDetailView(movie: MoviesViewModel(movie: movie))) {
+                NavigationLink(destination: MovieDetailView(movie: movie)) {
                     
-                    MovielistRowView(movies: MoviesViewModel(movie: movie))
+                    MovielistRowView(movies: movie)
                 }
             }
             

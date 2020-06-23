@@ -38,6 +38,18 @@ struct Movie: Codable {
     let releaseDate: String?
     let runTime: Int?
     
+    var posterURL: URL {
+        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
+    }
+    
+    var backdropURL: URL {
+        return URL(string: "https://image.tmdb.org/t/p/original\(backdropPath ?? "")")!
+    }
+    
+    var voteAveragePercent: String {
+        return "\(Int(voteAverage * 10))%"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case popularity
         case voteCount = "vote_count"

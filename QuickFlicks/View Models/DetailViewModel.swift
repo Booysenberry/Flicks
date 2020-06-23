@@ -10,15 +10,18 @@ import Foundation
 
 class DetailViewModel: ObservableObject {
     
-    @Published var fetchedMovie = [Movie]()
+    @Published var fetchedMovie: Movie?
     
     func getMovieDetails(id: Int) {
-
+        
         WebService().getMovieDetails(movie: id) { movie in
-
+            
             if let movie = movie {
-                self.fetchedMovie = [movie]
+                
+                self.fetchedMovie = movie
+                
             }
         }
     }
 }
+
