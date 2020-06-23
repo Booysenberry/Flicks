@@ -18,19 +18,46 @@ struct MovieDetailView: View {
         
         VStack {
             
-            URLImage(url: "\(movie.backdropURL)")
-                .aspectRatio(contentMode: .fit)
-            
-            HStack {
-                Image(systemName: "play.rectangle")
-                Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
+            ZStack(alignment: .bottom) {
                 
+                URLImage(url: "\(movie.backdropURL)")
+                    .aspectRatio(contentMode: .fit)
+                
+                HStack {
+                    
+                    HStack {
+                        Image(systemName: "timer")
+                        Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
+                        
+                    }
+                    Spacer()
+                    
+                    HStack {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                        
+                        Text(movie.voteAveragePercent)
+                        
+                    }
+                    Spacer()
+                    
+                    HStack {
+                        Image(systemName: "person.3")
+                        
+                        Text("\(movie.voteCount)")
+                        
+                    }
+                }
+                .padding()
+                .background(Color.black.opacity(0.5))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+
             }
             
-    
             
             Text(movie.overview)
-            .padding()
+                .padding()
             
             Spacer()
             

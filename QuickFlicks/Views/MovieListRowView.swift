@@ -33,18 +33,12 @@ struct MovielistRowView: View {
                         
                         Text(movies.voteAveragePercent)
                             .font(.callout)
-                    }
-                    
-                    HStack {
-                        
-                        Image(systemName: "person.fill")
-                        
-                        Text("\(movies.voteCount)")
-                            .font(.callout)
                         
                     }
                 }
+                Spacer()
             }
+            
         }
     }
 }

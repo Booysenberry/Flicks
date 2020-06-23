@@ -14,13 +14,17 @@ class MovieListViewModel: ObservableObject {
     
     func fetchMovies(genre: Int) {
         
-        WebService().getMoviesByGenre(genre: genre) { movie in
-            
-            if let movie = movie?.movie {
+        switch fetchedMovies.isEmpty {
+        case true:
+            WebService().getMoviesByGenre(genre: genre) { movie in
                 
-                self.fetchedMovies.append(contentsOf: movie)
-                
+                if let movie = movie?.movie {
+                    
+                    self.fetchedMovies.append(contentsOf: movie)
+                }
             }
+        case false:
+            break
         }
     }
 }
