@@ -10,21 +10,29 @@ import Foundation
 
 class MovieListViewModel: ObservableObject {
     
-    @Published var fetchedMovies = [Movie]()
+    @Published var movies = [Movie]()
+    
+    private var fetchedMovies = [MovieList]()
+    
+    var page = 1
     
     func fetchMovies(genre: Int) {
         
-        switch fetchedMovies.isEmpty {
-        case true:
-            WebService().getMoviesByGenre(genre: genre) { movie in
+        WebService().getMoviesByGenre(genre: genre, page: page) { movie in
+            
+            if let movie = movie {
                 
-                if let movie = movie?.movie {
+                self.fetchedMovies.append(movie)
+                
+                for movie in movie.movies {
+                    self.movies.append(movie)
                     
-                    self.fetchedMovies.append(contentsOf: movie)
                 }
             }
-        case false:
-            break
         }
+        page += 1
+        print(page)
     }
 }
+
+

@@ -51,9 +51,9 @@ class WebService {
     
     
     
-    func getMoviesByGenre(genre: Int, completion: @escaping (MovieList?) -> ()) {
+    func getMoviesByGenre(genre: Int, page: Int, completion: @escaping (MovieList?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=\(genre)") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=\(page)&with_genres=\(genre)") else {
             fatalError("Invalid URL")
         }
         
@@ -122,6 +122,7 @@ class WebService {
                     DispatchQueue.main.async {
                     
                        completion(movieDetails)
+                        
                         
                         
                     }

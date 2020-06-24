@@ -13,18 +13,18 @@ struct MovieList: Codable {
     let page: Int
     let totalResults: Int
     let totalPages: Int
-    let movie: [Movie]
+    let movies: [Movie]
 
     enum CodingKeys: String, CodingKey {
         case page
         case totalResults = "total_results"
         case totalPages = "total_pages"
-        case movie = "results"
+        case movies = "results"
     }
 }
 
 // MARK: - Result
-struct Movie: Codable {
+struct Movie: Codable, Equatable {
     let popularity: Double
     let voteCount: Int
     let video: Bool

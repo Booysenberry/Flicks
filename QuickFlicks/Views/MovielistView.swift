@@ -18,16 +18,26 @@ struct MovielistView: View {
         
         List {
             
-            ForEach(movielistVM.fetchedMovies, id: \.id) { movie in
+            ForEach(movielistVM.movies, id: \.id) { movie in
                 
                 NavigationLink(destination: MovieDetailView(movie: movie)) {
                     
                     MovielistRowView(movies: movie)
+                        
+                    .onAppear(perform: {
+                        if movie == self.movielistVM.movies.last {
+                            self.movielistVM.fetchMovies(genre: self.genre.id)
+                            
+                        }
+                    })
                 }
             }
             
         }.onAppear {
             self.movielistVM.fetchMovies(genre: self.genre.id)
+            
+            
+            
             
         }
         .navigationBarTitle(genre.name)
