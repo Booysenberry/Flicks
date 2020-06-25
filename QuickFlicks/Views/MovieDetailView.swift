@@ -20,7 +20,7 @@ struct MovieDetailView: View {
             
             ZStack(alignment: .bottom) {
                 
-                URLImage(url: "\(movie.backdropURL)")
+                URLImage(url: "https://image.tmdb.org/t/p/w500\(detailVM.fetchedMovie?.backdropPath ?? "")")
                     .aspectRatio(contentMode: .fit)
                 
                 HStack {

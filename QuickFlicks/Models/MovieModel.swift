@@ -50,6 +50,11 @@ struct Movie: Codable, Equatable {
         return "\(Int(voteAverage * 10))%"
     }
     
+    var releaseYear: String {
+        let dateComponents = releaseDate?.components(separatedBy: "-")
+        return dateComponents![0]
+    }
+    
     enum CodingKeys: String, CodingKey {
         case popularity
         case voteCount = "vote_count"

@@ -12,6 +12,12 @@ struct MovielistRowView: View {
     
     var movies: Movie
     
+    static let taskDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }()
+    
     var body: some View {
         
         HStack {
@@ -33,6 +39,16 @@ struct MovielistRowView: View {
                         
                         Text(movies.voteAveragePercent)
                             .font(.callout)
+                        
+                    }
+                    
+                    HStack {
+                    
+                    Image(systemName: "calendar")
+                    
+                    Text("\(movies.releaseYear)")
+                        .font(.callout)
+                        
                         
                     }
                 }

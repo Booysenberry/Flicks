@@ -94,7 +94,7 @@ class WebService {
     
     func getMovieDetails(movie: Int, completion: @escaping (Movie?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=5228bff935f7bd2b18c04fc3439828c0") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=5228bff935f7bd2b18c04fc3439828c0&append_to_response=similar") else {
             fatalError("Invalid URL")
         }
             

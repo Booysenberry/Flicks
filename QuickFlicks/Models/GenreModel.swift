@@ -18,4 +18,5 @@ struct Genre: Decodable, Identifiable {
 struct GenreElement: Decodable {
     let id: Int
     let name: String
+
 }

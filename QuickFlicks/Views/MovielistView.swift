@@ -36,9 +36,6 @@ struct MovielistView: View {
         }.onAppear {
             self.movielistVM.fetchMovies(genre: self.genre.id)
             
-            
-            
-            
         }
         .navigationBarTitle(genre.name)
     }

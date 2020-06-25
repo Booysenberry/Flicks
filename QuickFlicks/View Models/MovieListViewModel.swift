@@ -25,8 +25,10 @@ class MovieListViewModel: ObservableObject {
                 self.fetchedMovies.append(movie)
                 
                 for movie in movie.movies {
-                    self.movies.append(movie)
                     
+                  
+                        self.movies.append(movie)
+                
                 }
             }
         }
