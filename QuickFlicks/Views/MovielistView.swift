@@ -14,6 +14,11 @@ struct MovielistView: View {
     
     var genre: GenreElement
     
+    init(genre: GenreElement) {
+        self.genre = genre
+        movielistVM.fetchMovies(genre: genre.id)
+    }
+    
     var body: some View {
         
         List {
@@ -33,11 +38,7 @@ struct MovielistView: View {
                 }
             }
             
-        }.onAppear {
-            self.movielistVM.fetchMovies(genre: self.genre.id)
-            
-        }
-        .navigationBarTitle(genre.name)
+        }.navigationBarTitle(genre.name)
     }
 }
 

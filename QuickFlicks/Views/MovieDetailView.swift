@@ -14,6 +14,11 @@ struct MovieDetailView: View {
     
     var movie: Movie
     
+    init(movie: Movie) {
+        self.movie = movie
+        detailVM.getMovieDetails(id: movie.id)
+    }
+    
     var body: some View {
         
         VStack {
@@ -54,17 +59,13 @@ struct MovieDetailView: View {
                 .frame(maxWidth: .infinity)
 
             }
-            
-            
+        
             Text(movie.overview)
                 .padding()
             
             Spacer()
             
-        }.onAppear {
-            self.detailVM.getMovieDetails(id: self.movie.id)
-        }
-        .navigationBarTitle(movie.title)
+        }.navigationBarTitle(movie.title)
     }
 }
 
