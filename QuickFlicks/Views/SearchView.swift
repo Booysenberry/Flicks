@@ -10,7 +10,13 @@ import SwiftUI
 
 struct SearchView: View {
     
+    @ObservedObject var searchVM = SearchViewModel()
+    
     @State private var searchText = ""
+    
+    init() {
+        searchVM.fetchMovies(movie: "Star+Wars")
+    }
     
     var body: some View {
         
@@ -18,15 +24,22 @@ struct SearchView: View {
             
             VStack {
                 
-                SearchBar(text: $searchText)
+                SearchBarView(text: $searchText)
                 
                 List {
-                    Text("Search Result")
+                    
+                    ForEach(searchVM.searchedMovies, id: \.id) { movie in
+                        
+                        NavigationLink(destination: MovieDetailView(movie: movie)) {
+                            
+                            MovielistRowView(movies: movie)
+                        }
+                        
+                    }
                 }
             }
             .navigationBarTitle("Search")
         }
-    
     }
 }
 

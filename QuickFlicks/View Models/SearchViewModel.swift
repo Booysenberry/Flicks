@@ -1,24 +1,22 @@
 //
-//  ShortListViewModel.swift
+//  SearchViewModel.swift
 //  QuickFlicks
 //
-//  Created by Brad B on 12/06/20.
+//  Created by Brad B on 30/06/20.
 //  Copyright © 2020 Brad B. All rights reserved.
 //
 
 import Foundation
 
-class MovieListViewModel: ObservableObject {
+class SearchViewModel: ObservableObject {
     
-    @Published var movies = [Movie]()
+    @Published var searchedMovies = [Movie]()
     
     private var fetchedMovies = [MovieList]()
     
-    var page = 1
-    
-    func fetchMovies(genre: Int) {
+    func fetchMovies(movie: String) {
         
-        WebService().getMoviesByGenre(genre: genre, page: page) { movie in
+        WebService().searchForMovie(movie: movie) { movie in
             
             if let movie = movie {
                 
@@ -26,13 +24,12 @@ class MovieListViewModel: ObservableObject {
                 
                 for movie in movie.movies {
                     
-                        self.movies.append(movie)
-                
+                    self.searchedMovies.append(movie)
+                    print(self.searchedMovies)
+                    
                 }
             }
         }
-        page += 1
     }
 }
-
 

@@ -37,8 +37,8 @@ class WebService {
                 let genres = try decoder.decode(Genre.self, from: data)
                 
                 DispatchQueue.main.async {
-                
-                   completion(genres)
+                    
+                    completion(genres)
                 }
                 
             } catch let err {
@@ -74,14 +74,14 @@ class WebService {
             }
             
             do {
-
+                
                 let decoder = JSONDecoder()
                 let movies = try decoder.decode(MovieList.self, from: data)
                 
                 DispatchQueue.main.async {
-                
-                   completion(movies)
-
+                    
+                    completion(movies)
+                    
                 }
                 
             } catch let err {
@@ -97,41 +97,83 @@ class WebService {
         guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=5228bff935f7bd2b18c04fc3439828c0&append_to_response=similar") else {
             fatalError("Invalid URL")
         }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: url) { data, response, error in
             
-            let config = URLSessionConfiguration.default
-            let session = URLSession(configuration: config)
-            
-            let task = session.dataTask(with: url) { data, response, error in
-                
-                // Check for errors
-                guard error == nil else {
-                    print ("error: \(error!)")
-                    return
-                }
-                // Check that data has been returned
-                guard let data = data else {
-                    print("No data")
-                    return
-                }
-                
-                do {
-
-                    let decoder = JSONDecoder()
-                    let movieDetails = try decoder.decode(Movie.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                    
-                       completion(movieDetails)
-                        
-                        
-                        
-                    }
-                    
-                } catch let err {
-                    print("Err", err)
-                }
+            // Check for errors
+            guard error == nil else {
+                print ("error: \(error!)")
+                return
             }
-            // execute the HTTP request
-            task.resume()
+            // Check that data has been returned
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let movieDetails = try decoder.decode(Movie.self, from: data)
+                
+                DispatchQueue.main.async {
+                    
+                    completion(movieDetails)
+                    
+                    
+                    
+                }
+                
+            } catch let err {
+                print("Err", err)
+            }
         }
+        // execute the HTTP request
+        task.resume()
     }
+    
+    func searchForMovie(movie: String, completion: @escaping (MovieList?) -> ()) {
+        
+        guard let url = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&query=\(movie)") else {
+            fatalError("Invalid URL")
+        }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: url) { data, response, error in
+            
+            // Check for errors
+            guard error == nil else {
+                print ("error: \(error!)")
+                return
+            }
+            // Check that data has been returned
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let movieDetails = try decoder.decode(MovieList.self, from: data)
+                
+                DispatchQueue.main.async {
+                    
+                    completion(movieDetails)
+                    print(url)
+                    
+                }
+                
+            } catch let err {
+                print("Err", err)
+            }
+        }
+        // execute the HTTP request
+        task.resume()
+    }
+}

@@ -8,20 +8,32 @@
 
 import SwiftUI
 
-struct SearchBar: View {
+struct SearchBarView: View {
+    
+    @ObservedObject var searchVM = SearchViewModel()
     
     @Binding var text: String
     
     @State private var isEditing = false
     
      var body: some View {
+        
             HStack {
      
-                TextField("Search for a movie", text: $text)
+                TextField("Search for a movie", text: $text,
+                          
+                          onCommit: {
+                            
+                            self.searchVM.fetchMovies(movie: self.text)
+                
+                })
+                    
+                    
                     .padding(7)
                     .padding(.horizontal, 25)
                     .background(Color(.systemGray6))
                     .cornerRadius(8)
+                
                     
                     // Add search icon and cross icon
                     .overlay(
@@ -69,6 +81,6 @@ struct SearchBar: View {
 
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar(text: .constant(""))
+        SearchBarView(text: .constant(""))
     }
 }
