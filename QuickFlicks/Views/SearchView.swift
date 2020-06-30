@@ -14,17 +14,13 @@ struct SearchView: View {
     
     @State private var searchText = ""
     
-    init() {
-        searchVM.fetchMovies(movie: "Star+Wars")
-    }
-    
     var body: some View {
         
         NavigationView {
             
             VStack {
                 
-                SearchBarView(text: $searchText)
+                SearchBarView(searchVM: searchVM, text: $searchText)
                 
                 List {
                     

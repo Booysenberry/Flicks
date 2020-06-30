@@ -57,15 +57,18 @@ struct MovieDetailView: View {
                 .background(Color.black.opacity(0.5))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-
+                
             }
-        
-            Text(movie.overview)
-                .padding()
+            
+            ScrollView {
+                Text(movie.overview)
+                    .padding()
+            }
             
             Spacer()
             
         }.navigationBarTitle(movie.title)
+        
     }
 }
 

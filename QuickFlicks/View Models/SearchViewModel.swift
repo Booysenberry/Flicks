@@ -16,6 +16,8 @@ class SearchViewModel: ObservableObject {
     
     func fetchMovies(movie: String) {
         
+        searchedMovies.removeAll()
+        
         WebService().searchForMovie(movie: movie) { movie in
             
             if let movie = movie {
@@ -25,8 +27,7 @@ class SearchViewModel: ObservableObject {
                 for movie in movie.movies {
                     
                     self.searchedMovies.append(movie)
-                    print(self.searchedMovies)
-                    
+
                 }
             }
         }

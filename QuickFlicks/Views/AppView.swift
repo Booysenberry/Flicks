@@ -15,7 +15,7 @@ struct AppView: View {
         TabView {
             ContentView()
                 .tabItem {
-                    Image(systemName: "globe")
+                    Image(systemName: "film")
                     Text("Genres")
             }
             

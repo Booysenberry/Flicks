@@ -137,14 +137,16 @@ class WebService {
     
     func searchForMovie(movie: String, completion: @escaping (MovieList?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&query=\(movie)") else {
+        let url = "https://api.themoviedb.org/3/search/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&query=\(movie)"
+        
+        guard let enccodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
             fatalError("Invalid URL")
         }
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: url) { data, response, error in
+        let task = session.dataTask(with: enccodedUrl) { data, response, error in
             
             // Check for errors
             guard error == nil else {

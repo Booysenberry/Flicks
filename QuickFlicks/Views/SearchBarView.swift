@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchBarView: View {
     
-    @ObservedObject var searchVM = SearchViewModel()
+    var searchVM: SearchViewModel
     
     @Binding var text: String
     
@@ -21,14 +21,9 @@ struct SearchBarView: View {
             HStack {
      
                 TextField("Search for a movie", text: $text,
-                          
                           onCommit: {
-                            
                             self.searchVM.fetchMovies(movie: self.text)
-                
                 })
-                    
-                    
                     .padding(7)
                     .padding(.horizontal, 25)
                     .background(Color(.systemGray6))
@@ -79,8 +74,8 @@ struct SearchBarView: View {
         }
     }
 
-struct SearchBar_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchBarView(text: .constant(""))
-    }
-}
+//struct SearchBar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchBarView(text: .constant(""))
+//    }
+//}
