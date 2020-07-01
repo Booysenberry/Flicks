@@ -22,6 +22,8 @@ struct SearchBarView: View {
      
                 TextField("Search for a movie", text: $text,
                           onCommit: {
+                            self.searchVM.searchedMovies.removeAll()
+                            self.searchVM.currentPage = 1
                             self.searchVM.fetchMovies(movie: self.text)
                 })
                     .padding(7)

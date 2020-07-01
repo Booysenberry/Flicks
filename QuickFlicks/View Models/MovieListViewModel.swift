@@ -14,24 +14,25 @@ class MovieListViewModel: ObservableObject {
     
     private var fetchedMovies = [MovieList]()
     
-    var page = 1
+    var currentPage = 1
     
     func fetchMovies(genre: Int) {
         
-        WebService().getMoviesByGenre(genre: genre, page: page) { movie in
+        WebService().getMoviesByGenre(genre: genre, page: currentPage) { movie in
             
             if let movie = movie {
-                
                 self.fetchedMovies.append(movie)
-                
                 for movie in movie.movies {
+                    self.movies.append(movie)
                     
-                        self.movies.append(movie)
-                
                 }
             }
         }
-        page += 1
+        if let totalPages = fetchedMovies.first?.totalPages {
+            if currentPage <= totalPages {
+                currentPage += 1
+            }
+        }
     }
 }
 

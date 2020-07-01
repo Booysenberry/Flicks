@@ -14,21 +14,29 @@ class SearchViewModel: ObservableObject {
     
     private var fetchedMovies = [MovieList]()
     
+    var currentPage = 1
+    
+    func checkTotalMovies(movie: String) {
+        if fetchedMovies.count < 20 {
+            currentPage = currentPage + 1
+            fetchMovies(movie: movie)
+        }
+    }
+    
     func fetchMovies(movie: String) {
         
-        searchedMovies.removeAll()
-        
-        WebService().searchForMovie(movie: movie) { movie in
+        WebService().searchForMovie(movie: movie, page: currentPage) { movie in
             
             if let movie = movie {
-                
                 self.fetchedMovies.append(movie)
-                
                 for movie in movie.movies {
-                    
                     self.searchedMovies.append(movie)
-
                 }
+            }
+        }
+        if let totalPages = fetchedMovies.first?.totalPages {
+            if currentPage <= totalPages {
+                currentPage += 1
             }
         }
     }
