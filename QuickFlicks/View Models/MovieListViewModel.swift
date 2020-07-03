@@ -16,6 +16,13 @@ class MovieListViewModel: ObservableObject {
     
     var currentPage = 1
     
+    func checkTotalMovies(genre: Int) {
+        if fetchedMovies.count < 20 {
+            currentPage = currentPage + 1
+            fetchMovies(genre: genre)
+        }
+    }
+    
     func fetchMovies(genre: Int) {
         
         WebService().getMoviesByGenre(genre: genre, page: currentPage) { movie in
@@ -24,13 +31,13 @@ class MovieListViewModel: ObservableObject {
                 self.fetchedMovies.append(movie)
                 for movie in movie.movies {
                     self.movies.append(movie)
-                    
                 }
             }
         }
         if let totalPages = fetchedMovies.first?.totalPages {
             if currentPage <= totalPages {
                 currentPage += 1
+                print(currentPage)
             }
         }
     }

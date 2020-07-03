@@ -52,7 +52,7 @@ struct Movie: Codable, Equatable {
     
     var releaseYear: String {
         let dateComponents = releaseDate?.components(separatedBy: "-")
-        return dateComponents![0]
+        return dateComponents![0] 
     }
     
     enum CodingKeys: String, CodingKey {

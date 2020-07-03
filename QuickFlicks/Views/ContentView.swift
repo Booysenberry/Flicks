@@ -17,11 +17,21 @@ struct ContentView: View {
         NavigationView {
             
             List {
-                    
+                
                 GenreListView(genres: genreListVM.fetchedGenres)
-             
+                
             }
+            .navigationBarItems(trailing:
+                Button(action: {
+                  print("button pressed")
+
+                }) {
+                    Image(systemName: "gift")
+                    .renderingMode(.original)
+                })
+                
             .navigationBarTitle("Genres")
+            
             .font(.headline)
         }
     }

@@ -123,8 +123,6 @@ class WebService {
                     
                     completion(movieDetails)
                     
-                    
-                    
                 }
                 
             } catch let err {
@@ -167,7 +165,6 @@ class WebService {
                 DispatchQueue.main.async {
                     
                     completion(movieDetails)
-                    print(url)
                     
                 }
                 
