@@ -94,7 +94,7 @@ class WebService {
     
     func getMovieDetails(movie: Int, completion: @escaping (Movie?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=5228bff935f7bd2b18c04fc3439828c0&append_to_response=similar") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=5228bff935f7bd2b18c04fc3439828c0&append_to_response=credits") else {
             fatalError("Invalid URL")
         }
         
@@ -135,7 +135,7 @@ class WebService {
     
     func searchForMovie(movie: String, page: Int, completion: @escaping (MovieList?) -> ()) {
         
-        let url = "https://api.themoviedb.org/3/search/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&query=\(movie)&page=\(page)&include_adult=false"
+        let url = "https://api.themoviedb.org/3/search/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&query=\(movie)&page=\(page)&include_adult=false&append_to_response=credits"
         
         guard let enccodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
             fatalError("Invalid URL")

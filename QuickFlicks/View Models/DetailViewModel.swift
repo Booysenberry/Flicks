@@ -17,9 +17,7 @@ class DetailViewModel: ObservableObject {
         WebService().getMovieDetails(movie: id) { movie in
             
             if let movie = movie {
-                
                 self.fetchedMovie = movie
-                
             }
         }
     }

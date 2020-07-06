@@ -14,7 +14,7 @@ struct MovieList: Codable {
     let totalResults: Int
     let totalPages: Int
     let movies: [Movie]
-
+    
     enum CodingKeys: String, CodingKey {
         case page
         case totalResults = "total_results"
@@ -37,6 +37,7 @@ struct Movie: Codable, Equatable {
     let overview: String
     let releaseDate: String?
     let runTime: Int?
+    let credits: Credits?
     
     var posterURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
@@ -67,11 +68,41 @@ struct Movie: Codable, Equatable {
         case overview
         case releaseDate = "release_date"
         case runTime = "runtime"
-    
+        case credits
+        
     }
     
     #if DEBUG
-    static let example = Movie(popularity: 5, voteCount: 10, video: false, posterPath: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", id: 157336, adult: false, backdropPath: "/9mmkq59uRuJWDFz9UHeX5ATNJYf.jpg", title: "Interstellar", voteAverage: 7, overview: "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.", releaseDate: "2014-11-05", runTime: 120)
+    static let example = Movie(popularity: 5, voteCount: 10, video: false, posterPath: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", id: 157336, adult: false, backdropPath: "/9mmkq59uRuJWDFz9UHeX5ATNJYf.jpg", title: "Interstellar", voteAverage: 7, overview: "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.", releaseDate: "2014-11-05", runTime: 120, credits: Credits(cast: [Cast(id: 1, name: "Edward Norton", profilePath: "/eIkFHNlfretLS1spAcIoihKUS62.jpg")]))
     #endif
+}
+
+// MARK: - Credits
+struct Credits: Codable {
+    let cast: [Cast]
+}
+
+// MARK: - Cast
+struct Cast: Codable {
+    let id: Int?
+    let name: String?
+    let profilePath: String?
+    
+    var profileURL: URL {
+        return URL(string: "https://image.tmdb.org/t/p/original\(profilePath ?? "")")!
+    }
+
+    enum CodingKeys: String, CodingKey {
+
+        case id
+        case name
+        case profilePath = "profile_path"
+    }
+}
+
+extension Movie {
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 

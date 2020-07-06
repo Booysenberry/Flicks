@@ -17,6 +17,7 @@ struct MovieDetailView: View {
     init(movie: Movie) {
         self.movie = movie
         detailVM.getMovieDetails(id: movie.id)
+        
     }
     
     var body: some View {
@@ -25,11 +26,14 @@ struct MovieDetailView: View {
             
             ZStack(alignment: .bottom) {
                 
+                // Cover picture
+                
                 URLImage(url: "https://image.tmdb.org/t/p/w500\(detailVM.fetchedMovie?.backdropPath ?? "")")
                     .aspectRatio(contentMode: .fit)
                 
                 HStack {
                     
+                    // Runtime
                     HStack {
                         Image(systemName: "timer")
                         Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
@@ -37,6 +41,7 @@ struct MovieDetailView: View {
                     }
                     Spacer()
                     
+                    // Rating avg
                     HStack {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
@@ -46,6 +51,7 @@ struct MovieDetailView: View {
                     }
                     Spacer()
                     
+                    // Rating count
                     HStack {
                         Image(systemName: "person.3")
                         
@@ -61,14 +67,23 @@ struct MovieDetailView: View {
             }
             
             ScrollView {
+                
+                // Synopsis
                 Text(movie.overview)
+                    
+                    .font(.body)
                     .padding()
+                
+                // Cast
+                ScrollView(.horizontal) {
+                    
+                    HStack {
+                        CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
+                    }.padding()
+                }
             }
-            
             Spacer()
-            
         }.navigationBarTitle(movie.title)
-        
     }
 }
 
