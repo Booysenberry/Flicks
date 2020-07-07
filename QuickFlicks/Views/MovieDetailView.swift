@@ -35,7 +35,7 @@ struct MovieDetailView: View {
                     
                     // Runtime
                     HStack {
-                        Image(systemName: "timer")
+                        Image(systemName: "clock")
                         Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
                         
                     }
@@ -84,6 +84,7 @@ struct MovieDetailView: View {
             }
             Spacer()
         }.navigationBarTitle(movie.title)
+        .navigationBarItems(trailing: Image(systemName: "heart"))
     }
 }
 
