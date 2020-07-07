@@ -19,6 +19,12 @@ struct AppView: View {
                     Text("Genres")
             }
             
+            WatchListView()
+                .tabItem {
+                    Image(systemName: "heart")
+                    Text("Watch List")
+            }
+            
             SearchView() 
                 .tabItem {
                     Image(systemName: "magnifyingglass")

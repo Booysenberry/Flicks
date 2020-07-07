@@ -12,6 +12,9 @@ struct MovieDetailView: View {
     
     @ObservedObject private var detailVM = DetailViewModel()
     
+    // Core data
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     var movie: Movie
     
     init(movie: Movie) {
@@ -84,7 +87,36 @@ struct MovieDetailView: View {
             }
             Spacer()
         }.navigationBarTitle(movie.title)
-        .navigationBarItems(trailing: Image(systemName: "heart"))
+            
+        .navigationBarItems(trailing:
+        Button(action: {
+            
+            // Save to core data
+            let movieToBeSaved = SavedMovie(context: self.managedObjectContext)
+            movieToBeSaved.title = self.movie.title
+            movieToBeSaved.id = Int32(self.movie.id)
+            movieToBeSaved.adult = self.movie.adult
+            movieToBeSaved.backdropPath = self.movie.backdropPath
+            movieToBeSaved.video = self.movie.video
+            movieToBeSaved.popularity = self.movie.popularity
+            movieToBeSaved.releaseDate = self.movie.releaseDate
+            movieToBeSaved.posterPath = self.movie.posterPath
+            movieToBeSaved.overview = self.movie.overview
+            movieToBeSaved.voteAverage = self.movie.voteAverage
+            movieToBeSaved.voteCount = Int32(self.movie.voteCount)
+            movieToBeSaved.runTime = Int32(self.movie.runTime ?? 0)
+    
+            
+            do {
+                try self.managedObjectContext.save()
+            } catch {
+                // handle the Core Data error
+            }
+
+        }) {
+            Image(systemName: "heart")
+            .renderingMode(.original)
+        })
     }
 }
 
