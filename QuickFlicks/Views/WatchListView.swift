@@ -31,7 +31,44 @@ struct WatchListView: View {
                     NavigationLink(destination: MovieDetailView(movie: Movie(popularity: movie.popularity, voteCount: Int(movie.voteCount), video: movie.video, posterPath: movie.posterPath, id: Int(movie.id), adult: movie.adult, backdropPath: movie.backdropPath, title: movie.title ?? "", voteAverage: movie.voteAverage, overview: movie.overview ?? "", releaseDate: movie.releaseDate, runTime: Int(movie.runTime), credits: nil))) {
                         
                         
-                        MovielistRowView(movies: Movie.example)
+                        HStack {
+                            
+                            URLImage(url: "https://image.tmdb.org/t/p/w500\(movie.posterPath ?? "")")
+                            
+                            
+                                .frame(width: 92, height: 136)
+                            
+                            VStack(alignment: .leading) {
+                                
+                                Text("\(movie.title!)")
+                                    .font(.headline)
+                                
+                                VStack(alignment: .leading) {
+                                    
+                                    HStack {
+                                        
+                                        Image(systemName: "star.fill")
+                                            .foregroundColor(.yellow)
+                                        
+                                        Text("\(movie.voteAverage)")
+                                            .font(.callout)
+                                        
+                                    }
+                                    
+                                    HStack {
+                                    
+                                    Image(systemName: "calendar")
+                                    
+                                        Text("\(movie.releaseDate!)")
+                                        .font(.callout)
+                                        
+                                        
+                                    }
+                                }
+                                Spacer()
+                            }
+                            
+                        }
                         
                     }
                 }.onDelete(perform: removeMovie) // Swipe to delete
