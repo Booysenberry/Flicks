@@ -7,17 +7,18 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct WatchListView: View {
+    
+    @ObservedObject var watchListVM = WatchListViewModel()
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
     // Create core data fetch request
     @FetchRequest(
         entity: SavedMovie.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \SavedMovie.title, ascending: true)
-        ]
+        sortDescriptors: []
     ) var savedMovies: FetchedResults<SavedMovie>
     
     var body: some View {
@@ -26,55 +27,23 @@ struct WatchListView: View {
             
             List {
                 
-                ForEach(savedMovies, id: \.self) { movie in
+                ForEach(watchListVM.watchListMovies, id: \.id) { movie in
                     
-                    NavigationLink(destination: MovieDetailView(movie: Movie(popularity: movie.popularity, voteCount: Int(movie.voteCount), video: movie.video, posterPath: movie.posterPath, id: Int(movie.id), adult: movie.adult, backdropPath: movie.backdropPath, title: movie.title ?? "", voteAverage: movie.voteAverage, overview: movie.overview ?? "", releaseDate: movie.releaseDate, runTime: Int(movie.runTime), credits: nil))) {
+                    NavigationLink(destination: MovieDetailView(movie: movie)) {
                         
-                        
-                        HStack {
-                            
-                            URLImage(url: "https://image.tmdb.org/t/p/w500\(movie.posterPath ?? "")")
-                            
-                            
-                                .frame(width: 92, height: 136)
-                            
-                            VStack(alignment: .leading) {
-                                
-                                Text("\(movie.title!)")
-                                    .font(.headline)
-                                
-                                VStack(alignment: .leading) {
-                                    
-                                    HStack {
-                                        
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
-                                        
-                                        Text("\(movie.voteAverage)")
-                                            .font(.callout)
-                                        
-                                    }
-                                    
-                                    HStack {
-                                    
-                                    Image(systemName: "calendar")
-                                    
-                                        Text("\(movie.releaseDate!)")
-                                        .font(.callout)
-                                        
-                                        
-                                    }
-                                }
-                                Spacer()
-                            }
-                            
-                        }
+                        MovielistRowView(movies: movie)
                         
                     }
                 }.onDelete(perform: removeMovie) // Swipe to delete
+                
             }
-            .navigationBarTitle("Watch List")
-            .navigationBarItems(trailing: EditButton())
+            .onAppear(perform: {
+                self.watchListVM.watchListMovies.removeAll()
+                self.watchListVM.toAnyObject(movies: self.savedMovies)
+            })
+                .navigationBarTitle("Watch List")
+//                .navigationBarItems(trailing: EditButton())
+            
         }
     }
     
@@ -86,9 +55,12 @@ struct WatchListView: View {
         }
         do {
             try managedObjectContext.save()
+            
         } catch {
             // handle the Core Data error
         }
+        self.watchListVM.watchListMovies.removeAll()
+        self.watchListVM.toAnyObject(movies: self.savedMovies)
     }
 }
 

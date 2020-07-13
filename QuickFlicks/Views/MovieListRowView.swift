@@ -43,13 +43,11 @@ struct MovielistRowView: View {
                     }
                     
                     HStack {
-                    
-                    Image(systemName: "calendar")
-                    
-                    Text("\(movies.releaseYear)")
-                        .font(.callout)
                         
+                        Image(systemName: "calendar")
                         
+                        Text("\(movies.releaseYear)")
+                            .font(.callout)
                     }
                 }
                 Spacer()

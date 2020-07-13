@@ -32,7 +32,7 @@ struct Movie: Codable, Equatable {
     let id: Int
     let adult: Bool
     let backdropPath: String?
-    let title: String
+    var title: String
     let voteAverage: Double
     let overview: String
     let releaseDate: String?

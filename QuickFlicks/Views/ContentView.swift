@@ -20,19 +20,8 @@ struct ContentView: View {
                 
                 GenreListView(genres: genreListVM.fetchedGenres)
                 
-            }
-            .navigationBarItems(trailing:
-                Button(action: {
-                  print("button pressed")
-
-                }) {
-                    Image(systemName: "gift")
-                    .renderingMode(.original)
-                })
-                
-            .navigationBarTitle("Genres")
-            
-            .font(.headline)
+            }.navigationBarTitle("Genres")
+                .font(.headline)
         }
     }
 }

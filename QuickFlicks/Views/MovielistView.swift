@@ -17,7 +17,6 @@ struct MovielistView: View {
     init(genre: GenreElement) {
         self.genre = genre
         movielistVM.fetchMovies(genre: genre.id)
-        
     }
     
     var body: some View {
@@ -30,23 +29,14 @@ struct MovielistView: View {
                     
                     MovielistRowView(movies: movie)
                         
-                    .onAppear(perform: {
-                        if movie == self.movielistVM.movies.last {
-                            self.movielistVM.checkTotalMovies(genre: self.genre.id)
-                        }
-                    })
+                        .onAppear(perform: {
+                            if movie == self.movielistVM.movies.last {
+                                self.movielistVM.checkTotalMovies(genre: self.genre.id)
+                            }
+                        })
                 }
             }
-            
         }.navigationBarTitle(genre.name)
-        .navigationBarItems(trailing:
-        Button(action: {
-          print("button pressed")
-
-        }) {
-            Image(systemName: "gift")
-            .renderingMode(.original)
-        })
     }
 }
 
