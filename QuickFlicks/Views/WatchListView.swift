@@ -42,7 +42,7 @@ struct WatchListView: View {
                 self.watchListVM.toAnyObject(movies: self.savedMovies)
             })
                 .navigationBarTitle("Watch List")
-//                .navigationBarItems(trailing: EditButton())
+            //              .navigationBarItems(trailing: EditButton())
             
         }
     }

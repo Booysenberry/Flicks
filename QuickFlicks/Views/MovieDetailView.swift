@@ -81,7 +81,9 @@ struct MovieDetailView: View {
                 ScrollView(.horizontal) {
                     
                     HStack {
+                        if detailVM.fetchedMovie?.credits != nil {
                         CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
+                        }
                     }.padding()
                 }
             }
