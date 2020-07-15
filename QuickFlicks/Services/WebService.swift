@@ -50,6 +50,48 @@ class WebService {
     }
     
     
+    func getMoviesByFilter(filter: String, page: Int, completion: @escaping (MovieList?) -> ()) {
+        
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&sort_by=\(filter).desc&include_adult=false&include_video=false&page=\(page)") else {
+            fatalError("Invalid URL")
+        }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: url) { data, response, error in
+            
+            // Check for errors
+            guard error == nil else {
+                print ("error: \(error!)")
+                return
+            }
+            // Check that data has been returned
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let movies = try decoder.decode(MovieList.self, from: data)
+                
+                DispatchQueue.main.async {
+                    
+                    completion(movies)
+                    
+                }
+                
+            } catch let err {
+                print("Error", err)
+            }
+        }
+        // execute the HTTP request
+        task.resume()
+    }
+    
+    
     
     func getMoviesByGenre(genre: Int, page: Int, completion: @escaping (MovieList?) -> ()) {
         

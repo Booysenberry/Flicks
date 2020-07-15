@@ -12,22 +12,29 @@ struct AppView: View {
     var body: some View {
         
         TabView {
+            
+            FilteredMovieView()
+                .tabItem{
+                    Image(systemName: "film")
+                    Text("Movies")
+            }
+            
             GenresView()
                 .tabItem {
                     Image(systemName: "film")
                     Text("Genres")
             }
             
+            SearchView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Search")
+            }
+            
             WatchListView()
                 .tabItem {
                     Image(systemName: "heart")
                     Text("Watch List")
-            }
-            
-            SearchView() 
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
             }
         }
     }
