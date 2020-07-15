@@ -12,7 +12,7 @@ struct AppView: View {
     var body: some View {
         
         TabView {
-            ContentView()
+            GenresView()
                 .tabItem {
                     Image(systemName: "film")
                     Text("Genres")
