@@ -12,32 +12,37 @@ struct FilteredMovieView: View {
     
     @ObservedObject private var filteredMovieVM = FilteredMovieViewModel()
     
+    private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var filter: String = "popularity"
     
     var body: some View {
         
+        
         NavigationView {
             
-            List {
+            ScrollView {
                 
-                ForEach(filteredMovieVM.movies, id: \.id) { movie in
+                LazyVGrid(columns: twoColumnGrid, spacing: 10) {
                     
-                    NavigationLink(destination: MovieDetailView(movie: movie)) {
+                    ForEach(filteredMovieVM.movies, id:\.id) { movie in
                         
-                        MovielistRowView(movies: movie)
+                        NavigationLink(destination: MovieDetailView(movie: movie)) {
+                            
+                            MovielistRowView(movies: movie)
+                        }.buttonStyle(PlainButtonStyle())
                         
                         .onAppear(perform: {
                             if movie == self.filteredMovieVM.movies.last {
-                                self.filteredMovieVM.checkTotalMovies(filter: self.filter)
+                                self.filteredMovieVM.checkTotalMovies(filter: filter)
                             }
                         })
                     }
-                }.navigationBarTitle("Movies")
-            }
+                }
+            }.navigationBarTitle("Top Movies")
         }
     }
 }
-
 
 //struct FilteredMovieView_Previews: PreviewProvider {
 //    static var previews: some View {

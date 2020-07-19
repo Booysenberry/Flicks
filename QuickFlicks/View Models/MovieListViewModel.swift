@@ -25,6 +25,8 @@ class MovieListViewModel: ObservableObject {
     
     func fetchMovies(genre: Int) {
         
+        print("Page: \(currentPage)")
+        
         WebService().getMoviesByGenre(genre: genre, page: currentPage) { movie in
             
             if let movie = movie {
@@ -37,7 +39,7 @@ class MovieListViewModel: ObservableObject {
         if let totalPages = fetchedMovies.first?.totalPages {
             if currentPage <= totalPages {
                 currentPage += 1
-                print(currentPage)
+
             }
         }
     }

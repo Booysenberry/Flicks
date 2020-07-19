@@ -20,39 +20,29 @@ struct MovielistRowView: View {
     
     var body: some View {
         
-        HStack {
-            
+        VStack {
+            // Poster
             URLImage(url: "\(movies.posterURL)")
-                .frame(width: 92, height: 136)
+                .frame(width: 154, height: 228)
             
-            VStack(alignment: .leading) {
-                
-                Text(movies.title)
-                    .font(.headline)
-                
-                VStack(alignment: .leading) {
+            HStack {
+                // Rating
+                HStack {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
                     
-                    HStack {
-                        
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                        
-                        Text(movies.voteAveragePercent)
-                            .font(.callout)
-                        
-                    }
-                    
-                    HStack {
-                        
-                        Image(systemName: "calendar")
-                        
-                        Text("\(movies.releaseYear)")
-                            .font(.callout)
-                    }
+                    Text(movies.voteAveragePercent)
+   
                 }
-                Spacer()
+                
+                HStack {
+                    // Release date
+                    Image(systemName: "calendar")
+                    
+                    Text("\(movies.releaseYear)")
+                        .font(.callout)
+                }
             }
-            
         }
     }
 }

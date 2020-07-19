@@ -12,6 +12,8 @@ struct MovielistView: View {
     
     @ObservedObject private var movielistVM = MovieListViewModel()
     
+    private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var genre: GenreElement
     
     init(genre: GenreElement) {
@@ -21,13 +23,17 @@ struct MovielistView: View {
     
     var body: some View {
         
-        List {
+        ScrollView {
             
-            ForEach(movielistVM.movies, id: \.id) { movie in
+            LazyVGrid(columns: twoColumnGrid, spacing: 10) {
                 
-                NavigationLink(destination: MovieDetailView(movie: movie)) {
+                ForEach(movielistVM.movies, id:\.id) { movie in
                     
                     MovielistRowView(movies: movie)
+                        
+                        .onTapGesture {
+                            print(movie.title)
+                        }
                         
                         .onAppear(perform: {
                             if movie == self.movielistVM.movies.last {

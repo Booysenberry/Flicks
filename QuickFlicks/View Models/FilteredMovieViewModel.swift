@@ -12,6 +12,7 @@ class FilteredMovieViewModel: ObservableObject {
     
     init() {
         fetchMovies(filter: "popularity")
+        currentPage += 1
     }
     
     @Published var movies = [Movie]()
@@ -22,7 +23,6 @@ class FilteredMovieViewModel: ObservableObject {
     
     func checkTotalMovies(filter: String) {
         if filteredMovies.count < 20 {
-            currentPage = currentPage + 1
             fetchMovies(filter: filter)
         }
     }
@@ -41,7 +41,7 @@ class FilteredMovieViewModel: ObservableObject {
         if let totalPages = filteredMovies.first?.totalPages {
             if currentPage <= totalPages {
                 currentPage += 1
-                print(currentPage)
+                
             }
         }
     }
