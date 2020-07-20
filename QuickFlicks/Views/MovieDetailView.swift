@@ -70,54 +70,54 @@ struct MovieDetailView: View {
             }
             
             ScrollView {
-                
-                // Synopsis
-                Text(movie.overview)
+                VStack {
                     
-                    .font(.body)
-                    .padding()
-                
-                // Cast
-                ScrollView(.horizontal) {
+                    // Synopsis
+                    Text(movie.overview)
+                        .font(.body)
+                        .padding()
+                        .fixedSize(horizontal: false, vertical: true)
                     
-                    HStack {
+                    ScrollView(.horizontal) {
+                        
                         if detailVM.fetchedMovie?.credits != nil {
-                        CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
+                            CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
                         }
+                        
                     }.padding()
                 }
             }
             Spacer()
         }.navigationBarTitle(movie.title)
-            
-            .navigationBarItems(trailing:
-                Button(action: {
-                    
-                    // Save to core data
-                    let movieToBeSaved = SavedMovie(context: self.managedObjectContext)
-                    movieToBeSaved.title = self.movie.title
-                    movieToBeSaved.id = Int32(self.movie.id)
-                    movieToBeSaved.adult = self.movie.adult
-                    movieToBeSaved.backdropPath = self.movie.backdropPath
-                    movieToBeSaved.video = self.movie.video
-                    movieToBeSaved.popularity = self.movie.popularity
-                    movieToBeSaved.releaseDate = self.movie.releaseDate
-                    movieToBeSaved.posterPath = self.movie.posterPath
-                    movieToBeSaved.overview = self.movie.overview
-                    movieToBeSaved.voteAverage = self.movie.voteAverage
-                    movieToBeSaved.voteCount = Int32(self.movie.voteCount)
-                    movieToBeSaved.runTime = Int32(self.movie.runTime ?? 0)
-                    
-                    do {
-                        try self.managedObjectContext.save()
-                    } catch {
-                        // handle the Core Data error
-                    }
-                    
-                }) {
-                    Image(systemName: "heart")
-                        .renderingMode(.original)
-            })
+        
+        .navigationBarItems(trailing:
+                                Button(action: {
+                                    
+                                    // Save to core data
+                                    let movieToBeSaved = SavedMovie(context: self.managedObjectContext)
+                                    movieToBeSaved.title = self.movie.title
+                                    movieToBeSaved.id = Int32(self.movie.id)
+                                    movieToBeSaved.adult = self.movie.adult
+                                    movieToBeSaved.backdropPath = self.movie.backdropPath
+                                    movieToBeSaved.video = self.movie.video
+                                    movieToBeSaved.popularity = self.movie.popularity
+                                    movieToBeSaved.releaseDate = self.movie.releaseDate
+                                    movieToBeSaved.posterPath = self.movie.posterPath
+                                    movieToBeSaved.overview = self.movie.overview
+                                    movieToBeSaved.voteAverage = self.movie.voteAverage
+                                    movieToBeSaved.voteCount = Int32(self.movie.voteCount)
+                                    movieToBeSaved.runTime = Int32(self.movie.runTime ?? 0)
+                                    
+                                    do {
+                                        try self.managedObjectContext.save()
+                                    } catch {
+                                        // handle the Core Data error
+                                    }
+                                    
+                                }) {
+                                    Image(systemName: "heart")
+                                        .renderingMode(.original)
+                                })
     }
 }
 

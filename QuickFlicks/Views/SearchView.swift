@@ -28,7 +28,7 @@ struct SearchView: View {
                         
                         NavigationLink(destination: MovieDetailView(movie: movie)) {
                             
-                            MovielistRowView(movies: movie)
+                            SearchListView(movies: movie)
                             
                             .onAppear(perform: {
                                 if movie == self.searchVM.searchedMovies.last {

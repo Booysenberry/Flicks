@@ -31,10 +31,6 @@ struct MovielistView: View {
                     
                     MovielistRowView(movies: movie)
                         
-                        .onTapGesture {
-                            print(movie.title)
-                        }
-                        
                         .onAppear(perform: {
                             if movie == self.movielistVM.movies.last {
                                 self.movielistVM.checkTotalMovies(genre: self.genre.id)

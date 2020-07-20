@@ -18,17 +18,14 @@ struct CastView: View {
             
             ForEach(cast, id: \.id) { actor in
                 
-                HStack {
+                VStack {
                     
-                    ScrollView {
-                        
-                        URLImage(url: "\(actor.profileURL)")
-                            .clipShape(Circle())
-                            .frame(width: 92, height: 136)
-                        
-                        Text("\(actor.name!)")
-                            .font(.footnote)
-                    }
+                    URLImage(url: "\(actor.profileURL)")
+                        .clipShape(Circle())
+                        .frame(width: 92, height: 136)
+                    
+                    Text("\(actor.name!)")
+                        .font(.footnote)
                 }
             }
         }
