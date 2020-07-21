@@ -39,7 +39,7 @@ struct FilteredMovieView: View {
                         })
                     }
                 }
-            }.navigationBarTitle("Top Movies")
+            }.navigationBarTitle("Popular Movies")
         }
     }
 }

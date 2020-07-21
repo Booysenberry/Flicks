@@ -17,25 +17,31 @@ struct AppView: View {
                 .tabItem{
                     Image(systemName: "film")
                     Text("Movies")
-            }
+                }
+            
+            FilteredTVShowsView()
+                .tabItem{
+                    Image(systemName: "tv")
+                    Text("TV")
+                }
             
             GenresView()
                 .tabItem {
-                    Image(systemName: "film")
+                    Image(systemName: "list.and.film")
                     Text("Genres")
-            }
+                }
             
             SearchView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
-            }
+                }
             
             WatchListView()
                 .tabItem {
                     Image(systemName: "heart")
                     Text("Watch List")
-            }
+                }
         }
     }
 }
