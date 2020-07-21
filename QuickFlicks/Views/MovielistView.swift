@@ -29,16 +29,20 @@ struct MovielistView: View {
                 
                 ForEach(movielistVM.movies, id:\.id) { movie in
                     
-                    MovielistRowView(movies: movie)
+                    NavigationLink(destination: MovieDetailView(movie: movie)) {
                         
-                        .onAppear(perform: {
-                            if movie == self.movielistVM.movies.last {
-                                self.movielistVM.checkTotalMovies(genre: self.genre.id)
-                            }
-                        })
+                        MovielistRowView(movies: movie)
+                        
+                    }.buttonStyle(PlainButtonStyle())
+                    
+                    .onAppear(perform: {
+                        if movie == self.movielistVM.movies.last {
+                            self.movielistVM.checkTotalMovies(genre: self.genre.id)
+                        }
+                    })
                 }
-            }
-        }.navigationBarTitle(genre.name)
+            }.navigationBarTitle(genre.name)
+        }
     }
 }
 
