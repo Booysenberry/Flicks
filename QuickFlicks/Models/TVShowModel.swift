@@ -28,7 +28,6 @@ struct Show: Codable, Equatable {
     let name: String
     let popularity: Double
     let voteCount: Int
-    let firstAirDate: String
     let backdropPath: String?
     let id: Int
     let voteAverage: Double
@@ -52,13 +51,18 @@ struct Show: Codable, Equatable {
         case genreIDS = "genre_ids"
         case name, popularity
         case voteCount = "vote_count"
-        case firstAirDate = "first_air_date"
         case backdropPath = "backdrop_path"
         case id
         case voteAverage = "vote_average"
         case overview
         case posterPath = "poster_path"
     }
+}
+
+// MARK: - ShowCast
+struct ShowCast: Codable {
+    let cast: [Cast]
+    let id: Int
 }
 
 extension Show {

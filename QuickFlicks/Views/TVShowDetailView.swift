@@ -10,7 +10,15 @@ import SwiftUI
 
 struct TVShowDetailView: View {
     
+    @ObservedObject private var TVDetailVM = TVDetailViewModel()
+    
     var show: Show
+    
+    init(show: Show) {
+        self.show = show
+        TVDetailVM.getCast(show: show.id)
+        
+    }
     
     var body: some View {
         
@@ -58,6 +66,14 @@ struct TVShowDetailView: View {
                 .font(.body)
                 .padding()
                 .fixedSize(horizontal: false, vertical: true)
+            
+            ScrollView(.horizontal) {
+                
+                if TVDetailVM.castMembers != nil {
+                    CastView(cast: TVDetailVM.castMembers)
+                }
+                
+            }.padding()
             
         }.navigationBarTitle(show.name)
     }

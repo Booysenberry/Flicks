@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DetailViewModel: ObservableObject {
+class MovieDetailViewModel: ObservableObject {
     
     @Published var fetchedMovie: Movie?
     

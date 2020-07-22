@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MovieDetailView: View {
     
-    @ObservedObject private var detailVM = DetailViewModel()
+    @ObservedObject private var detailVM = MovieDetailViewModel()
     
     // Core data
     @Environment(\.managedObjectContext) var managedObjectContext
