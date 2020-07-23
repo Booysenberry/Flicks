@@ -20,7 +20,13 @@ class WatchListViewModel: ObservableObject {
         }
     }
     
-    func toAnyObject(movies: FetchedResults<SavedMovie>)  {
+    @Published var watchListTVShows = [Show]() {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
+    func moviesToAnyObject(movies: FetchedResults<SavedMovie>)  {
         
         var dic = [String:AnyObject?]()
         
@@ -61,5 +67,39 @@ class WatchListViewModel: ObservableObject {
             credits: nil)
         
         watchListMovies.append(movie)
+    }
+    
+    func showToAnyObject(shows: FetchedResults<SavedShow>)  {
+        
+        var dic = [String:AnyObject?]()
+        
+        for show in shows {
+            
+            dic["name"] = show.name as AnyObject
+            dic["id"] = show.id as AnyObject
+            dic["backdropPath"] = show.backdropPath as AnyObject
+            dic["popularity"] = show.popularity as AnyObject
+            dic["posterPath"] = show.posterPath as AnyObject
+            dic["overview"] = show.overview as AnyObject
+            dic["voteAverage"] = show.voteAverage as AnyObject
+            dic["voteCount"] = show.voteCount as AnyObject
+            
+            fromAnyObjectToShow(dictionary: dic)
+        }
+    }
+    
+    func fromAnyObjectToShow(dictionary: [String:AnyObject?]) {
+        
+        let show = Show(
+            name: dictionary["name"] as! String,
+            popularity: dictionary["popularity"] as! Double,
+            voteCount: dictionary["voteCount"] as! Int,
+            backdropPath: dictionary["backdropPath"] as? String,
+            id: dictionary["id"] as! Int,
+            voteAverage: dictionary["voteAverage"] as! Double,
+            overview: dictionary["overview"] as! String,
+            posterPath: dictionary["posterPath"] as? String)
+        
+        watchListTVShows.append(show)
     }
 }

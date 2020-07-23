@@ -23,8 +23,6 @@ struct TVShowList: Codable {
 
 // MARK: - Result
 struct Show: Codable, Equatable {
-    let originalName: String
-    let genreIDS: [Int]
     let name: String
     let popularity: Double
     let voteCount: Int
@@ -47,8 +45,6 @@ struct Show: Codable, Equatable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case originalName = "original_name"
-        case genreIDS = "genre_ids"
         case name, popularity
         case voteCount = "vote_count"
         case backdropPath = "backdrop_path"

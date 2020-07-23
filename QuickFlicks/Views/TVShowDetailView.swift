@@ -12,6 +12,9 @@ struct TVShowDetailView: View {
     
     @ObservedObject private var TVDetailVM = TVDetailViewModel()
     
+    // Core data
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     var show: Show
     
     init(show: Show) {
@@ -76,6 +79,31 @@ struct TVShowDetailView: View {
             }.padding()
             
         }.navigationBarTitle(show.name)
+        
+        .navigationBarItems(trailing:
+                                Button(action: {
+                                    
+                                    // Save to core data
+                                    let showToBeSaved = SavedShow(context: self.managedObjectContext)
+                                    showToBeSaved.name = self.show.name
+                                    showToBeSaved.id = Int32(self.show.id)
+                                    showToBeSaved.backdropPath = self.show.backdropPath
+                                    showToBeSaved.popularity = self.show.popularity
+                                    showToBeSaved.posterPath = self.show.posterPath
+                                    showToBeSaved.overview = self.show.overview
+                                    showToBeSaved.voteAverage = self.show.voteAverage
+                                    showToBeSaved.voteCount = Int32(self.show.voteCount)
+                                    
+                                    do {
+                                        try self.managedObjectContext.save()
+                                    } catch {
+                                        // handle the Core Data error
+                                    }
+                                    
+                                }) {
+                                    Image(systemName: "heart")
+                                        .renderingMode(.original)
+                                })
     }
 }
 
