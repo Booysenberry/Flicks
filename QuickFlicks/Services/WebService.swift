@@ -215,6 +215,49 @@ class WebService {
         task.resume()
     }
     
+    func searchForShow(show: String, page: Int, completion: @escaping (TVShowList?) -> ()) {
+        
+        let url = "https://api.themoviedb.org/3/search/tv?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&page=\(page)&query=\(show)&include_adult=false"
+        
+        guard let enccodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
+            fatalError("Invalid URL")
+        }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: enccodedUrl) { data, response, error in
+            
+            // Check for errors
+            guard error == nil else {
+                print ("error: \(error!)")
+                return
+            }
+            // Check that data has been returned
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let showDetails = try decoder.decode(TVShowList.self, from: data)
+                
+                DispatchQueue.main.async {
+                    
+                    completion(showDetails)
+                    
+                }
+                
+            } catch let err {
+                print("Err", err)
+            }
+        }
+        // execute the HTTP request
+        task.resume()
+    }
+    
     func getPopularTVShows(page: Int, completion: @escaping (TVShowList?) -> ()) {
         
         guard let url = URL(string: "https://api.themoviedb.org/3/tv/popular?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&page=\(page)") else {

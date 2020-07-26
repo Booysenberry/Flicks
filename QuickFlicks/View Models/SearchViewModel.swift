@@ -11,8 +11,10 @@ import Foundation
 class SearchViewModel: ObservableObject {
     
     @Published var searchedMovies = [Movie]()
+    @Published var searchedShows = [Show]()
     
     private var fetchedMovies = [MovieList]()
+    private var fetchedShows = [TVShowList]()
     
     var currentPage = 1
     
@@ -20,6 +22,13 @@ class SearchViewModel: ObservableObject {
         if fetchedMovies.count < 20 {
             currentPage = currentPage + 1
             fetchMovies(movie: movie)
+        }
+    }
+    
+    func checkTotalShows(show: String) {
+        if fetchedShows.count < 20 {
+            currentPage = currentPage + 1
+            fetchShows(show: show)
         }
     }
     
@@ -35,6 +44,24 @@ class SearchViewModel: ObservableObject {
             }
         }
         if let totalPages = fetchedMovies.first?.totalPages {
+            if currentPage <= totalPages {
+                currentPage += 1
+            }
+        }
+    }
+    
+    func fetchShows(show: String) {
+        
+        WebService().searchForShow(show: show, page: currentPage) { show in
+            
+            if let show = show {
+                self.fetchedShows.append(show)
+                for show in show.shows {
+                    self.searchedShows.append(show)
+                }
+            }
+        }
+        if let totalPages = fetchedShows.first?.totalPages {
             if currentPage <= totalPages {
                 currentPage += 1
             }

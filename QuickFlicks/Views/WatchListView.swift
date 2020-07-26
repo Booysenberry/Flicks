@@ -48,7 +48,7 @@ struct WatchListView: View {
                             
                             NavigationLink(destination: MovieDetailView(movie: movie)) {
                                 
-                                MovielistRowView(movies: movie)
+                                MovieSearchListView(movies: movie)
                             
                             }
                         }.onDelete(perform: removeMovie)
@@ -58,7 +58,7 @@ struct WatchListView: View {
                             
                             NavigationLink(destination: TVShowDetailView(show: show)) {
                                 
-                                TVShowRowView(shows: show)
+                                TVSearchListView(show: show)
                             }
                         }.onDelete(perform: removeShow)
                     }

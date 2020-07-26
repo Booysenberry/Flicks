@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SearchListView: View {
+struct MovieSearchListView: View {
     
     var movies: Movie
     
@@ -56,6 +56,6 @@ struct SearchListView: View {
 
 struct SearchListView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchListView(movies: Movie.example)
+        MovieSearchListView(movies: Movie.example)
     }
 }

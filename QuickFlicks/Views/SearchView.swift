@@ -14,34 +14,60 @@ struct SearchView: View {
     
     @State private var searchText = ""
     
+    @State var type = 0
+    
     var body: some View {
         
         NavigationView {
             
             VStack {
                 
-                SearchBarView(searchVM: searchVM, text: $searchText)
+                SearchBarView(searchVM: searchVM, searchView: self, text: $searchText)
+                
+                Picker(selection: $type, label: Text("Select")) {
+                    Text("Movies").tag(0)
+                    Text("TV Shows").tag(1)
+                }.pickerStyle(SegmentedPickerStyle())
                 
                 List {
                     
-                    ForEach(searchVM.searchedMovies, id: \.id) { movie in
+                    if type == 0 {
                         
-                        NavigationLink(destination: MovieDetailView(movie: movie)) {
+                        ForEach(searchVM.searchedMovies, id: \.id) { movie in
                             
-                            SearchListView(movies: movie)
-                            
-                            .onAppear(perform: {
-                                if movie == self.searchVM.searchedMovies.last {
-                                    self.searchVM.checkTotalMovies(movie: self.searchText)
+                            NavigationLink(destination: MovieDetailView(movie: movie)) {
+                                
+                                MovieSearchListView(movies: movie)
                                     
-                                }
-                            })
+                                    .onAppear(perform: {
+                                        if movie == self.searchVM.searchedMovies.last {
+                                            self.searchVM.checkTotalMovies(movie: self.searchText)
+                                            
+                                        }
+                                    })
+                            }
+                        }
+                    } else {
+                        
+                        ForEach(searchVM.searchedShows, id: \.id) { show in
+                            
+                            NavigationLink(destination: TVShowDetailView(show: show)) {
+                                
+                                TVSearchListView(show: show)
+                                    
+                                    .onAppear(perform: {
+                                        if show == self.searchVM.searchedShows.last {
+                                            self.searchVM.checkTotalShows(show: self.searchText)
+                                            
+                                        }
+                                    })
+                            }
                         }
                         
                     }
                 }
+                .navigationBarTitle("Search")
             }
-            .navigationBarTitle("Search")
         }
     }
 }
