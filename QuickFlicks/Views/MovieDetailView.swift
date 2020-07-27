@@ -107,16 +107,21 @@ struct MovieDetailView: View {
                                     movieToBeSaved.voteAverage = self.movie.voteAverage
                                     movieToBeSaved.voteCount = Int32(self.movie.voteCount)
                                     movieToBeSaved.runTime = Int32(self.movie.runTime ?? 0)
+                                    movieToBeSaved.isSaved = true
                                     
                                     do {
                                         try self.managedObjectContext.save()
                                     } catch {
                                         // handle the Core Data error
                                     }
-                                    
                                 }) {
-                                    Image(systemName: "heart")
-                                        .renderingMode(.original)
+                                    if movie.isSaved {
+                                        Image(systemName: "heart.fill")
+                                            .renderingMode(.original)
+                                    } else {
+                                        Image(systemName: "heart")
+                                            .renderingMode(.original)
+                                    }
                                 })
     }
 }

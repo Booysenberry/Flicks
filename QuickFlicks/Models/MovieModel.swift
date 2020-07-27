@@ -38,6 +38,7 @@ struct Movie: Codable, Equatable {
     let releaseDate: String?
     let runTime: Int?
     let credits: Credits?
+    var isSaved = false
     
     var posterURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!

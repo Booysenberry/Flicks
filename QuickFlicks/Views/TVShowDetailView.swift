@@ -93,6 +93,7 @@ struct TVShowDetailView: View {
                                     showToBeSaved.overview = self.show.overview
                                     showToBeSaved.voteAverage = self.show.voteAverage
                                     showToBeSaved.voteCount = Int32(self.show.voteCount)
+                                    showToBeSaved.isSaved = true
                                     
                                     do {
                                         try self.managedObjectContext.save()

@@ -16,6 +16,8 @@ struct FilteredMovieView: View {
     
     var filter: String = "popularity"
     
+    @State private var showFilterView = false
+    
     var body: some View {
         
         
@@ -40,9 +42,19 @@ struct FilteredMovieView: View {
                     }
                 }
             }.navigationBarTitle("Popular Movies")
+            .navigationBarItems(trailing:
+                                    Button(action: {
+                                        
+                                        // Filter action here
+                                        
+                                    }) {
+                                        Image(systemName: "line.horizontal.3.decrease.circle")
+                                            .renderingMode(.original)
+                                    })
         }
     }
 }
+
 
 //struct FilteredMovieView_Previews: PreviewProvider {
 //    static var previews: some View {

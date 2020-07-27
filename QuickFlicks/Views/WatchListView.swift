@@ -63,13 +63,15 @@ struct WatchListView: View {
                         }.onDelete(perform: removeShow)
                     }
                 }
+                .onAppear(perform: {
+                    print(savedMovies.count)
+                    self.watchListVM.watchListMovies.removeAll()
+                    self.watchListVM.moviesToAnyObject(movies: self.savedMovies)
+                    self.watchListVM.watchListTVShows.removeAll()
+                    self.watchListVM.showToAnyObject(shows: self.savedShows)
+                })
             }
-            .onAppear(perform: {
-                self.watchListVM.watchListMovies.removeAll()
-                self.watchListVM.moviesToAnyObject(movies: self.savedMovies)
-                self.watchListVM.watchListTVShows.removeAll()
-                self.watchListVM.showToAnyObject(shows: self.savedShows)
-            })
+            
             .navigationBarTitle("Watch List")
             //              .navigationBarItems(trailing: EditButton())
         }
