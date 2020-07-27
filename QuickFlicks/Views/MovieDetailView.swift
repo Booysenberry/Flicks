@@ -17,6 +17,8 @@ struct MovieDetailView: View {
     
     var movie: Movie
     
+    @State private var showingAlert = false
+    
     init(movie: Movie) {
         self.movie = movie
         detailVM.getMovieDetails(id: movie.id)
@@ -107,7 +109,8 @@ struct MovieDetailView: View {
                                     movieToBeSaved.voteAverage = self.movie.voteAverage
                                     movieToBeSaved.voteCount = Int32(self.movie.voteCount)
                                     movieToBeSaved.runTime = Int32(self.movie.runTime ?? 0)
-                                    movieToBeSaved.isSaved = true
+                                    
+                                    self.showingAlert = true
                                     
                                     do {
                                         try self.managedObjectContext.save()
@@ -115,14 +118,12 @@ struct MovieDetailView: View {
                                         // handle the Core Data error
                                     }
                                 }) {
-                                    if movie.isSaved {
-                                        Image(systemName: "heart.fill")
-                                            .renderingMode(.original)
-                                    } else {
-                                        Image(systemName: "heart")
-                                            .renderingMode(.original)
-                                    }
+                                    Image(systemName: "plus")
+                                        .renderingMode(.original)
+                                }.alert(isPresented: $showingAlert) {
+                                    Alert(title: Text("Saved"), message: Text("Movie added to your watch list"), dismissButton: .default(Text("Ok")))
                                 })
+        
     }
 }
 

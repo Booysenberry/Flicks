@@ -17,6 +17,8 @@ struct TVShowDetailView: View {
     
     var show: Show
     
+    @State private var showingAlert = false
+    
     init(show: Show) {
         self.show = show
         TVDetailVM.getCast(show: show.id)
@@ -93,7 +95,8 @@ struct TVShowDetailView: View {
                                     showToBeSaved.overview = self.show.overview
                                     showToBeSaved.voteAverage = self.show.voteAverage
                                     showToBeSaved.voteCount = Int32(self.show.voteCount)
-                                    showToBeSaved.isSaved = true
+                                    
+                                    self.showingAlert = true
                                     
                                     do {
                                         try self.managedObjectContext.save()
@@ -102,8 +105,10 @@ struct TVShowDetailView: View {
                                     }
                                     
                                 }) {
-                                    Image(systemName: "heart")
+                                    Image(systemName: "plus")
                                         .renderingMode(.original)
+                                }.alert(isPresented: $showingAlert) {
+                                    Alert(title: Text("Saved"), message: Text("Show added to watch list"), dismissButton: .default(Text("Got it!")))
                                 })
     }
 }
