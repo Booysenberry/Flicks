@@ -10,9 +10,11 @@ import Foundation
 
 class WebService {
     
+    private let apiKey = valueForAPIKey(keyname: "YOUR_APPLICATION_KEY")
+    
     func getGenres(completion: @escaping (Genre?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=en-US") else {
             fatalError("Invalid URL")
         }
         
@@ -51,7 +53,7 @@ class WebService {
     
     func getMoviesByFilter(filter: String, page: Int, completion: @escaping (MovieList?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&sort_by=\(filter).desc&include_adult=false&include_video=false&page=\(page)") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=en-US&sort_by=\(filter).desc&include_adult=false&include_video=false&page=\(page)") else {
             fatalError("Invalid URL")
         }
         
@@ -92,7 +94,7 @@ class WebService {
     
     func getMoviesByGenre(genre: Int, page: Int, completion: @escaping (MovieList?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=\(page)&with_genres=\(genre)") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=\(page)&with_genres=\(genre)") else {
             fatalError("Invalid URL")
         }
         
@@ -133,7 +135,7 @@ class WebService {
     
     func getMovieDetails(movie: Int, completion: @escaping (Movie?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=5228bff935f7bd2b18c04fc3439828c0&append_to_response=credits") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=\(apiKey)&append_to_response=credits") else {
             fatalError("Invalid URL")
         }
         
@@ -174,7 +176,7 @@ class WebService {
     
     func searchForMovie(movie: String, page: Int, completion: @escaping (MovieList?) -> ()) {
         
-        let url = "https://api.themoviedb.org/3/search/movie?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&query=\(movie)&page=\(page)&include_adult=false&append_to_response=credits"
+        let url = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(movie)&page=\(page)&include_adult=false&append_to_response=credits"
         
         guard let enccodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
             fatalError("Invalid URL")
@@ -217,7 +219,7 @@ class WebService {
     
     func searchForShow(show: String, page: Int, completion: @escaping (TVShowList?) -> ()) {
         
-        let url = "https://api.themoviedb.org/3/search/tv?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&page=\(page)&query=\(show)&include_adult=false"
+        let url = "https://api.themoviedb.org/3/search/tv?api_key=\(apiKey)&language=en-US&page=\(page)&query=\(show)&include_adult=false"
         
         guard let enccodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
             fatalError("Invalid URL")
@@ -260,7 +262,7 @@ class WebService {
     
     func getPopularTVShows(page: Int, completion: @escaping (TVShowList?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/tv/popular?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&page=\(page)") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/tv/popular?api_key=\(apiKey)&language=en-US&page=\(page)") else {
             fatalError("Invalid URL")
         }
         
@@ -299,7 +301,7 @@ class WebService {
     
     func getTVCast(show: Int, completion: @escaping (ShowCast?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/tv/\(show)/credits?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/tv/\(show)/credits?api_key=\(apiKey)&language=en-US") else {
             fatalError("Invalid URL")
         }
         
