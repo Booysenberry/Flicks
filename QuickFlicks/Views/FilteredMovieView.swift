@@ -42,15 +42,6 @@ struct FilteredMovieView: View {
                     }
                 }
             }.navigationBarTitle("Popular Movies")
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                                        
-                                        // Filter action here
-                                        
-                                    }) {
-                                        Image(systemName: "line.horizontal.3.decrease.circle")
-                                            .renderingMode(.original)
-                                    })
         }
     }
 }

@@ -23,6 +23,8 @@ struct TVShowDetailView: View {
         self.show = show
         TVDetailVM.getCast(show: show.id)
         
+        // Stop Scrollview bounce
+        UIScrollView.appearance().bounces = false
     }
     
     var body: some View {

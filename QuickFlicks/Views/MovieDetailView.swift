@@ -23,6 +23,8 @@ struct MovieDetailView: View {
         self.movie = movie
         detailVM.getMovieDetails(id: movie.id)
         
+        // Stop Scrollview bounce
+        UIScrollView.appearance().bounces = false
     }
     
     var body: some View {
@@ -85,7 +87,6 @@ struct MovieDetailView: View {
                         if detailVM.fetchedMovie?.credits != nil {
                             CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
                         }
-                        
                     }.padding()
                 }
             }

@@ -25,8 +25,10 @@ struct CastView: View {
                         .frame(width: 92, height: 136)
                     
                     Text("\(actor.name!)")
+                        .lineLimit(1)
                         .font(.footnote)
-                }
+                    
+                }.frame(width: 100, height: 200, alignment: .top)
             }
         }
     }

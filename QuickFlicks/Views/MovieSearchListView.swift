@@ -31,8 +31,9 @@ struct MovieSearchListView: View {
                 
                 // Title
                 Text(movies.title)
-                    .font(.body)
+                    .font(.body).bold()
                     .lineLimit(nil)
+                    .padding(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                 
                 // Rating
                 HStack {
@@ -40,7 +41,7 @@ struct MovieSearchListView: View {
                         .foregroundColor(.yellow)
                     
                     Text(movies.voteAveragePercent)
-                }
+                }.padding(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                 
                 // Release date
                 HStack {
@@ -49,6 +50,7 @@ struct MovieSearchListView: View {
                     Text("\(movies.releaseYear)")
                         .font(.callout)
                 }
+                Spacer()
             }
         }
     }
