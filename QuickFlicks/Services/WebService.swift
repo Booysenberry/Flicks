@@ -19,9 +19,11 @@ class WebService {
         }
         
         let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: url) { data, response, error in
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // Check for errors
             guard error == nil else {
@@ -58,9 +60,11 @@ class WebService {
         }
         
         let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: url) { data, response, error in
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // Check for errors
             guard error == nil else {
@@ -99,9 +103,11 @@ class WebService {
         }
         
         let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: url) { data, response, error in
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // Check for errors
             guard error == nil else {
@@ -140,9 +146,11 @@ class WebService {
         }
         
         let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: url) { data, response, error in
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // Check for errors
             guard error == nil else {
@@ -178,14 +186,16 @@ class WebService {
         
         let url = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(movie)&page=\(page)&include_adult=false&append_to_response=credits"
         
-        guard let enccodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
+        guard let encodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
             fatalError("Invalid URL")
         }
         
         let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: enccodedUrl) { data, response, error in
+        let urlRequest = URLRequest(url: encodedUrl, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // Check for errors
             guard error == nil else {
@@ -221,14 +231,16 @@ class WebService {
         
         let url = "https://api.themoviedb.org/3/search/tv?api_key=\(apiKey)&language=en-US&page=\(page)&query=\(show)&include_adult=false"
         
-        guard let enccodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
+        guard let encodedUrl = URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!) else {
             fatalError("Invalid URL")
         }
         
         let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: enccodedUrl) { data, response, error in
+        let urlRequest = URLRequest(url: encodedUrl, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // Check for errors
             guard error == nil else {
@@ -267,9 +279,11 @@ class WebService {
         }
         
         let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: url) { data, response, error in
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // Check for errors
             guard error == nil else {
@@ -306,9 +320,11 @@ class WebService {
         }
         
         let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
         let session = URLSession(configuration: config)
         
-        let task = session.dataTask(with: url) { data, response, error in
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // Check for errors
             guard error == nil else {
@@ -328,7 +344,7 @@ class WebService {
                 
                 DispatchQueue.main.async {
                     completion(cast)
-    
+                    
                 }
                 
             } catch let err {

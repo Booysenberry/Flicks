@@ -33,9 +33,8 @@ struct TVShowDetailView: View {
             
             ZStack(alignment: .bottom) {
                 
-                // Cover picture
-                
-                URLImage(url: "\(show.backdropURL)")
+                // Cover art
+                URLImage(url: "\(show.backdropURL)", type: "coverArt")
                     .aspectRatio(contentMode: .fit)
                 
                 HStack {

@@ -22,7 +22,7 @@ struct MovielistRowView: View {
         
         VStack {
             // Poster
-            URLImage(url: "\(movies.posterURL)")
+            URLImage(url: "\(movies.posterURL)", type: "coverArt")
                 .frame(width: 154, height: 228)
             
             HStack {

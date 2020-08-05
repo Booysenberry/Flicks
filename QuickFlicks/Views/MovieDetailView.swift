@@ -35,7 +35,7 @@ struct MovieDetailView: View {
                 
                 // Cover picture
                 
-                URLImage(url: "https://image.tmdb.org/t/p/w500\(detailVM.fetchedMovie?.backdropPath ?? "")")
+                URLImage(url: "https://image.tmdb.org/t/p/w500\(detailVM.fetchedMovie?.backdropPath ?? "")", type: "movie")
                     .aspectRatio(contentMode: .fit)
                 
                 HStack {

@@ -15,8 +15,17 @@ struct URLImage: View {
     
     var placeholder: Image
     
-    init(url: String, placeholder: Image = Image("noImageFound")) {
-        self.placeholder = placeholder
+    init(url: String, type: String, placeholder: Image = Image("noImageFound")) {
+        
+        switch type {
+        case "coverArt":
+            self.placeholder = Image("noImageFound")
+        case "cast":
+            self.placeholder = Image("noProfileImageFound")
+        default:
+            self.placeholder = Image("noImageFound")
+        }
+    
         self.imageLoader.load(url: url)
     }
     
@@ -36,3 +45,5 @@ struct URLImage_Previews: PreviewProvider {
         /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
+
+

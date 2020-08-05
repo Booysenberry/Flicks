@@ -23,7 +23,7 @@ struct TVShowRowView: View {
         
         VStack {
             // Poster
-            URLImage(url: "\(shows.posterURL)")
+            URLImage(url: "\(shows.posterURL)", type: "coverArt")
                 .frame(width: 154, height: 228)
             
 

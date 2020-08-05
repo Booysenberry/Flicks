@@ -23,7 +23,7 @@ struct MovieSearchListView: View {
         HStack {
             
             // Poster
-            URLImage(url: "\(movies.posterURL)")
+            URLImage(url: "\(movies.posterURL)", type: "coverArt")
                 .frame(width: 92, height: 136)
             
             

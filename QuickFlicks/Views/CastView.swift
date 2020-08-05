@@ -20,7 +20,7 @@ struct CastView: View {
                 
                 VStack {
                     
-                    URLImage(url: "\(actor.profileURL)")
+                    URLImage(url: "\(actor.profileURL)", type: "cast")
                         .clipShape(Circle())
                         .frame(width: 92, height: 136)
                     

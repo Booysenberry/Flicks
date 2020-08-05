@@ -23,7 +23,7 @@ struct TVSearchListView: View {
         HStack {
             
             // Poster
-            URLImage(url: "\(show.posterURL)")
+            URLImage(url: "\(show.posterURL)", type: "cast")
                 .frame(width: 92, height: 136)
             
             
