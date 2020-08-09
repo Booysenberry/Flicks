@@ -49,7 +49,7 @@ struct WatchListView: View {
                             NavigationLink(destination: MovieDetailView(movie: movie)) {
                                 
                                 MovieSearchListView(movies: movie)
-
+                                
                             }
                         }.onDelete(perform: removeMovie)
                     } else {
@@ -73,7 +73,7 @@ struct WatchListView: View {
             }
             
             .navigationBarTitle("Watch List")
-            //              .navigationBarItems(trailing: EditButton())
+            .navigationBarItems(trailing: EditButton())
         }
     }
     
