@@ -49,7 +49,7 @@ struct WatchListView: View {
                             NavigationLink(destination: MovieDetailView(movie: movie)) {
                                 
                                 MovieSearchListView(movies: movie)
-                            
+
                             }
                         }.onDelete(perform: removeMovie)
                     } else {

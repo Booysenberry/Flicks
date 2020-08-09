@@ -31,38 +31,7 @@ struct TVShowDetailView: View {
         
         VStack {
             
-            ZStack(alignment: .bottom) {
-                
-                // Cover art
-                URLImage(url: "\(show.backdropURL)", type: "coverArt")
-                    .aspectRatio(contentMode: .fit)
-                
-                HStack {
-                    
-                    
-                    // Rating avg
-                    HStack {
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                        
-                        Text(show.voteAveragePercent)
-                        
-                    }
-                    Spacer()
-                    
-                    // Rating count
-                    HStack {
-                        Image(systemName: "person.3")
-                        
-                        Text("\(show.voteCount)")
-                        
-                    }
-                }
-                .padding()
-                .background(Color.black.opacity(0.5))
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-            }
+            ShowHeroView(show: show)
         }
         
         ScrollView {
@@ -120,3 +89,43 @@ struct TVShowDetailView: View {
 //        TVShowDetailView()
 //    }
 //}
+
+struct ShowHeroView: View {
+    
+    var show: Show
+    
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            
+            // Cover art
+            URLImage(url: "\(show.backdropURL)", type: "coverArt")
+                .aspectRatio(contentMode: .fit)
+            
+            HStack {
+                
+                
+                // Rating avg
+                HStack {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                    
+                    Text(show.voteAveragePercent)
+                    
+                }
+                Spacer()
+                
+                // Rating count
+                HStack {
+                    Image(systemName: "person.3")
+                    
+                    Text("\(show.voteCount)")
+                    
+                }
+            }
+            .padding()
+            .background(Color.black.opacity(0.5))
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+        }
+    }
+}

@@ -31,47 +31,7 @@ struct MovieDetailView: View {
         
         VStack {
             
-            ZStack(alignment: .bottom) {
-                
-                // Cover picture
-                
-                URLImage(url: "https://image.tmdb.org/t/p/w500\(detailVM.fetchedMovie?.backdropPath ?? "")", type: "movie")
-                    .aspectRatio(contentMode: .fit)
-                
-                HStack {
-                    
-                    // Runtime
-                    HStack {
-                        Image(systemName: "clock")
-                        Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
-                        
-                    }
-                    Spacer()
-                    
-                    // Rating avg
-                    HStack {
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                        
-                        Text(movie.voteAveragePercent)
-                        
-                    }
-                    Spacer()
-                    
-                    // Rating count
-                    HStack {
-                        Image(systemName: "person.3")
-                        
-                        Text("\(movie.voteCount)")
-                        
-                    }
-                }
-                .padding()
-                .background(Color.black.opacity(0.5))
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                
-            }
+            MovieHeroView(movie: detailVM.fetchedMovie!)
             
             ScrollView {
                 VStack {
@@ -135,5 +95,51 @@ struct MovieDetailView_Previews: PreviewProvider {
 }
 
 
-
-
+struct MovieHeroView: View {
+    
+    var movie: Movie
+    
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            
+            // Cover picture
+            
+            URLImage(url: "https://image.tmdb.org/t/p/w500\(movie.backdropPath ?? "")", type: "movie")
+                .aspectRatio(contentMode: .fit)
+            
+            HStack {
+                
+                // Runtime
+                HStack {
+                    Image(systemName: "clock")
+                    Text("\(movie.runTime ?? 1) mins")
+                    
+                }
+                Spacer()
+                
+                // Rating avg
+                HStack {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                    
+                    Text(movie.voteAveragePercent)
+                    
+                }
+                Spacer()
+                
+                // Rating count
+                HStack {
+                    Image(systemName: "person.3")
+                    
+                    Text("\(movie.voteCount)")
+                    
+                }
+            }
+            .padding()
+            .background(Color.black.opacity(0.5))
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            
+        }
+    }
+}
