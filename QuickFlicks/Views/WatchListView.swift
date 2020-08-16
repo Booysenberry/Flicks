@@ -12,9 +12,7 @@ import CoreData
 struct WatchListView: View {
     
     @ObservedObject var watchListVM = WatchListViewModel()
-    
     @Environment(\.managedObjectContext) var managedObjectContext
-    
     @State private var type = 0
     
     // Create core data movie fetch request
@@ -63,17 +61,16 @@ struct WatchListView: View {
                         }.onDelete(perform: removeShow)
                     }
                 }
-                .onAppear(perform: {
-                    print(savedMovies.count)
-                    self.watchListVM.watchListMovies.removeAll()
-                    self.watchListVM.moviesToAnyObject(movies: self.savedMovies)
-                    self.watchListVM.watchListTVShows.removeAll()
-                    self.watchListVM.showToAnyObject(shows: self.savedShows)
-                })
             }
-            
             .navigationBarTitle("Watch List")
             .navigationBarItems(trailing: EditButton())
+        }
+        .onAppear {
+            print("ContentView appeared!")
+            self.watchListVM.watchListMovies.removeAll()
+            self.watchListVM.moviesToAnyObject(movies: self.savedMovies)
+            self.watchListVM.watchListTVShows.removeAll()
+            self.watchListVM.showToAnyObject(shows: self.savedShows)
         }
     }
     
