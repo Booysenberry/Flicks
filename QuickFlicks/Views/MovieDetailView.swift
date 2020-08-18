@@ -42,7 +42,7 @@ struct MovieDetailView: View {
                         .padding()
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    ScrollView(.horizontal) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         
                         if detailVM.fetchedMovie?.credits != nil {
                             CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
