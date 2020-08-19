@@ -14,41 +14,74 @@ struct FilteredMovieView: View {
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
-    var filter: String = "popularity"
+    @State private var filter = 0
+    @State private var filterString = "popularity"
     
-    @State private var showFilterView = false
+    init() {
+        filteredMovieVM.fetchMovies(filter: filterString)
+    }
     
     var body: some View {
         
-        
         NavigationView {
             
-            ScrollView {
+            VStack {
                 
-                LazyVGrid(columns: twoColumnGrid, spacing: 10) {
+                Picker(selection: $filter, label: Text("Select")) {
+                    Text("Popular").tag(0)
+                    Text("Top Rated").tag(1)
+                }
+                
+                .onReceive([self.filter].publisher.first()) { (value) in
+                    switch filter {
+                    case 0:
+                        filterString = "popularity"
+                    case 1:
+                        filterString = "vote_average"
+                    default:
+                        filterString = "popularity"
+                    }
+                    print(filterString)
+                }.pickerStyle(SegmentedPickerStyle())
+                
+                
+                
+                ScrollView {
                     
-                    ForEach(filteredMovieVM.movies, id:\.id) { movie in
+                    LazyVGrid(columns: twoColumnGrid, spacing: 10) {
                         
-                        NavigationLink(destination: MovieDetailView(movie: movie)) {
+                        ForEach(filteredMovieVM.movies, id:\.id) { movie in
                             
-                            MovielistRowView(movies: movie)
-                        }.buttonStyle(PlainButtonStyle())
-                        
-                        .onAppear(perform: {
-                            if movie == self.filteredMovieVM.movies.last {
-                                self.filteredMovieVM.checkTotalMovies(filter: filter)
-                            }
-                        })
+                            NavigationLink(destination: MovieDetailView(movie: movie)) {
+                                
+                                MovielistRowView(movies: movie)
+                            }.buttonStyle(PlainButtonStyle())
+                            
+                            .onAppear(perform: {
+                                if movie == self.filteredMovieVM.movies.last {
+                                    
+                                    switch filter {
+                                    case 0:
+                                        self.filteredMovieVM.checkTotalMovies(filter: "popularity")
+                                    case 1:
+                                        self.filteredMovieVM.checkTotalMovies(filter: "vote_average")
+                                    default:
+                                        self.filteredMovieVM.checkTotalMovies(filter: "popularity")
+                                    }
+                                }
+                            })
+                        }
                     }
                 }
-            }.navigationBarTitle("Popular Movies")
+                .navigationBarTitle("Popular Movies")
+            }
         }
     }
 }
 
 
-//struct FilteredMovieView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FilteredMovieView(filteredMovies: [Movie)])
-//    }
-//}
+struct FilteredMovieView_Previews: PreviewProvider {
+    static var previews: some View {
+        FilteredMovieView()
+    }
+}

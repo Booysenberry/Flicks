@@ -10,11 +10,6 @@ import Foundation
 
 class FilteredMovieViewModel: ObservableObject {
     
-    init() {
-        fetchMovies(filter: "popularity")
-        currentPage += 1
-    }
-    
     @Published var movies = [Movie]()
     
     private var filteredMovies = [MovieList]()
