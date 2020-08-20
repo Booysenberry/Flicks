@@ -55,7 +55,7 @@ class WebService {
     
     func getMoviesByFilter(filter: String, page: Int, completion: @escaping (MovieList?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=en-US&sort_by=\(filter).desc&include_adult=false&include_video=false&page=\(page)") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=en-US&sort_by=\(filter).desc&include_adult=false&include_video=false&page=\(page)&vote_count.gte=100") else {
             fatalError("Invalid URL")
         }
         

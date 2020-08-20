@@ -8,44 +8,53 @@
 
 import SwiftUI
 
+//class Model: ObservableObject {
+//    @Published var selectedIndex = 0
+//    @Published var greeting = "initial"
+//
+//}
+
+class PickerModel: ObservableObject {
+    @Published var filter = 0
+}
+
 struct FilteredMovieView: View {
     
     @ObservedObject private var filteredMovieVM = FilteredMovieViewModel()
+    @ObservedObject private var pickerModel = PickerModel()
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
-    @State private var filter = 0
-    @State private var filterString = "popularity"
-    
-    init() {
-        filteredMovieVM.fetchMovies(filter: filterString)
-    }
-    
+    let pickerOptions = ["Popular", "Top Rated"]
+
     var body: some View {
         
         NavigationView {
             
             VStack {
                 
-                Picker(selection: $filter, label: Text("Select")) {
-                    Text("Popular").tag(0)
-                    Text("Top Rated").tag(1)
-                }
-                
-                .onReceive([self.filter].publisher.first()) { (value) in
-                    switch filter {
+                Picker(selection: $pickerModel.filter, label: Text("Please choose a color")) {
+                            ForEach(0 ..< pickerOptions.count) {
+                               Text(self.pickerOptions[$0])
+                            }
+                         }.onReceive(pickerModel.$filter) { (value) in
+                    switch value {
                     case 0:
-                        filterString = "popularity"
+                        filteredMovieVM.movies.removeAll()
+                        filteredMovieVM.currentPage = 1
+                        filteredMovieVM.fetchMovies(filter: "popularity")
                     case 1:
-                        filterString = "vote_average"
+                        filteredMovieVM.movies.removeAll()
+                        filteredMovieVM.currentPage = 1
+                        filteredMovieVM.fetchMovies(filter: "vote_average")
                     default:
-                        filterString = "popularity"
+                        filteredMovieVM.movies.removeAll()
+                        filteredMovieVM.currentPage = 1
+                        filteredMovieVM.fetchMovies(filter: "popularity")
                     }
-                    print(filterString)
+                    
                 }.pickerStyle(SegmentedPickerStyle())
-                
-                
-                
+   
                 ScrollView {
                     
                     LazyVGrid(columns: twoColumnGrid, spacing: 10) {
@@ -60,7 +69,7 @@ struct FilteredMovieView: View {
                             .onAppear(perform: {
                                 if movie == self.filteredMovieVM.movies.last {
                                     
-                                    switch filter {
+                                    switch pickerModel.filter {
                                     case 0:
                                         self.filteredMovieVM.checkTotalMovies(filter: "popularity")
                                     case 1:
@@ -73,7 +82,7 @@ struct FilteredMovieView: View {
                         }
                     }
                 }
-                .navigationBarTitle("Popular Movies")
+                .navigationBarTitle("Movies")
             }
         }
     }
