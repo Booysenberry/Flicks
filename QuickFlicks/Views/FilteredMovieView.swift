@@ -8,13 +8,11 @@
 
 import SwiftUI
 
-//class Model: ObservableObject {
-//    @Published var selectedIndex = 0
-//    @Published var greeting = "initial"
-//
-//}
-
-class PickerModel: ObservableObject {
+class PickerModel: ObservableObject, Equatable {
+    static func == (lhs: PickerModel, rhs: PickerModel) -> Bool {
+        return lhs.filter == rhs.filter
+    }
+    
     @Published var filter = 0
 }
 
@@ -33,7 +31,7 @@ struct FilteredMovieView: View {
             
             VStack {
                 
-                Picker(selection: $pickerModel.filter, label: Text("Please choose a color")) {
+                Picker(selection: $pickerModel.filter, label: Text("Select")) {
                             ForEach(0 ..< pickerOptions.count) {
                                Text(self.pickerOptions[$0])
                             }

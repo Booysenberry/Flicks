@@ -11,37 +11,72 @@ import SwiftUI
 struct MovielistView: View {
     
     @ObservedObject private var movielistVM = MovieListViewModel()
+    @ObservedObject private var pickerModel = PickerModel()
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    
+    let pickerOptions = ["Popular", "Top Rated"]
     
     var genre: GenreElement
     
     init(genre: GenreElement) {
         self.genre = genre
-        movielistVM.fetchMovies(genre: genre.id)
     }
     
     var body: some View {
         
-        ScrollView {
+        VStack {
             
-            LazyVGrid(columns: twoColumnGrid, spacing: 10) {
-                
-                ForEach(movielistVM.movies, id:\.id) { movie in
-                    
-                    NavigationLink(destination: MovieDetailView(movie: movie)) {
-                        
-                        MovielistRowView(movies: movie)
-                        
-                    }.buttonStyle(PlainButtonStyle())
-                    
-                    .onAppear(perform: {
-                        if movie == self.movielistVM.movies.last {
-                            self.movielistVM.checkTotalMovies(genre: self.genre.id)
+            Picker(selection: $pickerModel.filter, label: Text("Select")) {
+                        ForEach(0 ..< pickerOptions.count) {
+                           Text(self.pickerOptions[$0])
                         }
-                    })
+                     }.onReceive(pickerModel.$filter) { (value) in
+                switch value {
+                case 0:
+                    movielistVM.movies.removeAll()
+                    movielistVM.currentPage = 1
+                    movielistVM.fetchMovies(genre: genre.id, filter: "popularity")
+                case 1:
+                    movielistVM.movies.removeAll()
+                    movielistVM.currentPage = 1
+                    movielistVM.fetchMovies(genre: genre.id, filter: "vote_average")
+                default:
+                    movielistVM.movies.removeAll()
+                    movielistVM.currentPage = 1
+                    movielistVM.fetchMovies(genre: genre.id, filter: "popularity")
                 }
-            }.navigationBarTitle(genre.name)
+                
+            }.pickerStyle(SegmentedPickerStyle())
+            
+            ScrollView {
+                
+                LazyVGrid(columns: twoColumnGrid, spacing: 10) {
+                    
+                    ForEach(movielistVM.movies, id:\.id) { movie in
+                        
+                        NavigationLink(destination: MovieDetailView(movie: movie)) {
+                            
+                            MovielistRowView(movies: movie)
+                            
+                        }.buttonStyle(PlainButtonStyle())
+                        
+                        .onAppear(perform: {
+                            if movie == self.movielistVM.movies.last {
+                                switch pickerModel.filter {
+                                case 0:
+                                    self.movielistVM.checkTotalMovies(genre: self.genre.id, filter: "popularity")
+                                case 1:
+                                    self.movielistVM.checkTotalMovies(genre: self.genre.id, filter: "vote_average")
+                                default:
+                                    self.movielistVM.checkTotalMovies(genre: self.genre.id, filter: "popularity")
+                                }
+                                
+                            }
+                        })
+                    }
+                }.navigationBarTitle(genre.name)
+            }
         }
     }
 }
