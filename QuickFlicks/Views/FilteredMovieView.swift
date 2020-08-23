@@ -8,22 +8,12 @@
 
 import SwiftUI
 
-class PickerModel: ObservableObject, Equatable {
-    static func == (lhs: PickerModel, rhs: PickerModel) -> Bool {
-        return lhs.filter == rhs.filter
-    }
-    
-    @Published var filter = 0
-}
-
 struct FilteredMovieView: View {
     
     @ObservedObject private var filteredMovieVM = FilteredMovieViewModel()
     @ObservedObject private var pickerModel = PickerModel()
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
-    
-    let pickerOptions = ["Popular", "Top Rated"]
 
     var body: some View {
         
@@ -32,8 +22,8 @@ struct FilteredMovieView: View {
             VStack {
                 
                 Picker(selection: $pickerModel.filter, label: Text("Select")) {
-                            ForEach(0 ..< pickerOptions.count) {
-                               Text(self.pickerOptions[$0])
+                    ForEach(0 ..< pickerModel.pickerOptions.count) {
+                               Text(pickerModel.pickerOptions[$0])
                             }
                          }.onReceive(pickerModel.$filter) { (value) in
                     switch value {
@@ -50,7 +40,6 @@ struct FilteredMovieView: View {
                         filteredMovieVM.currentPage = 1
                         filteredMovieVM.fetchMovies(filter: "popularity")
                     }
-                    
                 }.pickerStyle(SegmentedPickerStyle())
    
                 ScrollView {

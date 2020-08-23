@@ -15,8 +15,6 @@ struct MovielistView: View {
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
-    let pickerOptions = ["Popular", "Top Rated"]
-    
     var genre: GenreElement
     
     init(genre: GenreElement) {
@@ -28,8 +26,8 @@ struct MovielistView: View {
         VStack {
             
             Picker(selection: $pickerModel.filter, label: Text("Select")) {
-                        ForEach(0 ..< pickerOptions.count) {
-                           Text(self.pickerOptions[$0])
+                ForEach(0 ..< pickerModel.pickerOptions.count) {
+                           Text(pickerModel.pickerOptions[$0])
                         }
                      }.onReceive(pickerModel.$filter) { (value) in
                 switch value {
@@ -46,7 +44,6 @@ struct MovielistView: View {
                     movielistVM.currentPage = 1
                     movielistVM.fetchMovies(genre: genre.id, filter: "popularity")
                 }
-                
             }.pickerStyle(SegmentedPickerStyle())
             
             ScrollView {

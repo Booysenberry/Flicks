@@ -17,19 +17,19 @@ class TVShowListViewModel: ObservableObject {
     var currentPage = 1
     
     init() {
-        fetchShows()
+        fetchShows(filter: "popular")
     }
     
-    func checkTotalShows() {
+    func checkTotalShows(filter: String) {
         if fetchedShows.count < 20 {
             currentPage = currentPage + 1
-            fetchShows()
+            fetchShows(filter: filter)
         }
     }
     
-    func fetchShows() {
+    func fetchShows(filter: String) {
         
-        WebService().getPopularTVShows(page: currentPage) { show in
+        WebService().getPopularTVShows(page: currentPage, filter: filter) { show in
             
             if let show = show {
                 self.fetchedShows.append(show)
