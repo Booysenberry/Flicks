@@ -78,14 +78,11 @@ class WebService {
             }
             
             do {
-                
                 let decoder = JSONDecoder()
                 let movies = try decoder.decode(MovieList.self, from: data)
                 
                 DispatchQueue.main.async {
-                    print(url)
                     completion(movies)
-                    
                 }
                 
             } catch let err {

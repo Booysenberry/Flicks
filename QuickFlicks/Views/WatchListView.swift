@@ -66,12 +66,11 @@ struct WatchListView: View {
             .navigationBarItems(trailing: EditButton())
         }
         .onAppear {
-            print("ContentView appeared!")
             self.watchListVM.watchListMovies.removeAll()
             self.watchListVM.moviesToAnyObject(movies: self.savedMovies)
             self.watchListVM.watchListTVShows.removeAll()
             self.watchListVM.showToAnyObject(shows: self.savedShows)
-        }
+        }.accentColor(.white)
     }
     
     // Delete movie from core data

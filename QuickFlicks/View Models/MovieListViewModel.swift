@@ -25,8 +25,6 @@ class MovieListViewModel: ObservableObject {
     
     func fetchMovies(genre: Int, filter: String) {
         
-        print("Page: \(currentPage)")
-        
         WebService().getMoviesByGenre(filter: filter, genre: genre, page: currentPage) { movie in
             
             if let movie = movie {

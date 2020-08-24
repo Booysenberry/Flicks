@@ -13,11 +13,13 @@ class FilteredMovieViewModel: ObservableObject {
     @Published var movies = [Movie]()
     
     private var filteredMovies = [MovieList]()
-    
+   
     var currentPage = 1
     
     func checkTotalMovies(filter: String) {
+        
         if filteredMovies.count < 20 {
+            
             fetchMovies(filter: filter)
         }
     }
@@ -34,9 +36,10 @@ class FilteredMovieViewModel: ObservableObject {
             }
         }
         if let totalPages = filteredMovies.first?.totalPages {
+            
             if currentPage <= totalPages {
+                print(currentPage)
                 currentPage += 1
-                
             }
         }
     }

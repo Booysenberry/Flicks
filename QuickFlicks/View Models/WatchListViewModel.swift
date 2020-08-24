@@ -28,8 +28,6 @@ class WatchListViewModel: ObservableObject {
     
     func moviesToAnyObject(movies: FetchedResults<SavedMovie>)  {
         
-        print("run")
-        
         var dic = [String:AnyObject?]()
         
         for movie in movies {

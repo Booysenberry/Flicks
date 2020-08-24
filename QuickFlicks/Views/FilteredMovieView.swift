@@ -10,11 +10,21 @@ import SwiftUI
 
 struct FilteredMovieView: View {
     
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.largeTitleTextAttributes = [.foregroundColor : UIColor.white]
+        appearance.titleTextAttributes = [.foregroundColor : UIColor.white]
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().standardAppearance = appearance
+        appearance.backgroundColor = .systemRed
+    }
+    
     @ObservedObject private var filteredMovieVM = FilteredMovieViewModel()
     @ObservedObject private var pickerModel = PickerModel()
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
-
+    
     var body: some View {
         
         NavigationView {
@@ -23,9 +33,9 @@ struct FilteredMovieView: View {
                 
                 Picker(selection: $pickerModel.filter, label: Text("Select")) {
                     ForEach(0 ..< pickerModel.pickerOptions.count) {
-                               Text(pickerModel.pickerOptions[$0])
-                            }
-                         }.onReceive(pickerModel.$filter) { (value) in
+                        Text(pickerModel.pickerOptions[$0])
+                    }
+                }.onReceive(pickerModel.$filter) { (value) in
                     switch value {
                     case 0:
                         filteredMovieVM.movies.removeAll()
@@ -41,7 +51,7 @@ struct FilteredMovieView: View {
                         filteredMovieVM.fetchMovies(filter: "popularity")
                     }
                 }.pickerStyle(SegmentedPickerStyle())
-   
+                
                 ScrollView {
                     
                     LazyVGrid(columns: twoColumnGrid, spacing: 10) {
@@ -51,6 +61,7 @@ struct FilteredMovieView: View {
                             NavigationLink(destination: MovieDetailView(movie: movie)) {
                                 
                                 MovielistRowView(movies: movie)
+                                
                             }.buttonStyle(PlainButtonStyle())
                             
                             .onAppear(perform: {
@@ -71,7 +82,7 @@ struct FilteredMovieView: View {
                 }
                 .navigationBarTitle("Movies")
             }
-        }
+        }.accentColor(.white)
     }
 }
 
