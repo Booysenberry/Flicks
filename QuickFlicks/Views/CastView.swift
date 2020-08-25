@@ -18,6 +18,8 @@ struct CastView: View {
             
             ForEach(cast, id: \.id) { actor in
                 
+                NavigationLink(destination: FilmographyView(cast: actor)) {
+                
                 VStack {
                     
                     URLImage(url: "\(actor.profileURL)", type: "cast")
@@ -29,6 +31,7 @@ struct CastView: View {
                         .font(.footnote)
                     
                 }.frame(width: 100, height: 200, alignment: .top)
+            }
             }
         }
     }
