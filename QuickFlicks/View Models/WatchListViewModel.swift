@@ -54,10 +54,8 @@ class WatchListViewModel: ObservableObject {
         let movie = Movie(
             popularity: dictionary["popularity"] as! Double,
             voteCount: dictionary["voteCount"] as! Int,
-            video: (dictionary["video"] != nil),
             posterPath: dictionary["posterPath"] as? String,
             id: dictionary["id"] as! Int,
-            adult: (dictionary["adult"] != nil),
             backdropPath: dictionary["backdropPath"] as? String,
             title: dictionary["title"] as! String,
             voteAverage: dictionary["voteAverage"] as! Double,

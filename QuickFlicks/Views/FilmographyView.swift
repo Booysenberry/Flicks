@@ -10,28 +10,51 @@ import SwiftUI
 
 struct FilmographyView: View {
     
-    var cast: Cast
+    @ObservedObject var filmographyVM = FilmographyViewModel()
+    
+    var cast: Actors
+    
+     var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         
-        HStack {
+        VStack {
+            HStack(alignment: .center, spacing: 50) {
+                
+                URLImage(url: "\(cast.profileURL)", type: "cast")
+                    .clipShape(Circle())
+                    .frame(width: 92, height: 136)
+                
+            }.padding()
             
-            URLImage(url: "\(cast.profileURL)", type: "cast")
-                .clipShape(Circle())
-                .frame(width: 92, height: 136)
+            Text("Filmography").font(.largeTitle)
             
-            Text("\(cast.name!)")
-                .font(.title)
-            
-        }.padding()
+            ScrollView {
+                
+                LazyVGrid(columns: twoColumnGrid, spacing: 10) {
+                    
+                    ForEach(filmographyVM.fetchedRoles, id:\.id) { movie in
+                        
+                        NavigationLink(destination: MovieDetailView(movie: movie)) {
+                            
+                            MovielistRowView(movies: movie)
+                            
+                        }.buttonStyle(PlainButtonStyle())
+                    }
+                }
+            }
+
+        }.onAppear(perform: {
+            filmographyVM.getRoles(actor: cast.id ?? 0)
+        })
         Spacer()
+            .navigationTitle(cast.name!)
     }
 }
 
-
-
-struct FilmographyView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilmographyView(cast: Cast(id: 1, name: "Edward Norton", profilePath: "/eIkFHNlfretLS1spAcIoihKUS62.jpg"))
-    }
-}
+//struct FilmographyView_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        FilmographyView(cast: Actors.example)
+//    }
+//}

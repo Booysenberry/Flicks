@@ -10,7 +10,7 @@ import Foundation
 
 class TVDetailViewModel: ObservableObject {
     
-    @Published var castMembers = [Cast]()
+    @Published var castMembers = [Actors]()
     
     private var fetchedCast = [ShowCast]()
     

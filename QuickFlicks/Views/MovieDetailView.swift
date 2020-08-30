@@ -31,7 +31,7 @@ struct MovieDetailView: View {
         
         VStack {
             
-            MovieHeroView(movie: detailVM.fetchedMovie!)
+            MovieHeroView(movie: movie)
             
             ScrollView {
                 VStack {
@@ -46,12 +46,15 @@ struct MovieDetailView: View {
                         
                         if detailVM.fetchedMovie?.credits != nil {
                             CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
+                                .buttonStyle(PlainButtonStyle())
                         }
                     }.padding()
                 }
             }
             Spacer()
-        }.navigationBarTitle(movie.title)
+        }
+        
+        .navigationBarTitle(movie.title ?? "")
         
         .navigationBarItems(trailing:
                                 Button(action: {
@@ -60,9 +63,7 @@ struct MovieDetailView: View {
                                     let movieToBeSaved = SavedMovie(context: self.managedObjectContext)
                                     movieToBeSaved.title = self.movie.title
                                     movieToBeSaved.id = Int32(self.movie.id)
-                                    movieToBeSaved.adult = self.movie.adult
                                     movieToBeSaved.backdropPath = self.movie.backdropPath
-                                    movieToBeSaved.video = self.movie.video
                                     movieToBeSaved.popularity = self.movie.popularity
                                     movieToBeSaved.releaseDate = self.movie.releaseDate
                                     movieToBeSaved.posterPath = self.movie.posterPath

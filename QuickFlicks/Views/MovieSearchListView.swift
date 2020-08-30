@@ -30,7 +30,7 @@ struct MovieSearchListView: View {
             VStack(alignment: .leading) {
                 
                 // Title
-                Text(movies.title)
+                Text(movies.title ?? "")
                     .font(.body).bold()
                     .lineLimit(nil)
                     .padding(.init(top: 10, leading: 0, bottom: 10, trailing: 10))

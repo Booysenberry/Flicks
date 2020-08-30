@@ -351,4 +351,46 @@ class WebService {
         // execute the HTTP request
         task.resume()
     }
+    
+    func getRoles(actor: Int, completion: @escaping (FilmographyList?) -> ()) {
+        
+        guard let url = URL(string: "https://api.themoviedb.org/3/person/\(actor)/combined_credits?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US") else {
+            fatalError("Invalid URL")
+        }
+        
+        let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
+        let session = URLSession(configuration: config)
+        
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
+            
+            // Check for errors
+            guard error == nil else {
+                print ("error: \(error!)")
+                return
+            }
+            // Check that data has been returned
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let roles = try decoder.decode(FilmographyList.self, from: data)
+                
+                DispatchQueue.main.async {
+                    completion(roles)
+                    
+                }
+                
+            } catch let err {
+                print("Error", err)
+            }
+        }
+        // execute the HTTP request
+        task.resume()
+    }
 }

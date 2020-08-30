@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CastView: View {
     
-    var cast: [Cast]
+    var cast: [Actors]
     
     var body: some View {
         
@@ -39,7 +39,7 @@ struct CastView: View {
 
 struct CastView_Previews: PreviewProvider {
     static var previews: some View {
-        CastView(cast: [Cast(id: 1, name: "Edward Norton", profilePath: "/eIkFHNlfretLS1spAcIoihKUS62.jpg")])
+        CastView(cast: [Actors(id: 1, name: "Edward Norton", profilePath: "/eIkFHNlfretLS1spAcIoihKUS62.jpg")])
     }
 }
 

@@ -27,18 +27,15 @@ struct MovieList: Codable {
 struct Movie: Codable, Equatable {
     let popularity: Double
     let voteCount: Int
-    let video: Bool
     let posterPath: String?
     let id: Int
-    let adult: Bool
     let backdropPath: String?
-    var title: String
+    var title: String?
     let voteAverage: Double
     let overview: String
     let releaseDate: String?
     let runTime: Int?
     let credits: Credits?
-    var isSaved = false
     
     var posterURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
@@ -54,15 +51,14 @@ struct Movie: Codable, Equatable {
     
     var releaseYear: String {
         let dateComponents = releaseDate?.components(separatedBy: "-")
-        return dateComponents![0] 
+        return dateComponents?[0] ?? ""
     }
     
     enum CodingKeys: String, CodingKey {
         case popularity
         case voteCount = "vote_count"
-        case video
         case posterPath = "poster_path"
-        case id, adult
+        case id
         case backdropPath = "backdrop_path"
         case title
         case voteAverage = "vote_average"
@@ -74,17 +70,17 @@ struct Movie: Codable, Equatable {
     }
     
     #if DEBUG
-    static let example = Movie(popularity: 5, voteCount: 10, video: false, posterPath: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", id: 157336, adult: false, backdropPath: "/9mmkq59uRuJWDFz9UHeX5ATNJYf.jpg", title: "Interstellar", voteAverage: 7, overview: "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.", releaseDate: "2014-11-05", runTime: 120, credits: Credits(cast: [Cast(id: 1, name: "Edward Norton", profilePath: "/eIkFHNlfretLS1spAcIoihKUS62.jpg")]))
+    static let example = Movie(popularity: 5, voteCount: 10, posterPath: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", id: 157336, backdropPath: "/9mmkq59uRuJWDFz9UHeX5ATNJYf.jpg", title: "Interstellar", voteAverage: 7, overview: "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.", releaseDate: "2014-11-05", runTime: 120, credits: Credits(cast: [Actors(id: 1, name: "Edward Norton", profilePath: "/eIkFHNlfretLS1spAcIoihKUS62.jpg")]))
     #endif
 }
 
 // MARK: - Credits
 struct Credits: Codable {
-    let cast: [Cast]
+    let cast: [Actors]
 }
 
 // MARK: - Cast
-struct Cast: Codable {
+struct Actors: Codable {
     let id: Int?
     let name: String?
     let profilePath: String?
@@ -99,6 +95,10 @@ struct Cast: Codable {
         case name
         case profilePath = "profile_path"
     }
+    
+    #if DEBUG
+    static let example = Actors(id: 63, name: "Bob Stone", profilePath: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg")
+    #endif
 }
 
 extension Movie {

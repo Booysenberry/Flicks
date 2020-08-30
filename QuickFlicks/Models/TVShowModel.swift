@@ -57,7 +57,7 @@ struct Show: Codable, Equatable {
 
 // MARK: - ShowCast
 struct ShowCast: Codable {
-    let cast: [Cast]
+    let cast: [Actors]
     let id: Int
 }
 

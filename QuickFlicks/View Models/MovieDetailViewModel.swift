@@ -18,6 +18,7 @@ class MovieDetailViewModel: ObservableObject {
             
             if let movie = movie {
                 self.fetchedMovie = movie
+                print(self.fetchedMovie)
             }
         }
     }
