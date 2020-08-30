@@ -9,13 +9,13 @@
 import Foundation
 
 // MARK: - Genre
-struct Genre: Decodable, Identifiable {
+struct Genre: Codable, Identifiable {
     let id = UUID()
     let genres: [GenreElement]
 }
 
 // MARK: - GenreElement
-struct GenreElement: Decodable {
+struct GenreElement: Codable {
     let id: Int
     let name: String
 

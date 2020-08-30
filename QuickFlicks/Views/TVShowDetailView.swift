@@ -46,6 +46,7 @@ struct TVShowDetailView: View {
                 
                 if TVDetailVM.castMembers != nil {
                     CastView(cast: TVDetailVM.castMembers)
+                        .buttonStyle(PlainButtonStyle())
                 }
                 
             }.padding()

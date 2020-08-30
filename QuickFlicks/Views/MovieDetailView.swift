@@ -33,6 +33,23 @@ struct MovieDetailView: View {
             
             MovieHeroView(movie: movie)
             
+            HStack {
+                
+                ForEach((detailVM.fetchedMovie?.genres)!, id:\.id) { genre in
+                    
+                    Text("\(genre.name)")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                        .padding(2)
+                        .border(Color.gray)
+                    
+                }
+                
+                Spacer()
+                
+                Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
+            }.padding()
+            
             ScrollView {
                 VStack {
                     

@@ -23,7 +23,7 @@ struct FilmographyView: View {
                 
                 URLImage(url: "\(cast.profileURL)", type: "cast")
                     .clipShape(Circle())
-                    .frame(width: 92, height: 136)
+                    .frame(width: 138, height: 204)
                 
             }.padding()
             
