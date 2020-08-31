@@ -31,11 +31,11 @@ struct MovieDetailView: View {
         
         VStack {
             
-            MovieHeroView(movie: movie)
+            MovieHeroImage(movie: movie)
             
             HStack {
                 
-                ForEach((detailVM.fetchedMovie?.genres)!, id:\.id) { genre in
+                ForEach(((detailVM.fetchedMovie?.genres)!), id:\.id) { genre in
                     
                     Text("\(genre.name)")
                         .font(.footnote)
@@ -47,7 +47,13 @@ struct MovieDetailView: View {
                 
                 Spacer()
                 
-                Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
+                // Runtime
+                HStack {
+                    Image(systemName: "clock")
+                    Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
+                    
+                }
+                
             }.padding()
             
             ScrollView {
@@ -109,55 +115,5 @@ struct MovieDetailView: View {
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MovieDetailView(movie: Movie.example)
-    }
-}
-
-
-struct MovieHeroView: View {
-    
-    var movie: Movie
-    
-    var body: some View {
-        ZStack(alignment: .bottom) {
-            
-            // Cover picture
-            
-            URLImage(url: "https://image.tmdb.org/t/p/w500\(movie.backdropPath ?? "")", type: "movie")
-                .aspectRatio(contentMode: .fit)
-            
-            HStack {
-                
-                // Runtime
-                HStack {
-                    Image(systemName: "clock")
-                    Text("\(movie.runTime ?? 1) mins")
-                    
-                }
-                Spacer()
-                
-                // Rating avg
-                HStack {
-                    Image(systemName: "star.fill")
-                        .foregroundColor(.yellow)
-                    
-                    Text(movie.voteAveragePercent)
-                    
-                }
-                Spacer()
-                
-                // Rating count
-                HStack {
-                    Image(systemName: "person.3")
-                    
-                    Text("\(movie.voteCount)")
-                    
-                }
-            }
-            .padding()
-            .background(Color.black.opacity(0.5))
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            
-        }
     }
 }

@@ -54,7 +54,7 @@ struct MovielistView: View {
                         
                         NavigationLink(destination: MovieDetailView(movie: movie)) {
                             
-                            MovielistRowView(movies: movie)
+                            MovieGridItemView(movies: movie)
                             
                         }.buttonStyle(PlainButtonStyle())
                         

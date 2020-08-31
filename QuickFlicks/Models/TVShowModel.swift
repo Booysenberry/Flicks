@@ -53,6 +53,10 @@ struct Show: Codable, Equatable {
         case overview
         case posterPath = "poster_path"
     }
+    
+    #if DEBUG
+    static let example = Show(name: "Interstellar", popularity: 9.0, voteCount: 100, backdropPath: "/9mmkq59uRuJWDFz9UHeX5ATNJYf.jpg", id: 99, voteAverage: 9.0, overview: "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.", posterPath: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg")
+    #endif
 }
 
 // MARK: - ShowCast

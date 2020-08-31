@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TVShowRowView: View {
+struct TVShowGridItemView: View {
     
     
     var shows: Show
@@ -39,11 +39,8 @@ struct TVShowRowView: View {
         }
     }
 
-
-
-
-//struct TVShowRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TVShowRowView()
-//    }
-//}
+struct TVShowGridItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        TVShowGridItemView(shows: Show.example)
+    }
+}

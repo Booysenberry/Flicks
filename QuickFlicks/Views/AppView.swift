@@ -13,19 +13,19 @@ struct AppView: View {
         
         TabView {
             
-            FilteredMovieView()
+            FilteredMoviesGridView()
                 .tabItem{
                     Image(systemName: "film")
                     Text("Movies")
                 }
             
-            FilteredTVShowsView()
+            FilteredTVShowsGridView()
                 .tabItem{
                     Image(systemName: "tv")
                     Text("TV")
                 }
             
-            GenresView()
+            ListOfGenresView()
                 .tabItem {
                     Image(systemName: "list.and.film")
                     Text("Genres")

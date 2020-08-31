@@ -354,7 +354,7 @@ class WebService {
     
     func getRoles(actor: Int, completion: @escaping (FilmographyList?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/person/\(actor)/combined_credits?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/person/\(actor)/combined_credits?api_key=5228bff935f7bd2b18c04fc3439828c0&language=en-US&append_to_response=details") else {
             fatalError("Invalid URL")
         }
         

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct MovielistRowView: View {
+struct MovieGridItemView: View {
     
     var movies: Movie
     
@@ -47,9 +47,9 @@ struct MovielistRowView: View {
     }
 }
 
-struct MovielistRowView_Previews: PreviewProvider {
+struct MovieGridItemView_Previews: PreviewProvider {
     static var previews: some View {
-        MovielistRowView(movies: Movie.example)
+        MovieGridItemView(movies: Movie.example)
     }
 }
 

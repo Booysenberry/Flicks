@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FilteredMovieView: View {
+struct FilteredMoviesGridView: View {
     
     init() {
         let appearance = UINavigationBarAppearance()
@@ -60,7 +60,7 @@ struct FilteredMovieView: View {
                             
                             NavigationLink(destination: MovieDetailView(movie: movie)) {
                                 
-                                MovielistRowView(movies: movie)
+                                MovieGridItemView(movies: movie)
                                 
                             }.buttonStyle(PlainButtonStyle())
                             
@@ -87,8 +87,8 @@ struct FilteredMovieView: View {
 }
 
 
-struct FilteredMovieView_Previews: PreviewProvider {
+struct FilteredMoviesGridView_Previews: PreviewProvider {
     static var previews: some View {
-        FilteredMovieView()
+        FilteredMoviesGridView()
     }
 }

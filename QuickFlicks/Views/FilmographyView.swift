@@ -23,7 +23,7 @@ struct FilmographyView: View {
                 
                 URLImage(url: "\(cast.profileURL)", type: "cast")
                     .clipShape(Circle())
-                    .frame(width: 138, height: 204)
+                    .frame(width: 92, height: 136)
                 
             }.padding()
             
@@ -37,7 +37,7 @@ struct FilmographyView: View {
                         
                         NavigationLink(destination: MovieDetailView(movie: movie)) {
                             
-                            MovielistRowView(movies: movie)
+                            MovieGridItemView(movies: movie)
                             
                         }.buttonStyle(PlainButtonStyle())
                     }

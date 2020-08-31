@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct GenreListView: View {
+struct GenreRowView: View {
     
     let genres: [GenreElement]
     
@@ -32,6 +32,6 @@ struct GenreListView: View {
 
 struct GenreListView_Previews: PreviewProvider {
     static var previews: some View {
-        GenreListView(genres: [GenreElement(id: 1, name: "Western")])
+        GenreRowView(genres: [GenreElement(id: 1, name: "Western")])
     }
 }

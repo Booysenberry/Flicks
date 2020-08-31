@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FilteredTVShowsView: View {
+struct FilteredTVShowsGridView: View {
     
     @ObservedObject private var filteredTVVM = TVShowListViewModel()
     @ObservedObject private var pickerModel = PickerModel()
@@ -49,7 +49,7 @@ struct FilteredTVShowsView: View {
                             
                             NavigationLink(destination: TVShowDetailView(show: show)) {
                                 
-                                TVShowRowView(shows: show)
+                                TVShowGridItemView(shows: show)
                                 
                             }.buttonStyle(PlainButtonStyle())
                             
@@ -74,8 +74,8 @@ struct FilteredTVShowsView: View {
     }
 }
 
-struct FilteredTVShowsView_Previews: PreviewProvider {
+struct FilteredTVShowsGridView_Previews: PreviewProvider {
     static var previews: some View {
-        FilteredTVShowsView()
+        FilteredTVShowsGridView()
     }
 }

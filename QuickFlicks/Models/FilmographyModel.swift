@@ -32,6 +32,7 @@ struct Cast: Codable {
     let episodeCount: Int?
     let originCountry: [String]?
     let originalName, name, firstAirDate: String?
+    let biography: String?
 
     enum CodingKeys: String, CodingKey {
         case id, character
@@ -53,6 +54,7 @@ struct Cast: Codable {
         case originalName = "original_name"
         case name
         case firstAirDate = "first_air_date"
+        case biography
     }
 }
 
