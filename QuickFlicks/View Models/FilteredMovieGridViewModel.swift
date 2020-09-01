@@ -8,10 +8,9 @@
 
 import Foundation
 
-class FilteredMovieViewModel: ObservableObject {
+class FilteredMovieGridViewModel: ObservableObject {
     
     @Published var movies = [Movie]()
-    
     private var filteredMovies = [MovieList]()
    
     var currentPage = 1
@@ -19,12 +18,13 @@ class FilteredMovieViewModel: ObservableObject {
     func checkTotalMovies(filter: String) {
         
         if filteredMovies.count < 20 {
-            
             fetchMovies(filter: filter)
         }
     }
     
     func fetchMovies(filter: String) {
+        
+        print("Page: \(currentPage)")
         
         WebService().getMoviesByFilter(filter: filter, page: currentPage) { movie in
             
@@ -32,13 +32,13 @@ class FilteredMovieViewModel: ObservableObject {
                 self.filteredMovies.append(movie)
                 for movie in movie.movies {
                     self.movies.append(movie)
+                    print(self.movies.count)
                 }
             }
         }
         if let totalPages = filteredMovies.first?.totalPages {
             
             if currentPage <= totalPages {
-                print(currentPage)
                 currentPage += 1
             }
         }

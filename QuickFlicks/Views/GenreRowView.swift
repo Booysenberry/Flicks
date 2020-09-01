@@ -29,7 +29,6 @@ struct GenreRowView: View {
     }
 }
 
-
 struct GenreListView_Previews: PreviewProvider {
     static var previews: some View {
         GenreRowView(genres: [GenreElement(id: 1, name: "Western")])

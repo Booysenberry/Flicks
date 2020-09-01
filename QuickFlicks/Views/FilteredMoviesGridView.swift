@@ -20,7 +20,7 @@ struct FilteredMoviesGridView: View {
         appearance.backgroundColor = .systemRed
     }
     
-    @ObservedObject private var filteredMovieVM = FilteredMovieViewModel()
+    @ObservedObject private var filteredMovieVM = FilteredMovieGridViewModel()
     @ObservedObject private var pickerModel = PickerModel()
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
