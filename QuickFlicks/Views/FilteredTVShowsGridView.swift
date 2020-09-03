@@ -10,8 +10,9 @@ import SwiftUI
 
 struct FilteredTVShowsGridView: View {
     
-    @ObservedObject private var filteredTVVM = TVShowListViewModel()
-    @ObservedObject private var pickerModel = PickerModel()
+    @StateObject private var filteredTVVM = TVShowListViewModel()
+    @State var filter = 0
+    private let pickerOptions = ["Popular", "Top Rated"]
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -20,11 +21,12 @@ struct FilteredTVShowsGridView: View {
             
             VStack {
                 
-                Picker(selection: $pickerModel.filter, label: Text("Select")) {
-                    ForEach(0 ..< pickerModel.pickerOptions.count) {
-                               Text(pickerModel.pickerOptions[$0])
-                            }
-                         }.onReceive(pickerModel.$filter) { (value) in
+                Picker(selection: $filter, label: Text("Select")) {
+                    Text("Popular").tag(0)
+                    Text("Top Rated").tag(1)
+                }
+                .onChange(of: filter) { value in
+                    
                     switch value {
                     case 0:
                         filteredTVVM.shows.removeAll()
@@ -39,6 +41,7 @@ struct FilteredTVShowsGridView: View {
                         filteredTVVM.currentPage = 1
                         filteredTVVM.fetchShows(filter: "popular")
                     }
+                    
                 }.pickerStyle(SegmentedPickerStyle())
                 
                 ScrollView {
@@ -56,7 +59,7 @@ struct FilteredTVShowsGridView: View {
                             .onAppear(perform: {
                                 if show == self.filteredTVVM.shows.last {
                                     
-                                    switch pickerModel.filter {
+                                    switch filter {
                                     case 0:
                                         self.filteredTVVM.fetchShows(filter: "popular")
                                     case 1:

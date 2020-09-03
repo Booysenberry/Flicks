@@ -20,8 +20,11 @@ struct FilteredMoviesGridView: View {
         appearance.backgroundColor = .systemRed
     }
     
-    @ObservedObject private var filteredMovieVM = FilteredMovieGridViewModel()
+    @StateObject private var filteredMovieVM = FilteredMovieGridViewModel()
     @ObservedObject private var pickerModel = PickerModel()
+    
+    @State var filter = 0
+    private let pickerOptions = ["Popular", "Top Rated"]
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -31,11 +34,12 @@ struct FilteredMoviesGridView: View {
             
             VStack {
                 
-                Picker(selection: $pickerModel.filter, label: Text("Select")) {
-                    ForEach(0 ..< pickerModel.pickerOptions.count) {
-                        Text(pickerModel.pickerOptions[$0])
-                    }
-                }.onReceive(pickerModel.$filter) { (value) in
+                Picker(selection: $filter, label: Text("Select")) {
+                    Text("Popular").tag(0)
+                    Text("Top Rated").tag(1)
+                }
+                .onChange(of: filter) { value in
+                    
                     switch value {
                     case 0:
                         filteredMovieVM.movies.removeAll()
@@ -50,6 +54,7 @@ struct FilteredMoviesGridView: View {
                         filteredMovieVM.currentPage = 1
                         filteredMovieVM.fetchMovies(filter: "popularity")
                     }
+                
                 }.pickerStyle(SegmentedPickerStyle())
                 
                 ScrollView {
@@ -67,7 +72,7 @@ struct FilteredMoviesGridView: View {
                             .onAppear(perform: {
                                 if movie == self.filteredMovieVM.movies.last {
                                     
-                                    switch pickerModel.filter {
+                                    switch filter {
                                     case 0:
                                         self.filteredMovieVM.checkTotalMovies(filter: "popularity")
                                     case 1:
@@ -82,9 +87,10 @@ struct FilteredMoviesGridView: View {
                 }
                 .navigationBarTitle("Movies")
             }
-        }.accentColor(.white)
+        }
     }
 }
+
 
 
 struct FilteredMoviesGridView_Previews: PreviewProvider {

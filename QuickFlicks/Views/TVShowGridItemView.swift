@@ -10,7 +10,6 @@ import SwiftUI
 
 struct TVShowGridItemView: View {
     
-    
     var shows: Show
     
     static let taskDateFormat: DateFormatter = {

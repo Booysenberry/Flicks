@@ -82,6 +82,7 @@ class WebService {
                 let movies = try decoder.decode(MovieList.self, from: data)
                 
                 DispatchQueue.main.async {
+                    print(movies.movies.count)
                     completion(movies)
                 }
                 

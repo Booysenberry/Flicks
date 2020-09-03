@@ -11,7 +11,9 @@ import SwiftUI
 struct MovielistView: View {
     
     @ObservedObject private var movielistVM = MovieListViewModel()
-    @ObservedObject private var pickerModel = PickerModel()
+    
+    @State var filter = 0
+    private let pickerOptions = ["Popular", "Top Rated"]
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -19,17 +21,19 @@ struct MovielistView: View {
     
     init(genre: GenreElement) {
         self.genre = genre
+        movielistVM.fetchMovies(genre: genre.id, filter: "popularity")
     }
     
     var body: some View {
         
         VStack {
             
-            Picker(selection: $pickerModel.filter, label: Text("Select")) {
-                ForEach(0 ..< pickerModel.pickerOptions.count) {
-                           Text(pickerModel.pickerOptions[$0])
-                        }
-                     }.onReceive(pickerModel.$filter) { (value) in
+            Picker(selection: $filter, label: Text("Select")) {
+                Text("Popular").tag(0)
+                Text("Top Rated").tag(1)
+            }
+            .onChange(of: filter) { value in
+                
                 switch value {
                 case 0:
                     movielistVM.movies.removeAll()
@@ -44,6 +48,7 @@ struct MovielistView: View {
                     movielistVM.currentPage = 1
                     movielistVM.fetchMovies(genre: genre.id, filter: "popularity")
                 }
+                
             }.pickerStyle(SegmentedPickerStyle())
             
             ScrollView {
@@ -60,7 +65,7 @@ struct MovielistView: View {
                         
                         .onAppear(perform: {
                             if movie == self.movielistVM.movies.last {
-                                switch pickerModel.filter {
+                                switch filter {
                                 case 0:
                                     self.movielistVM.checkTotalMovies(genre: self.genre.id, filter: "popularity")
                                 case 1:

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FilmographyView: View {
     
-    @ObservedObject var filmographyVM = FilmographyViewModel()
+    @StateObject var filmographyVM = FilmographyViewModel()
     
     var cast: Actors
     

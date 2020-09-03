@@ -18,6 +18,7 @@ class TVShowListViewModel: ObservableObject {
     
     init() {
         fetchShows(filter: "popular")
+        currentPage += 1
     }
     
     func checkTotalShows(filter: String) {

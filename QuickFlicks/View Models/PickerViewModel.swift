@@ -10,11 +10,7 @@ import Foundation
 
 class PickerModel: ObservableObject {
     
-    @Published var filter = 0 {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+    var filter = 0
     
     let pickerOptions = ["Popular", "Top Rated"]
     
