@@ -20,7 +20,7 @@ struct FilteredMoviesGridView: View {
         appearance.backgroundColor = .systemRed
     }
     
-    @StateObject private var filteredMovieVM = FilteredMovieGridViewModel()
+    @ObservedObject private var filteredMovieVM = FilteredMovieGridViewModel()
     @ObservedObject private var pickerModel = PickerModel()
     
     @State var filter = 0
@@ -33,13 +33,13 @@ struct FilteredMoviesGridView: View {
         NavigationView {
             
             VStack {
-                
+
                 Picker(selection: $filter, label: Text("Select")) {
                     Text("Popular").tag(0)
                     Text("Top Rated").tag(1)
                 }
                 .onChange(of: filter) { value in
-                    
+
                     switch value {
                     case 0:
                         filteredMovieVM.movies.removeAll()
@@ -54,7 +54,7 @@ struct FilteredMoviesGridView: View {
                         filteredMovieVM.currentPage = 1
                         filteredMovieVM.fetchMovies(filter: "popularity")
                     }
-                
+
                 }.pickerStyle(SegmentedPickerStyle())
                 
                 ScrollView {
@@ -66,6 +66,7 @@ struct FilteredMoviesGridView: View {
                             NavigationLink(destination: MovieDetailView(movie: movie)) {
                                 
                                 MovieGridItemView(movies: movie)
+
                                 
                             }.buttonStyle(PlainButtonStyle())
                             

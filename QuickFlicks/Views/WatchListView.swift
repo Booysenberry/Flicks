@@ -11,7 +11,7 @@ import CoreData
 
 struct WatchListView: View {
     
-    @StateObject var watchListVM = WatchListViewModel()
+    @ObservedObject var watchListVM = WatchListViewModel()
     @Environment(\.managedObjectContext) var managedObjectContext
     @State private var type = 0
     

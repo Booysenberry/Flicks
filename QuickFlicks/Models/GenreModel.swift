@@ -15,7 +15,7 @@ struct Genre: Codable, Identifiable {
 }
 
 // MARK: - GenreElement
-struct GenreElement: Codable {
+struct GenreElement: Codable, Equatable {
     let id: Int
     let name: String
 

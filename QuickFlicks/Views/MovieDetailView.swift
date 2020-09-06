@@ -31,32 +31,11 @@ struct MovieDetailView: View {
         
         VStack {
             
+            // Movie poster
             MovieHeroImage(movie: movie)
             
-            HStack {
-                
-                ForEach(((detailVM.fetchedMovie?.genres)!), id:\.id) { genre in
-                    
-                    Text("\(genre.name)")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                        .padding(2)
-                        .border(Color.gray)
-                    
-                }
-                
-                Spacer()
-                
-                // Runtime
-                HStack {
-                    Image(systemName: "clock")
-                    Text("\(detailVM.fetchedMovie?.runTime ?? 1) mins")
-                    
-                }
-                
-            }.padding()
-            
             ScrollView {
+                
                 VStack {
                     
                     // Synopsis
@@ -65,8 +44,10 @@ struct MovieDetailView: View {
                         .padding()
                         .fixedSize(horizontal: false, vertical: true)
                     
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         
+                        // Cast members
                         if detailVM.fetchedMovie?.credits != nil {
                             CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
                                 .buttonStyle(PlainButtonStyle())
