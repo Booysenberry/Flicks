@@ -44,10 +44,10 @@ struct TVShowDetailView: View {
             
             ScrollView(.horizontal) {
                 
-                if TVDetailVM.castMembers != nil {
+               
                     CastView(cast: TVDetailVM.castMembers)
                         .buttonStyle(PlainButtonStyle())
-                }
+               
                 
             }.padding()
             

@@ -30,13 +30,14 @@ struct Movie: Codable, Equatable {
     let posterPath: String?
     let id: Int
     let backdropPath: String?
-    var title: String?
+    let title: String?
     let genres: [GenreElement]?
     let voteAverage: Double
     let overview: String
     let releaseDate: String?
     let runTime: Int?
     let credits: Credits?
+    var uniqueID = UUID()
     
     var posterURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!

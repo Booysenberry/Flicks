@@ -22,10 +22,8 @@ struct FilteredMoviesGridView: View {
     
     @ObservedObject private var filteredMovieVM = FilteredMovieGridViewModel()
     @ObservedObject private var pickerModel = PickerModel()
-    
     @State var filter = 0
     private let pickerOptions = ["Popular", "Top Rated"]
-    
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -61,13 +59,12 @@ struct FilteredMoviesGridView: View {
                     
                     LazyVGrid(columns: twoColumnGrid, spacing: 10) {
                         
-                        ForEach(filteredMovieVM.movies, id:\.id) { movie in
+                        ForEach(filteredMovieVM.movies, id:\.uniqueID) { movie in
                             
                             NavigationLink(destination: MovieDetailView(movie: movie)) {
                                 
                                 MovieGridItemView(movies: movie)
-
-                                
+ 
                             }.buttonStyle(PlainButtonStyle())
                             
                             .onAppear(perform: {

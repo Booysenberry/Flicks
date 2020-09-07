@@ -41,7 +41,6 @@ class FilteredMovieGridViewModel: ObservableObject {
                     
                     self.movies.append(movie)
                     
-                    
                 }
             }
         }
