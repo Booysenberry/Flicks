@@ -105,6 +105,19 @@ struct Actors: Codable {
     #endif
 }
 
+// MARK: - RecommendedMovies
+struct RecommendedMovies: Codable {
+    let page: Int
+    let results: [Movie]
+    let totalPages, totalResults: Int
+
+    enum CodingKeys: String, CodingKey {
+        case page, results
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
+    }
+}
+
 extension Movie {
     static func == (lhs: Movie, rhs: Movie) -> Bool {
         return lhs.id == rhs.id

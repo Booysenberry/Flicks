@@ -394,4 +394,46 @@ class WebService {
         // execute the HTTP request
         task.resume()
     }
+    
+    func getRecommendedMovies(movie: Int, completion: @escaping (RecommendedMovies?) -> ()) {
+        
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)/recommendations?api_key=\(apiKey)&language=en-US&page=1") else {
+            fatalError("Invalid URL")
+        }
+        
+        let config = URLSessionConfiguration.default
+        config.urlCache = URLCache.shared
+        let session = URLSession(configuration: config)
+        
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15.0)
+        let task = session.dataTask(with: urlRequest) { data, response, error in
+            
+            // Check for errors
+            guard error == nil else {
+                print ("error: \(error!)")
+                return
+            }
+            // Check that data has been returned
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let movies = try decoder.decode(RecommendedMovies.self, from: data)
+                
+                DispatchQueue.main.async {
+                    completion(movies)
+                    
+                }
+                
+            } catch let err {
+                print("Error", err)
+            }
+        }
+        // execute the HTTP request
+        task.resume()
+    }
 }

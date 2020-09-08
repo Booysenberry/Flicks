@@ -22,6 +22,7 @@ struct MovieDetailView: View {
     init(movie: Movie) {
         self.movie = movie
         detailVM.getMovieDetails(id: movie.id)
+        detailVM.getRecommendedMovies(movie: movie.id)
         
         // Stop Scrollview bounce
         UIScrollView.appearance().bounces = false
@@ -36,25 +37,51 @@ struct MovieDetailView: View {
             
             ScrollView {
                 
-                VStack {
+                VStack(alignment: .leading) {
+                    
+                    Section {
                     
                     // Synopsis
                     Text(movie.overview)
                         .font(.body)
-                        .padding()
                         .fixedSize(horizontal: false, vertical: true)
+                    }
+                    Spacer(minLength: 40)
                     
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
+                    Section(header: Text("Cast").font(.title2)) {
                         
-                        // Cast members
-                        if detailVM.fetchedMovie?.credits != nil {
-                            CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
-                                .buttonStyle(PlainButtonStyle())
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            
+                            // Cast members
+                            if detailVM.fetchedMovie?.credits != nil {
+                                HStack {
+                                    CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
+                                        .buttonStyle(PlainButtonStyle())
+                                }
+                            }
                         }
-                    }.padding()
+                    }
+                    Spacer(minLength: 40)
+                    
+                    Section(header: Text("Recommended Movies").font(.title2)) {
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            
+                            // Recommended movies
+                            HStack(spacing: 20) {
+                                ForEach(detailVM.recommendedMovies, id:\.uniqueID) { movie in
+                                    
+                                    NavigationLink(destination: MovieDetailView(movie: movie)) {
+                                        
+                                        MovieGridItemView(movies: movie)
+                                        
+                                    }.buttonStyle(PlainButtonStyle())
+                                }
+                            }
+                        }
+                    }
                 }
-            }
+            }.padding()
             Spacer()
         }
         
