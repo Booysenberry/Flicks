@@ -33,7 +33,6 @@ class MovieDetailViewModel: ObservableObject {
             
                 for movie in movies {
                     self.recommendedMovies.append(movie)
-                    
 
                 }
             }

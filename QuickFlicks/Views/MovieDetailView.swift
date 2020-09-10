@@ -30,60 +30,40 @@ struct MovieDetailView: View {
     
     var body: some View {
         
-        VStack {
+        
+        // Movie poster
+        MovieHeroImage(movie: movie, runTime: detailVM.fetchedMovie?.runTime ?? 0)
+        
+        ScrollView {
             
-            // Movie poster
-            MovieHeroImage(movie: movie)
-            
-            ScrollView {
+            VStack(alignment: .leading) {
                 
-                VStack(alignment: .leading) {
-                    
-                    Section {
-                    
-                    // Synopsis
-                    Text(movie.overview)
-                        .font(.body)
-                        .fixedSize(horizontal: false, vertical: true)
-                    }
-                    Spacer(minLength: 40)
-                    
-                    Section(header: Text("Cast").font(.title2)) {
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            
-                            // Cast members
-                            if detailVM.fetchedMovie?.credits != nil {
-                                HStack {
-                                    CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
-                                        .buttonStyle(PlainButtonStyle())
-                                }
-                            }
-                        }
-                    }
-                    Spacer(minLength: 40)
-                    
-                    Section(header: Text("Recommended Movies").font(.title2)) {
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            
-                            // Recommended movies
-                            HStack(spacing: 20) {
-                                ForEach(detailVM.recommendedMovies, id:\.uniqueID) { movie in
-                                    
-                                    NavigationLink(destination: MovieDetailView(movie: movie)) {
-                                        
-                                        MovieGridItemView(movies: movie)
-                                        
-                                    }.buttonStyle(PlainButtonStyle())
-                                }
-                            }
-                        }
-                    }
+                // Genre
+                Text("\(detailVM.fetchedMovie?.genres?.first?.name ?? "")")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                    .padding(2)
+                    .border(Color.gray)
+                
+                // Synopsis
+                Text(movie.overview)
+                    .font(.body)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                
+                // Cast members
+                if detailVM.fetchedMovie?.credits != nil {
+                    CastView(cast: (detailVM.fetchedMovie?.credits!.cast)!)
+                        .buttonStyle(PlainButtonStyle())
                 }
-            }.padding()
-            Spacer()
-        }
+                
+                Text("Recommended")
+                    .font(.title2)
+                
+                // Recommended movies
+                RecommendedMoviesView(movies: detailVM.recommendedMovies)
+            }
+        }.padding()
         
         .navigationBarTitle(movie.title ?? "")
         
@@ -119,6 +99,7 @@ struct MovieDetailView: View {
         
     }
 }
+
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {

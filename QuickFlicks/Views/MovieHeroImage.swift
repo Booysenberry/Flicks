@@ -11,6 +11,7 @@ import SwiftUI
 struct MovieHeroImage: View {
     
     var movie: Movie
+    var runTime: Int = 0
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -38,6 +39,14 @@ struct MovieHeroImage: View {
                     
                     Text("\(movie.voteCount)")
                     
+                }
+                Spacer()
+                
+                // Movie runtime
+                HStack {
+                    Image(systemName: "clock")
+                    
+                    Text("\(runTime)")
                 }
             }
             .padding()

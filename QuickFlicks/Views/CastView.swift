@@ -14,26 +14,29 @@ struct CastView: View {
     
     var body: some View {
         
-        HStack {
+        ScrollView(.horizontal, showsIndicators: false) {
             
-            ForEach(cast, id: \.id) { actor in
+            HStack {
                 
-                NavigationLink(destination: FilmographyView(cast: actor)) {
-                
-                VStack {
+                ForEach(cast, id: \.id) { actor in
                     
-                    URLImage(url: "\(actor.profileURL)", type: "cast")
-                        .clipShape(Circle())
-                        .overlay(
-                               Circle().stroke(Color.gray, lineWidth: 2))
-                        .frame(width: 92, height: 136)
-                    
-                    Text("\(actor.name!)")
-                        .lineLimit(1)
-                        .font(.footnote)
-                    
-                }.frame(width: 100, height: 200, alignment: .top)
-            }
+                    NavigationLink(destination: FilmographyView(cast: actor)) {
+                        
+                        VStack {
+                            
+                            URLImage(url: "\(actor.profileURL)", type: "cast")
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle().stroke(Color.gray, lineWidth: 2))
+                                .frame(width: 92, height: 136)
+                            
+                            Text("\(actor.name!)")
+                                .lineLimit(1)
+                                .font(.footnote)
+                            
+                        }.frame(width: 100, height: 200, alignment: .top)
+                    }
+                }
             }
         }
     }
