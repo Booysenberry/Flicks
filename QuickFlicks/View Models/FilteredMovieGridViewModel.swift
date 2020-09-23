@@ -29,7 +29,6 @@ class FilteredMovieGridViewModel: ObservableObject {
     
     func fetchMovies(filter: String) {
         
-        print("Starting: \(currentPage)")
         
         WebService().getMoviesByFilter(filter: filter, page: currentPage) { movie in
             
@@ -48,8 +47,6 @@ class FilteredMovieGridViewModel: ObservableObject {
 
             if currentPage <= totalPages {
                 currentPage += 1
-                
-                print("Ending: \(currentPage)")
 
             }
         }

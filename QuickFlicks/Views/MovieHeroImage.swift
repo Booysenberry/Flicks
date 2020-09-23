@@ -46,7 +46,7 @@ struct MovieHeroImage: View {
                 HStack {
                     Image(systemName: "clock")
                     
-                    Text("\(runTime)")
+                    Text("\(runTime) mins")
                 }
             }
             .padding()

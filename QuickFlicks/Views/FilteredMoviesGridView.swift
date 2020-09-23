@@ -15,6 +15,7 @@ struct FilteredMoviesGridView: View {
         appearance.configureWithTransparentBackground()
         appearance.largeTitleTextAttributes = [.foregroundColor : UIColor.white]
         appearance.titleTextAttributes = [.foregroundColor : UIColor.white]
+        
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().standardAppearance = appearance
         appearance.backgroundColor = .systemRed
@@ -31,13 +32,13 @@ struct FilteredMoviesGridView: View {
         NavigationView {
             
             VStack {
-
+                
                 Picker(selection: $filter, label: Text("Select")) {
                     Text("Popular").tag(0)
                     Text("Top Rated").tag(1)
                 }
                 .onChange(of: filter) { value in
-
+                    
                     switch value {
                     case 0:
                         filteredMovieVM.movies.removeAll()
@@ -52,40 +53,56 @@ struct FilteredMoviesGridView: View {
                         filteredMovieVM.currentPage = 1
                         filteredMovieVM.fetchMovies(filter: "popularity")
                     }
-
+                    
                 }.pickerStyle(SegmentedPickerStyle())
                 
-                ScrollView {
+                if filteredMovieVM.movies.isEmpty {
                     
-                    LazyVGrid(columns: twoColumnGrid, spacing: 10) {
+                    Spacer()
+                    
+                    VStack {
+                        ProgressView()
+                            .scaleEffect(1.5, anchor: .center)
+                            .padding()
                         
-                        ForEach(filteredMovieVM.movies, id:\.uniqueID) { movie in
+                        Text("Please check internet connection")
+                    }
+                    
+                    Spacer()
+                    
+                } else {
+                    ScrollView {
+                        
+                        LazyVGrid(columns: twoColumnGrid, spacing: 10) {
                             
-                            NavigationLink(destination: MovieDetailView(movie: movie)) {
+                            ForEach(filteredMovieVM.movies, id:\.uniqueID) { movie in
                                 
-                                MovieGridItemView(movies: movie)
- 
-                            }.buttonStyle(PlainButtonStyle())
-                            
-                            .onAppear(perform: {
-                                if movie == self.filteredMovieVM.movies.last {
+                                NavigationLink(destination: MovieDetailView(movie: movie)) {
                                     
-                                    switch filter {
-                                    case 0:
-                                        self.filteredMovieVM.checkTotalMovies(filter: "popularity")
-                                    case 1:
-                                        self.filteredMovieVM.checkTotalMovies(filter: "vote_average")
-                                    default:
-                                        self.filteredMovieVM.checkTotalMovies(filter: "popularity")
+                                    MovieGridItemView(movies: movie)
+                                    
+                                }.buttonStyle(PlainButtonStyle())
+                                
+                                .onAppear(perform: {
+                                    if movie == self.filteredMovieVM.movies.last {
+                                        
+                                        switch filter {
+                                        case 0:
+                                            self.filteredMovieVM.checkTotalMovies(filter: "popularity")
+                                        case 1:
+                                            self.filteredMovieVM.checkTotalMovies(filter: "vote_average")
+                                        default:
+                                            self.filteredMovieVM.checkTotalMovies(filter: "popularity")
+                                        }
                                     }
-                                }
-                            })
+                                })
+                            }
                         }
                     }
                 }
-                .navigationBarTitle("Movies")
             }
-        }
+            .navigationBarTitle("Movies")
+        }.accentColor(.white)
     }
 }
 

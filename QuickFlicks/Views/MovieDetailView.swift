@@ -11,6 +11,7 @@ import SwiftUI
 struct MovieDetailView: View {
     
     @ObservedObject private var detailVM = MovieDetailViewModel()
+    @ObservedObject var watchListVM = WatchListViewModel()
     
     // Core data
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -57,11 +58,15 @@ struct MovieDetailView: View {
                         .buttonStyle(PlainButtonStyle())
                 }
                 
-                Text("Recommended")
-                    .font(.title2)
-                
-                // Recommended movies
-                RecommendedMoviesView(movies: detailVM.recommendedMovies)
+                if detailVM.recommendedMovies.isEmpty {
+                    // Do nothing
+                } else {
+                    Text("Recommended")
+                        .font(.title2)
+                    
+                    // Recommended movies
+                    RecommendedMoviesView(movies: detailVM.recommendedMovies)
+                }
             }
         }.padding()
         
@@ -91,8 +96,8 @@ struct MovieDetailView: View {
                                         // handle the Core Data error
                                     }
                                 }) {
-                                    Image(systemName: "plus")
-                                        .renderingMode(.original)
+                                    Image(systemName: "bookmark")
+                                        .foregroundColor(.white)
                                 }.alert(isPresented: $showingAlert) {
                                     Alert(title: Text("Saved"), message: Text("Movie added to your watch list"), dismissButton: .default(Text("Ok")))
                                 })

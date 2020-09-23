@@ -44,36 +44,52 @@ struct FilteredTVShowsGridView: View {
                     
                 }.pickerStyle(SegmentedPickerStyle())
                 
-                ScrollView {
+                if filteredTVVM.shows.isEmpty {
                     
-                    LazyVGrid(columns: twoColumnGrid, spacing: 10) {
+                    Spacer()
+                    
+                    VStack {
+                        ProgressView()
+                            .scaleEffect(1.5, anchor: .center)
+                            .padding()
                         
-                        ForEach(filteredTVVM.shows, id:\.id) { show in
+                        Text("Please check internet connection")
+                    }
+                    
+                    Spacer()
+                    
+                } else {
+                    ScrollView {
+                        
+                        LazyVGrid(columns: twoColumnGrid, spacing: 10) {
                             
-                            NavigationLink(destination: TVShowDetailView(show: show)) {
+                            ForEach(filteredTVVM.shows, id:\.id) { show in
                                 
-                                TVShowGridItemView(shows: show)
-                                
-                            }.buttonStyle(PlainButtonStyle())
-                            
-                            .onAppear(perform: {
-                                if show == self.filteredTVVM.shows.last {
+                                NavigationLink(destination: TVShowDetailView(show: show)) {
                                     
-                                    switch filter {
-                                    case 0:
-                                        self.filteredTVVM.fetchShows(filter: "popular")
-                                    case 1:
-                                        self.filteredTVVM.fetchShows(filter: "top_rated")
-                                    default:
-                                        self.filteredTVVM.fetchShows(filter: "popular")
+                                    TVShowGridItemView(shows: show)
+                                    
+                                }.buttonStyle(PlainButtonStyle())
+                                
+                                .onAppear(perform: {
+                                    if show == self.filteredTVVM.shows.last {
+                                        
+                                        switch filter {
+                                        case 0:
+                                            self.filteredTVVM.fetchShows(filter: "popular")
+                                        case 1:
+                                            self.filteredTVVM.fetchShows(filter: "top_rated")
+                                        default:
+                                            self.filteredTVVM.fetchShows(filter: "popular")
+                                        }
                                     }
-                                }
-                            })
+                                })
+                            }
                         }
                     }
-                }.navigationBarTitle("Popular TV")
-            }
-        }
+                }
+            }.navigationBarTitle("TV Shows")
+        }.accentColor(.white)
     }
 }
 

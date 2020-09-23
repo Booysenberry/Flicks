@@ -39,7 +39,7 @@ struct AppView: View {
             
             WatchListView()
                 .tabItem {
-                    Image(systemName: "heart")
+                    Image(systemName: "bookmark")
                     Text("Watch List")
                 }
         }

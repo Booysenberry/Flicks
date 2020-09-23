@@ -16,13 +16,29 @@ struct ListOfGenresView: View {
         
         NavigationView {
             
-            List {
+            if genreListVM.fetchedGenres.isEmpty {
                 
-                GenreRowView(genres: genreListVM.fetchedGenres)
+                Spacer()
                 
-            }.navigationBarTitle("Genres")
-                .font(.headline)
-        }
+                VStack {
+                    ProgressView()
+                        .scaleEffect(1.5, anchor: .center)
+                        .padding()
+                    
+                    Text("Please check internet connection")
+                    
+                }.navigationBarTitle("Genres")
+                
+                Spacer()
+                
+            } else {
+                List {
+                    
+                    GenreRowView(genres: genreListVM.fetchedGenres)
+                    
+                }.navigationBarTitle("Genres")
+            }
+        }.accentColor(.white)
     }
 }
 

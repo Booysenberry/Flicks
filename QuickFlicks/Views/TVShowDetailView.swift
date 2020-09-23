@@ -76,8 +76,9 @@ struct TVShowDetailView: View {
                                     }
                                     
                                 }) {
-                                    Image(systemName: "plus")
-                                        .renderingMode(.original)
+                                    Image(systemName: "bookmark")
+                                        .foregroundColor(.white)
+                                    
                                 }.alert(isPresented: $showingAlert) {
                                     Alert(title: Text("Saved"), message: Text("Show added to watch list"), dismissButton: .default(Text("Got it!")))
                                 })
