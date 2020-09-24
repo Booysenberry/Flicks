@@ -37,6 +37,7 @@ struct WatchListView: View {
                     Text("Movies").tag(0)
                     Text("TV Shows").tag(1)
                 }.pickerStyle(SegmentedPickerStyle())
+                .padding(5)
                 
                 List {
                     

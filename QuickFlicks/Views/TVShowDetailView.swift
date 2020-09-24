@@ -34,24 +34,25 @@ struct TVShowDetailView: View {
             TVHeroImage(show: show)
         }
         
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             
             // Synopsis
             Text(show.overview)
                 .font(.body)
-                .padding()
                 .fixedSize(horizontal: false, vertical: true)
             
             ScrollView(.horizontal) {
                 
-               
-                    CastView(cast: TVDetailVM.castMembers)
-                        .buttonStyle(PlainButtonStyle())
-               
+                CastView(cast: TVDetailVM.castMembers)
+                    .buttonStyle(PlainButtonStyle())
                 
-            }.padding()
+            }
             
-        }.navigationBarTitle(show.name)
+            // TMDB attribution
+            AttributionView()
+            
+        }.padding()
+        .navigationBarTitle(show.name)
         
         .navigationBarItems(trailing:
                                 Button(action: {

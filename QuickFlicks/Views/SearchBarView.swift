@@ -80,7 +80,7 @@ struct SearchBarView: View {
                 .transition(.move(edge: .trailing))
                 .animation(.default)
             }
-        }
+        }.padding(5)
     }
 }
 

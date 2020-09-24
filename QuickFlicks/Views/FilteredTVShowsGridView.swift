@@ -43,6 +43,7 @@ struct FilteredTVShowsGridView: View {
                     }
                     
                 }.pickerStyle(SegmentedPickerStyle())
+                .padding(5)
                 
                 if filteredTVVM.shows.isEmpty {
                     

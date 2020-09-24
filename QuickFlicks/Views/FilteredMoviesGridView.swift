@@ -55,6 +55,7 @@ struct FilteredMoviesGridView: View {
                     }
                     
                 }.pickerStyle(SegmentedPickerStyle())
+                .padding(5)
                 
                 if filteredMovieVM.movies.isEmpty {
                     

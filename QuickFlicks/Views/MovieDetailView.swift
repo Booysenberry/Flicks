@@ -35,7 +35,7 @@ struct MovieDetailView: View {
         // Movie poster
         MovieHeroImage(movie: movie, runTime: detailVM.fetchedMovie?.runTime ?? 0)
         
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             
             VStack(alignment: .leading) {
                 
@@ -67,6 +67,10 @@ struct MovieDetailView: View {
                     // Recommended movies
                     RecommendedMoviesView(movies: detailVM.recommendedMovies)
                 }
+                
+                // TMDB attribution
+                AttributionView()
+                
             }
         }.padding()
         

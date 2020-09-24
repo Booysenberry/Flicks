@@ -50,6 +50,7 @@ struct MovielistView: View {
                 }
                 
             }.pickerStyle(SegmentedPickerStyle())
+            .padding(5)
             
             ScrollView {
                 
