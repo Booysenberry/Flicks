@@ -14,7 +14,7 @@ struct FilmographyView: View {
     
     var cast: Actors
     
-     var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         
@@ -23,11 +23,13 @@ struct FilmographyView: View {
                 
                 URLImage(url: "\(cast.profileURL)", type: "cast")
                     .clipShape(Circle())
+                    .overlay(
+                        Circle().stroke(Color.gray, lineWidth: 2))
                     .frame(width: 92, height: 136)
                 
-            }.padding()
+            }
             
-            Text("Filmography").font(.largeTitle)
+            Text(cast.name ?? "").font(.largeTitle)
             
             ScrollView {
                 
@@ -43,18 +45,18 @@ struct FilmographyView: View {
                     }
                 }
             }
-
+            
         }.onAppear(perform: {
             filmographyVM.getRoles(actor: cast.id ?? 0)
         })
         Spacer()
-            .navigationTitle(cast.name!)
+            .navigationTitle("Filmography")
     }
 }
 
-//struct FilmographyView_Previews: PreviewProvider {
-//    
-//    static var previews: some View {
-//        FilmographyView(cast: Actors.example)
-//    }
-//}
+struct FilmographyView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        FilmographyView(cast: Actors.example)
+    }
+}

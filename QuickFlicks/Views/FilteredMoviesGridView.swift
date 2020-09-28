@@ -66,7 +66,10 @@ struct FilteredMoviesGridView: View {
                             .scaleEffect(1.5, anchor: .center)
                             .padding()
                         
-                        Text("Please check internet connection")
+                        Text("Connecting").padding(5)
+                    
+                        Text("Please check your internet connection")
+                        
                     }
                     
                     Spacer()

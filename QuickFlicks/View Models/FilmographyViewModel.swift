@@ -21,6 +21,7 @@ class FilmographyViewModel: ObservableObject {
                 for role in roles {
                     
                     self.fetchedRoles.append(role)
+                    print(role)
                     
                 }
             }

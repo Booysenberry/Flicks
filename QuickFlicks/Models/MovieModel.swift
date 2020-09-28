@@ -89,6 +89,7 @@ struct Actors: Codable {
     let name: String?
     let profilePath: String?
     
+    
     var profileURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/original\(profilePath ?? "")")!
     }
