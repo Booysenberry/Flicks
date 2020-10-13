@@ -67,9 +67,6 @@ struct FilteredMoviesGridView: View {
                             .padding()
                         
                         Text("Connecting").padding(5)
-                    
-                        Text("Please check your internet connection")
-                        
                     }
                     
                     Spacer()
