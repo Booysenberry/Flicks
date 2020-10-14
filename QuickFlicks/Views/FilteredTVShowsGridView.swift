@@ -54,7 +54,7 @@ struct FilteredTVShowsGridView: View {
                             .scaleEffect(1.5, anchor: .center)
                             .padding()
                         
-                        Text("Connecting")
+                        Text("Connecting...")
                     }
                     
                     Spacer()

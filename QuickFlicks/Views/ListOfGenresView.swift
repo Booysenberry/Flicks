@@ -25,7 +25,7 @@ struct ListOfGenresView: View {
                         .scaleEffect(1.5, anchor: .center)
                         .padding()
                     
-                    Text("Connecting")
+                    Text("Connecting...")
                     
                 }.navigationBarTitle("Genres")
                 

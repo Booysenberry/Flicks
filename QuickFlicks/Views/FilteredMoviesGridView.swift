@@ -66,7 +66,7 @@ struct FilteredMoviesGridView: View {
                             .scaleEffect(1.5, anchor: .center)
                             .padding()
                         
-                        Text("Connecting").padding(5)
+                        Text("Connecting...").padding(5)
                     }
                     
                     Spacer()

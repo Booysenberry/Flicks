@@ -34,7 +34,7 @@ struct CastView: View {
                                 .lineLimit(1)
                                 .font(.footnote)
                             
-                        }.frame(width: 100, height: 200, alignment: .top)
+                        }.frame(width: 100, height: 200, alignment: .center)
                     }
                 }
             }
