@@ -1,4 +1,4 @@
-# QuickFlicks 🎬
+# Flicks 🎬
 Movie discovery app using The Movie DB, SwiftUI, and MVVM. 
 
 ### 💡Purpose
