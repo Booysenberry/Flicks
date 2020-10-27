@@ -12,6 +12,7 @@ struct SearchBarView: View {
     
     var searchVM: SearchViewModel
     var searchView: SearchView
+    @Environment(\.colorScheme) var colorScheme
     
     @Binding var text: String
     
@@ -74,8 +75,8 @@ struct SearchBarView: View {
                     
                 }) {
                     Text("Cancel")
-                    
                 }
+                .accentColor(.blue)
                 .padding(.trailing, 10)
                 .transition(.move(edge: .trailing))
                 .animation(.default)

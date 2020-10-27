@@ -11,9 +11,7 @@ import SwiftUI
 struct SearchView: View {
     
     @ObservedObject var searchVM = SearchViewModel()
-    
     @State private var searchText = ""
-    
     @State var type = 0
     
     var body: some View {
@@ -69,7 +67,7 @@ struct SearchView: View {
                 }
                 .navigationBarTitle("Search")
             }
-        }
+        }.accentColor(.white)
     }
 }
 

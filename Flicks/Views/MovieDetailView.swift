@@ -39,12 +39,18 @@ struct MovieDetailView: View {
             
             VStack(alignment: .leading) {
                 
-                // Genre
-                Text("\(detailVM.fetchedMovie?.genres?.first?.name ?? "")")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
-                    .padding(2)
-                    .border(Color.gray)
+                if detailVM.fetchedMovie?.genres?.count ?? 0 >= 1 {
+                    
+                    // Genre
+                    Text("\(detailVM.fetchedMovie?.genres?.first?.name ?? "")")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                        .padding(2)
+                        .border(Color.gray)
+                    
+                }
+                
+                
                 
                 // Synopsis
                 Text(movie.overview)

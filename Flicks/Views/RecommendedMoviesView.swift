@@ -18,12 +18,13 @@ struct RecommendedMoviesView: View {
             
             // Recommended movies
             HStack(spacing: 20) {
+                
                 ForEach(movies, id:\.uniqueID) { movie in
                     
                     NavigationLink(destination: MovieDetailView(movie: movie)) {
                         
                         MovieGridItemView(movies: movie)
-                        
+            
                     }.buttonStyle(PlainButtonStyle())
                 }
             }

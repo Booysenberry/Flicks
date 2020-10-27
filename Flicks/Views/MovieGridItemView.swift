@@ -25,6 +25,11 @@ struct MovieGridItemView: View {
             URLImage(url: "\(movies.posterURL)", type: "coverArt")
                 .frame(width: 154, height: 228)
             
+            Text(movies.title ?? "")
+                .padding(.horizontal, 15)
+                .font(.footnote)
+                .lineLimit(0)
+            
             HStack {
                 // Rating
                 HStack {
@@ -43,7 +48,8 @@ struct MovieGridItemView: View {
                         .font(.callout)
                 }
             }
-        }
+        }.padding(.bottom, 20)
+        .frame(width: 154)
     }
 }
 
