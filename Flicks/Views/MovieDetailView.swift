@@ -49,9 +49,7 @@ struct MovieDetailView: View {
                         .border(Color.gray)
                     
                 }
-                
-                
-                
+
                 // Synopsis
                 Text(movie.overview)
                     .font(.body)

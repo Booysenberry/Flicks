@@ -32,7 +32,7 @@ struct SearchView: View {
                     
                     if type == 0 {
                         
-                        ForEach(searchVM.searchedMovies, id: \.id) { movie in
+                        ForEach(searchVM.searchedMovies, id: \.uniqueID) { movie in
                             
                             NavigationLink(destination: MovieDetailView(movie: movie)) {
                                 
@@ -48,7 +48,7 @@ struct SearchView: View {
                         }
                     } else {
                         
-                        ForEach(searchVM.searchedShows, id: \.id) { show in
+                        ForEach(searchVM.searchedShows, id: \.uniqueID) { show in
                             
                             NavigationLink(destination: TVShowDetailView(show: show)) {
                                 

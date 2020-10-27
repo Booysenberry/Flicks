@@ -26,7 +26,6 @@ struct MovieGridItemView: View {
                 .frame(width: 154, height: 228)
             
             Text(movies.title ?? "")
-                .padding(.horizontal, 15)
                 .font(.footnote)
                 .lineLimit(0)
             

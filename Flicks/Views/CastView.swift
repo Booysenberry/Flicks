@@ -27,7 +27,7 @@ struct CastView: View {
                             URLImage(url: "\(actor.profileURL)", type: "cast")
                                 .clipShape(Circle())
                                 .overlay(
-                                    Circle().stroke(Color.gray, lineWidth: 2))
+                                    Circle().stroke(Color.gray, lineWidth: 1))
                                 .frame(width: 92, height: 136)
                             
                             Text("\(actor.name!)")

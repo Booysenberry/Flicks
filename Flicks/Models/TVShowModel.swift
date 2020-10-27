@@ -31,6 +31,7 @@ struct Show: Codable, Equatable {
     let voteAverage: Double
     let overview: String
     let posterPath: String?
+    var uniqueID = UUID()
     
     var posterURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
