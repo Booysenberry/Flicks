@@ -18,7 +18,7 @@ struct FilteredMoviesGridView: View {
         
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().standardAppearance = appearance
-        appearance.backgroundColor = .systemYellow
+        appearance.backgroundColor = .systemRed
     }
     
     @ObservedObject private var filteredMovieVM = FilteredMovieGridViewModel()
