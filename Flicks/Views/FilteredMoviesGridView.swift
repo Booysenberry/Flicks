@@ -22,9 +22,7 @@ struct FilteredMoviesGridView: View {
     }
     
     @ObservedObject private var filteredMovieVM = FilteredMovieGridViewModel()
-    @ObservedObject private var pickerModel = PickerModel()
-    @State var filter = 0
-    private let pickerOptions = ["Popular", "Top Rated"]
+    
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -32,30 +30,6 @@ struct FilteredMoviesGridView: View {
         NavigationView {
             
             VStack {
-                
-                Picker(selection: $filter, label: Text("Select")) {
-                    Text("Popular").tag(0)
-                    Text("Top Rated").tag(1)
-                }
-                .onChange(of: filter) { value in
-                    
-                    switch value {
-                    case 0:
-                        filteredMovieVM.movies.removeAll()
-                        filteredMovieVM.currentPage = 1
-                        filteredMovieVM.fetchMovies(filter: "popularity")
-                    case 1:
-                        filteredMovieVM.movies.removeAll()
-                        filteredMovieVM.currentPage = 1
-                        filteredMovieVM.fetchMovies(filter: "vote_average")
-                    default:
-                        filteredMovieVM.movies.removeAll()
-                        filteredMovieVM.currentPage = 1
-                        filteredMovieVM.fetchMovies(filter: "popularity")
-                    }
-                    
-                }.pickerStyle(SegmentedPickerStyle())
-                .padding(5)
                 
                 if filteredMovieVM.movies.isEmpty {
                     
@@ -68,9 +42,7 @@ struct FilteredMoviesGridView: View {
                         
                         Text("Connecting...").padding(5)
                     }
-                    
                     Spacer()
-                    
                 } else {
                     ScrollView {
                         
@@ -87,11 +59,15 @@ struct FilteredMoviesGridView: View {
                                 .onAppear(perform: {
                                     if movie == self.filteredMovieVM.movies.last {
                                         
-                                        switch filter {
-                                        case 0:
+                                        switch filteredMovieVM.filter {
+                                        case "popularity":
                                             self.filteredMovieVM.checkTotalMovies(filter: "popularity")
-                                        case 1:
+                                        case "vote_average":
                                             self.filteredMovieVM.checkTotalMovies(filter: "vote_average")
+                                        case "primary_release_date":
+                                            self.filteredMovieVM.checkTotalMovies(filter: "primary_release_date")
+                                        case "revenue":
+                                            self.filteredMovieVM.checkTotalMovies(filter: "revenue")
                                         default:
                                             self.filteredMovieVM.checkTotalMovies(filter: "popularity")
                                         }
@@ -102,11 +78,22 @@ struct FilteredMoviesGridView: View {
                     }
                 }
             }
-            .navigationBarTitle("Movies")
+            .padding(.top, 5)
+            
+            .navigationBarItems(trailing:
+                                    Menu {
+                                        Button("Top Rated", action: filteredMovieVM.topRated)
+                                        Button("Most Popular", action: filteredMovieVM.popular)
+                                        Button("Newest", action: filteredMovieVM.releaseDate)
+                                        Button("Revenue", action: filteredMovieVM.highestGrossing)
+                                    } label: {
+                                        Label("\(filteredMovieVM.label)", image: "Filter")
+                                    }
+            )
+            .navigationBarTitle("Movies", displayMode: .automatic)
         }.accentColor(.white)
     }
 }
-
 
 
 struct FilteredMoviesGridView_Previews: PreviewProvider {
