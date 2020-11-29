@@ -10,10 +10,11 @@ import Foundation
 
 class FilteredMovieGridViewModel: ObservableObject {
     
-    @Published var label = "Most Popular"
+    @Published var label = "Trending"
+    @Published var icon = "flame.fill"
     @Published var movies = [Movie]()
     private var filteredMovies = [MovieList]()
-   
+    
     var currentPage = 1
     
     var filter = "popularity"
@@ -25,7 +26,7 @@ class FilteredMovieGridViewModel: ObservableObject {
     }
     
     func checkTotalMovies(filter: String) {
-
+        
         if filteredMovies.count < 20 {
             fetchMovies(filter: filter)
         }
@@ -48,10 +49,10 @@ class FilteredMovieGridViewModel: ObservableObject {
             }
         }
         if let totalPages = filteredMovies.first?.totalPages {
-
+            
             if currentPage <= totalPages {
                 currentPage += 1
-
+                
             }
         }
     }
@@ -64,15 +65,20 @@ class FilteredMovieGridViewModel: ObservableObject {
         
         switch filterBy {
         case "popularity":
-            label = "Most Popular"
+            label = "Trending"
+            icon = "flame.fill"
         case "vote_average":
             label = "Top Rated"
+            icon = "star.fill"
         case "primary_release_date":
             label = "Newest"
+            icon = "calendar"
         case "revenue":
             label = "Revenue"
+            icon = "dollarsign.square.fill"
         default:
             label = "Most Popular"
+            icon = "flame.fill"
         }
     }
     
@@ -95,6 +101,6 @@ class FilteredMovieGridViewModel: ObservableObject {
         filter = "revenue"
         filterResults(filterBy: filter)
     }
-
+    
 }
 

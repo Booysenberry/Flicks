@@ -82,12 +82,35 @@ struct FilteredMoviesGridView: View {
             
             .navigationBarItems(trailing:
                                     Menu {
-                                        Button("Top Rated", action: filteredMovieVM.topRated)
-                                        Button("Most Popular", action: filteredMovieVM.popular)
-                                        Button("Newest", action: filteredMovieVM.releaseDate)
-                                        Button("Revenue", action: filteredMovieVM.highestGrossing)
+                                        Button(action: filteredMovieVM.topRated, label: {
+                                            Text("Top Rated")
+                                            Image(systemName: "star.fill")
+                                            
+                                        })
+                                        
+                                        Button(action: filteredMovieVM.popular, label: {
+                                            Text("Trending")
+                                            Image(systemName: "flame.fill")
+                                            
+                                        })
+                                        
+                                        Button(action: filteredMovieVM.releaseDate, label: {
+                                            Text("Newest")
+                                            Image(systemName: "calendar")
+                                            
+                                        })
+                                        
+                                        Button(action: filteredMovieVM.highestGrossing, label: {
+                                            Text("Revenue")
+                                            Image(systemName: "dollarsign.square.fill")
+                                            
+                                        })
+                                        
                                     } label: {
-                                        Label("\(filteredMovieVM.label)", image: "Filter")
+                                        Label(
+                                            title: { Text("\(filteredMovieVM.label)") },
+                                            icon: { Image(systemName: filteredMovieVM.icon) }
+                                        ).frame(width: 120)
                                     }
             )
             .navigationBarTitle("Movies", displayMode: .automatic)
