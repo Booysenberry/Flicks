@@ -65,7 +65,7 @@ struct MovieDetailView: View {
                 if detailVM.recommendedMovies.isEmpty {
                     // Do nothing
                 } else {
-                    Text("Similar Movies:")
+                    Text("Similar Movies")
                         .font(.title2)
                     
                     // Recommended movies

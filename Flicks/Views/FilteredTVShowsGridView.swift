@@ -11,8 +11,6 @@ import SwiftUI
 struct FilteredTVShowsGridView: View {
     
     @StateObject private var filteredTVVM = TVShowListViewModel()
-    @State var filter = 0
-    private let pickerOptions = ["Popular", "Top Rated"]
     
     private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -20,30 +18,6 @@ struct FilteredTVShowsGridView: View {
         NavigationView {
             
             VStack {
-                
-                Picker(selection: $filter, label: Text("Select")) {
-                    Text("Popular").tag(0)
-                    Text("Top Rated").tag(1)
-                }
-                .onChange(of: filter) { value in
-                    
-                    switch value {
-                    case 0:
-                        filteredTVVM.shows.removeAll()
-                        filteredTVVM.currentPage = 1
-                        filteredTVVM.fetchShows(filter: "popular")
-                    case 1:
-                        filteredTVVM.shows.removeAll()
-                        filteredTVVM.currentPage = 1
-                        filteredTVVM.fetchShows(filter: "top_rated")
-                    default:
-                        filteredTVVM.shows.removeAll()
-                        filteredTVVM.currentPage = 1
-                        filteredTVVM.fetchShows(filter: "popular")
-                    }
-                    
-                }.pickerStyle(SegmentedPickerStyle())
-                .padding(5)
                 
                 if filteredTVVM.shows.isEmpty {
                     
@@ -75,13 +49,13 @@ struct FilteredTVShowsGridView: View {
                                 .onAppear(perform: {
                                     if show == self.filteredTVVM.shows.last {
                                         
-                                        switch filter {
-                                        case 0:
-                                            self.filteredTVVM.fetchShows(filter: "popular")
-                                        case 1:
-                                            self.filteredTVVM.fetchShows(filter: "top_rated")
+                                        switch filteredTVVM.filter {
+                                        case "popularity":
+                                            self.filteredTVVM.fetchShows(filter: "popularity")
+                                        case "vote_average":
+                                            self.filteredTVVM.fetchShows(filter: "vote_average")
                                         default:
-                                            self.filteredTVVM.fetchShows(filter: "popular")
+                                            self.filteredTVVM.fetchShows(filter: "popularity")
                                         }
                                     }
                                 })
@@ -89,7 +63,29 @@ struct FilteredTVShowsGridView: View {
                         }
                     }
                 }
-            }.navigationBarTitle("TV Shows")
+            }.padding(5)
+            
+            .navigationBarItems(trailing:
+                                    Menu {
+                                        Button(action: filteredTVVM.topRated, label: {
+                                            Text("Top Rated")
+                                            Image(systemName: "star.fill")
+                                            
+                                        })
+                                        
+                                        Button(action: filteredTVVM.popular, label: {
+                                            Text("Trending")
+                                            Image(systemName: "flame.fill")
+                                            
+                                        })
+                                    } label: {
+                                        Label(
+                                            title: { Text("\(filteredTVVM.label)") },
+                                            icon: { Image(systemName: filteredTVVM.icon) }
+                                        ).frame(width: 120)
+                                    }
+            )
+            .navigationBarTitle("TV Shows")
         }.accentColor(.white)
     }
 }

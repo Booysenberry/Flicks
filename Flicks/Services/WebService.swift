@@ -270,9 +270,9 @@ class WebService {
         task.resume()
     }
     
-    func getPopularTVShows(page: Int, filter: String, completion: @escaping (TVShowList?) -> ()) {
+    func getTVShowsByFilter(page: Int, filter: String, completion: @escaping (TVShowList?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/tv/\(filter)?api_key=\(apiKey)&language=en-US&page=\(page)") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/tv?api_key=\(apiKey)&language=en-US&sort_by=\(filter).desc&page=\(page)&vote_count.gte=100") else {
             fatalError("Invalid URL")
         }
         
