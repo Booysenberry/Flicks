@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct FilteredMoviesGridView: View {
     
@@ -54,6 +55,7 @@ struct FilteredMoviesGridView: View {
                                     
                                     MovieGridItemView(movies: movie)
                                     
+                                    
                                 }.buttonStyle(PlainButtonStyle())
                                 
                                 .onAppear(perform: {
@@ -76,8 +78,22 @@ struct FilteredMoviesGridView: View {
                             }
                         }
                     }
+                    
+                    // Banner ad
+                    VStack {
+                        Button(action: {
+                            // your action here
+                        }) {
+                            Text("Remove ads")
+                        }.font(.footnote)
+                        .foregroundColor(.blue)
+                        
+                        GADBannerViewController()
+                            .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+                    }
                 }
             }
+            
             .padding(.top, 5)
             
             .navigationBarItems(trailing:

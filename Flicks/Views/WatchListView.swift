@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import GoogleMobileAds
 
 struct WatchListView: View {
     
@@ -65,6 +66,11 @@ struct WatchListView: View {
                     }
                 }
             }
+            
+            // Banner ad
+            GADBannerViewController()
+                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+                
             .buttonStyle(PlainButtonStyle())
             .navigationBarTitle("Watch List")
         }

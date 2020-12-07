@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct MovielistView: View {
     
@@ -70,7 +71,20 @@ struct MovielistView: View {
                             })
                         }
                     }
-                }.padding(5)
+                }
+                
+                // Banner ad
+                VStack {
+                    Button(action: {
+                        // your action here
+                    }) {
+                        Text("Remove ads")
+                    }.font(.footnote)
+                    .foregroundColor(.blue)
+                    
+                    GADBannerViewController()
+                        .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+                }
                 
                 .navigationBarItems(trailing:
                                         Menu {
@@ -107,7 +121,7 @@ struct MovielistView: View {
                 )
                 .navigationBarTitle(genre.name)
             }
-        }
+        }.padding(5)
     }
 }
 
