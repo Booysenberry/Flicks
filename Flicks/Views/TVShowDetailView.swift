@@ -30,12 +30,10 @@ struct TVShowDetailView: View {
     
     var body: some View {
         
-        VStack {
-            
-            TVHeroImage(show: show)
-        }
-        
         ScrollView(showsIndicators: false) {
+            
+            // Poster
+            TVHeroImage(show: show)
             
             VStack(alignment: .leading) {
             

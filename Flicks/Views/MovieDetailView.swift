@@ -32,11 +32,10 @@ struct MovieDetailView: View {
     
     var body: some View {
         
-        
-        // Movie poster
-        MovieHeroImage(movie: movie, runTime: detailVM.fetchedMovie?.runTime ?? 0)
-        
         ScrollView(showsIndicators: false) {
+            
+            // Movie poster
+            MovieHeroImage(movie: movie, runTime: detailVM.fetchedMovie?.runTime ?? 0)
             
             VStack(alignment: .leading) {
                 
