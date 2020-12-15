@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct FilteredTVShowsGridView: View {
     
@@ -63,7 +64,22 @@ struct FilteredTVShowsGridView: View {
                         }
                     }
                 }
+                
+                // Banner ad
+                VStack {
+                    Button(action: {
+                        // your action here
+                    }) {
+                        Text("Remove ads")
+                    }.font(.footnote)
+                    .foregroundColor(.blue)
+                    
+                    GADBannerViewController()
+                        .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+                }
             }.padding(5)
+            
+            
             
             .navigationBarItems(trailing:
                                     Menu {

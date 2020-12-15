@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct FilmographyView: View {
     
@@ -44,6 +45,19 @@ struct FilmographyView: View {
                         }.buttonStyle(PlainButtonStyle())
                     }
                 }
+            }
+            
+            // Banner ad
+            VStack {
+                Button(action: {
+                    // your action here
+                }) {
+                    Text("Remove ads")
+                }.font(.footnote)
+                .foregroundColor(.blue)
+                
+                GADBannerViewController()
+                    .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
             }
             
         }.onAppear(perform: {

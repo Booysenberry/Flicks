@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct SearchView: View {
     
@@ -67,6 +68,11 @@ struct SearchView: View {
                 }
                 .navigationBarTitle("Search")
             }
+            
+            // Banner ad
+            GADBannerViewController()
+                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+            
         }.accentColor(.white)
     }
 }

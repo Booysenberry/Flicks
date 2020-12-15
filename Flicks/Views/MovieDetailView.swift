@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct MovieDetailView: View {
     
@@ -74,9 +75,23 @@ struct MovieDetailView: View {
                 
                 // TMDB attribution
                 AttributionView()
-                
-            }
-        }.padding()
+
+            }.padding()
+        }
+        
+        // Banner ad
+        VStack {
+            Button(action: {
+                // your action here
+            }) {
+                Text("Remove ads")
+            }.font(.footnote)
+            .foregroundColor(.blue)
+            
+            GADBannerViewController()
+                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+        }
+            
         .navigationBarTitle(movie.title ?? "")
         .navigationBarItems(trailing:
                                 Button(action: {

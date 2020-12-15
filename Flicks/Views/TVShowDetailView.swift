@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct TVShowDetailView: View {
     
@@ -36,6 +37,8 @@ struct TVShowDetailView: View {
         
         ScrollView(showsIndicators: false) {
             
+            VStack(alignment: .leading) {
+            
             // Synopsis
             Text(show.overview)
                 .font(.body)
@@ -51,7 +54,24 @@ struct TVShowDetailView: View {
             // TMDB attribution
             AttributionView()
             
-        }.padding()
+            }.padding()
+                
+        }
+        // Banner ad
+        VStack {
+            Button(action: {
+                // your action here
+            }) {
+                Text("Remove ads")
+            }.font(.footnote)
+            .foregroundColor(.blue)
+            
+            GADBannerViewController()
+                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+        }
+        
+        
+            
         .navigationBarTitle(show.name)
         
         .navigationBarItems(trailing:
