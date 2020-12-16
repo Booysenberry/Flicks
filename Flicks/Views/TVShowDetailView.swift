@@ -55,23 +55,10 @@ struct TVShowDetailView: View {
             }.padding()
                 
         }
-        // Banner ad
-        VStack {
-            Button(action: {
-                // your action here
-            }) {
-                Text("Remove ads")
-            }.font(.footnote)
-            .foregroundColor(.blue)
-            
-            GADBannerViewController()
-                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
-        }
         
+        BannerAdView()
         
-            
         .navigationBarTitle(show.name)
-        
         .navigationBarItems(trailing:
                                 Button(action: {
                                     

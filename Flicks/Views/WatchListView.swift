@@ -65,14 +65,13 @@ struct WatchListView: View {
                         }.onDelete(perform: removeShow)
                     }
                 }
+                .navigationBarTitle("Watch List")
             }
             
-            // Banner ad
-            GADBannerViewController()
-                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+            BannerAdView()
                 
             .buttonStyle(PlainButtonStyle())
-            .navigationBarTitle("Watch List")
+            
         }
         .onAppear {
             self.watchListVM.watchListMovies.removeAll()

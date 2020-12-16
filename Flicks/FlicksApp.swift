@@ -16,6 +16,9 @@ struct Flicks: App {
     class AppDelegate: NSObject, UIApplicationDelegate {
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
             
+            let cache = URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
+            URLCache.shared = cache
+            
             // Initialize the Mobile Ads SDK
             GADMobileAds.sharedInstance().start(completionHandler: nil)
             return true
@@ -36,6 +39,7 @@ struct Flicks: App {
 // Load core data model
 var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: "MovieWatchList")
+    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     container.loadPersistentStores { description, error in
         if let error = error {
             // Add your error UI here

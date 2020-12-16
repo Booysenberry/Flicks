@@ -69,9 +69,7 @@ struct SearchView: View {
                 .navigationBarTitle("Search")
             }
             
-            // Banner ad
-            GADBannerViewController()
-                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+            BannerAdView()
             
         }.accentColor(.white)
     }

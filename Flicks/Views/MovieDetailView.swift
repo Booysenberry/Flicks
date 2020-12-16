@@ -78,18 +78,7 @@ struct MovieDetailView: View {
             }.padding()
         }
         
-        // Banner ad
-        VStack {
-            Button(action: {
-                // your action here
-            }) {
-                Text("Remove ads")
-            }.font(.footnote)
-            .foregroundColor(.blue)
-            
-            GADBannerViewController()
-                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
-        }
+        BannerAdView()
             
         .navigationBarTitle(movie.title ?? "")
         .navigationBarItems(trailing:
@@ -118,6 +107,7 @@ struct MovieDetailView: View {
                                 }) {
                                     Image(systemName: "bookmark")
                                         .foregroundColor(.white)
+                                        .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: .trailing)
                                 }.alert(isPresented: $showingAlert) {
                                     Alert(title: Text("Saved"), message: Text("Movie added to your watch list"), dismissButton: .default(Text("Ok")))
                                 })
