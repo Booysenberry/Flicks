@@ -74,43 +74,42 @@ struct MovielistView: View {
                 }
                 
                 BannerAdView()
-                
-                .navigationBarItems(trailing:
-                                        Menu {
-                                            Button(action: movielistVM.topRated, label: {
-                                                Text("Top Rated")
-                                                Image(systemName: "star.fill")
+                    
+                    .navigationBarItems(trailing:
+                                            Menu {
+                                                Button(action: movielistVM.topRated, label: {
+                                                    Text("Top Rated")
+                                                    Image(systemName: "star.fill")
+                                                    
+                                                })
                                                 
-                                            })
-                                            
-                                            Button(action: movielistVM.popular, label: {
-                                                Text("Trending")
-                                                Image(systemName: "flame.fill")
+                                                Button(action: movielistVM.popular, label: {
+                                                    Text("Trending")
+                                                    Image(systemName: "flame.fill")
+                                                    
+                                                })
                                                 
-                                            })
-                                            
-                                            Button(action: movielistVM.releaseDate, label: {
-                                                Text("Newest")
-                                                Image(systemName: "calendar")
+                                                Button(action: movielistVM.releaseDate, label: {
+                                                    Text("Newest")
+                                                    Image(systemName: "calendar")
+                                                    
+                                                })
                                                 
-                                            })
-                                            
-                                            Button(action: movielistVM.highestGrossing, label: {
-                                                Text("Revenue")
-                                                Image(systemName: "dollarsign.square.fill")
+                                                Button(action: movielistVM.highestGrossing, label: {
+                                                    Text("Revenue")
+                                                    Image(systemName: "dollarsign.square.fill")
+                                                    
+                                                })
                                                 
+                                            } label: {
+                                                Label(
+                                                    title: { Text("\(movielistVM.label)") },
+                                                    icon: { Image(systemName: movielistVM.icon) }
+                                                ).frame(width: 120)
                                             })
-                                            
-                                        } label: {
-                                            Label(
-                                                title: { Text("\(movielistVM.label)") },
-                                                icon: { Image(systemName: movielistVM.icon) }
-                                            ).frame(width: 120)
-                                        }
-                )
-                .navigationBarTitle(genre.name)
             }
         }.padding(5)
+        .navigationBarTitle(genre.name)
     }
 }
 
