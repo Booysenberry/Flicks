@@ -39,11 +39,12 @@ struct Flicks: App {
 // Load core data model
 var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: "MovieWatchList")
-    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+    
     container.loadPersistentStores { description, error in
         if let error = error {
             // Add your error UI here
         }
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
     return container
 }()
