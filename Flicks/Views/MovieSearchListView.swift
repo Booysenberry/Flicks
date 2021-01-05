@@ -56,8 +56,8 @@ struct MovieSearchListView: View {
     }
 }
 
-struct SearchListView_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieSearchListView(movies: Movie.example)
-    }
-}
+//struct SearchListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MovieSearchListView(movies: Movie.example)
+//    }
+//}

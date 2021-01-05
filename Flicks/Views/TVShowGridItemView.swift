@@ -38,8 +38,8 @@ struct TVShowGridItemView: View {
         }
     }
 
-struct TVShowGridItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        TVShowGridItemView(shows: Show.example)
-    }
-}
+//struct TVShowGridItemView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TVShowGridItemView(shows: Show.example)
+//    }
+//}

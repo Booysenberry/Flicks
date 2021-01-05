@@ -30,8 +30,6 @@ struct FilmographyView: View {
                 
             }
             
-            Text(cast.name ?? "").font(.largeTitle)
-            
             ScrollView {
                 
                 LazyVGrid(columns: twoColumnGrid, spacing: 10) {
@@ -47,30 +45,18 @@ struct FilmographyView: View {
                 }
             }
             
-            // Banner ad
-            VStack {
-                Button(action: {
-                    // your action here
-                }) {
-                    Text("Remove ads")
-                }.font(.footnote)
-                .foregroundColor(.blue)
-                
-                GADBannerViewController()
-                    .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
-            }
+            BannerAdView()
             
         }.onAppear(perform: {
             filmographyVM.getRoles(actor: cast.id ?? 0)
         })
         Spacer()
-            .navigationTitle("Filmography")
+            .navigationTitle("\(cast.name ?? "")")
     }
 }
 
-struct FilmographyView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        FilmographyView(cast: Actors.example)
-    }
-}
+//struct FilmographyView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FilmographyView(cast: Actors.example)
+//    }
+//}

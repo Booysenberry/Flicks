@@ -48,8 +48,8 @@ struct TVSearchListView: View {
     }
 }
 
-struct TVSearchListView_Previews: PreviewProvider {
-    static var previews: some View {
-        TVSearchListView(show: Show.example)
-    }
-}
+//struct TVSearchListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TVSearchListView(show: Show.example)
+//    }
+//}

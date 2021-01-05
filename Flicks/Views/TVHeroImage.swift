@@ -48,8 +48,8 @@ struct TVHeroImage: View {
     }
 }
 
-struct TVHeroImage_Previews: PreviewProvider {
-    static var previews: some View {
-        TVHeroImage(show: Show.example)
-    }
-}
+//struct TVHeroImage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TVHeroImage(show: Show.example)
+//    }
+//}

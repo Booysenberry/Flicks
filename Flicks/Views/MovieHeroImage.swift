@@ -58,8 +58,8 @@ struct MovieHeroImage: View {
     }
 }
 
-struct MovieHeroImage_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieHeroImage(movie: Movie.example)
-    }
-}
+//struct MovieHeroImage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MovieHeroImage(movie: Movie.example)
+//    }
+//}

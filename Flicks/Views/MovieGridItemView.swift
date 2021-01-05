@@ -52,9 +52,9 @@ struct MovieGridItemView: View {
     }
 }
 
-struct MovieGridItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieGridItemView(movies: Movie.example)
-    }
-}
+//struct MovieGridItemView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MovieGridItemView(movies: Movie.example)
+//    }
+//}
 

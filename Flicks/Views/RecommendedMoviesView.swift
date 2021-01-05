@@ -32,8 +32,8 @@ struct RecommendedMoviesView: View {
     }
 }
 
-struct RecommendedMoviesView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecommendedMoviesView(movies: [Movie.example])
-    }
-}
+//struct RecommendedMoviesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecommendedMoviesView(movies: [Movie.example])
+//    }
+//}

@@ -116,8 +116,8 @@ struct MovieDetailView: View {
 }
 
 
-struct MovieDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieDetailView(movie: Movie.example)
-    }
-}
+//struct MovieDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MovieDetailView(movie: Movie.example)
+//    }
+//}
