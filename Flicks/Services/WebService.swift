@@ -82,7 +82,6 @@ class WebService {
                 let movies = try decoder.decode(MovieList.self, from: data)
                 
                 DispatchQueue.main.async {
-                    print(movies.movies.count)
                     completion(movies)
                 }
                 
@@ -139,7 +138,7 @@ class WebService {
     
     func getMovieDetails(movie: Int, completion: @escaping (Movie?) -> ()) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=\(apiKey)&append_to_response=credits") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie)?api_key=\(apiKey)&append_to_response=credits,watch/providers") else {
             fatalError("Invalid URL")
         }
         

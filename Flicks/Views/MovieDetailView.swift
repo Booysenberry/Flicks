@@ -78,7 +78,7 @@ struct MovieDetailView: View {
             }.padding()
         }
         
-        BannerAdView()
+//        BannerAdView()
             
         .navigationBarTitle(movie.title ?? "")
         .navigationBarItems(trailing:

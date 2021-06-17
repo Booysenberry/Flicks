@@ -12,12 +12,6 @@ struct MovieSearchListView: View {
     
     var movies: Movie
     
-    static let taskDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        return formatter
-    }()
-    
     var body: some View {
         
         HStack {
