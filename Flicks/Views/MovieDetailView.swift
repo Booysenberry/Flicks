@@ -23,8 +23,6 @@ struct MovieDetailView: View {
     
     init(movie: Movie) {
         self.movie = movie
-        detailVM.getMovieDetails(id: movie.id)
-        detailVM.getRecommendedMovies(movie: movie.id)
         
         // Stop Scrollview bounce
         UIScrollView.appearance().bounces = false
@@ -49,7 +47,7 @@ struct MovieDetailView: View {
                         .border(Color.gray)
                     
                 }
-
+                
                 // Synopsis
                 Text(movie.overview)
                     .font(.body)
@@ -74,12 +72,15 @@ struct MovieDetailView: View {
                 
                 // TMDB attribution
                 AttributionView()
-
+                
             }.padding()
-        }
+        }.onAppear(perform: {
+            detailVM.getMovieDetails(id: movie.id)
+            detailVM.getRecommendedMovies(movie: movie.id)
+        })
         
-//        BannerAdView()
-            
+        //        BannerAdView()
+        
         .navigationBarTitle(movie.title ?? "")
         .navigationBarItems(trailing:
                                 Button(action: {

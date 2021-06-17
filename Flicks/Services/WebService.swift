@@ -164,6 +164,7 @@ class WebService {
                 
                 let decoder = JSONDecoder()
                 let movieDetails = try decoder.decode(Movie.self, from: data)
+                print("ran getMovieDetails")
                 
                 DispatchQueue.main.async {
                     
